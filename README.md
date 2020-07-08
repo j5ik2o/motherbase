@@ -12,10 +12,23 @@
 
 ## システム構成
 
+### アプリケーション構成
+
 - Write API
 - Domain Event Router
 - Read Model Updater
 - Read API
+
+### ストレージ構成
+
+- ジャーナルデータベース
+    - DynamoDB
+- スナップショットデータベース
+    - S3
+- イベントバス
+    - Kafka
+- リードモデルデータベース
+    - Aurora(RDS)
 
 ## エージェント
 
