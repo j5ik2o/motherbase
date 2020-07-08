@@ -1,0 +1,1 @@
+addSbtPlugin("jp.co.septeni-original" % "sbt-dao-generator" % "1.0.8")

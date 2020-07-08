@@ -1,0 +1,1 @@
+addSbtPlugin("com.chatwork" % "sbt-wix-embedded-mysql" % "1.0.9")

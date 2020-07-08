@@ -1,0 +1,1 @@
+addSbtPlugin("io.kamon" % "sbt-aspectj-runner" % "1.1.0")

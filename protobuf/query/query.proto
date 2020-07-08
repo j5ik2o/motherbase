@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto;
+option optimize_for = SPEED;
+
+message GetAccountRequest {
+    string accountId = 1;
+}
+
+message GetAccountBody {
+    string accountId = 1;
+    string organizationId = 2;
+    string name = 3;
+    string email = 4;
+    int64 createdAt = 5;
+    int64 updatedAt = 6;
+}
+
+message GetAccountResponse {
+    bool hasError = 1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    GetAccountBody body = 4;
+}
+
+message GetAccountsRequest {
+    repeated string accountIds = 1;
+}
+
+message GetAccountsResponse {
+    bool hasError = 1;
+    string errorCode = 2;
+    string errorMessage = 3;
+    repeated GetAccountBody bodies = 4;
+}
+
+service AccountQueryService {
+    rpc GetAccount (GetAccountRequest) returns (GetAccountResponse) {};
+    rpc GetAccounts (GetAccountsRequest) returns (GetAccountsResponse) {};
+}
