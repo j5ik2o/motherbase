@@ -4,7 +4,18 @@
 
 ## 特徴
 
-- 応答性のあるシステムを実現するために、リアクティブ・アーキテクチャを全面的に採用します
+- ドメイン駆動設計
+- Clean Architecture
+- CQRS & Event Sourcing
+- リアクティブアーキテクチャ(Akka)
+- Kubernetes対応
+
+## システム構成
+
+- Write API
+- Domain Event Router
+- Read Model Updater
+- Read API
 
 ## エージェント
 
