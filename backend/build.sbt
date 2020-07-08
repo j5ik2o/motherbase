@@ -22,7 +22,7 @@ val `healthchecks-k8s-probes` = project
 // --- modules
 
 val infrastructure =
-  (project in file("modules/infrastructure"))
+  (project in file("modules/common/infrastructure"))
     .settings(baseSettings)
     .settings(
       name := s"$projectBaseName-infrastructure",
@@ -32,7 +32,7 @@ val infrastructure =
       )
     )
 
-val domain = (project in file("modules/domain"))
+val domain = (project in file("modules/command/domain"))
   .settings(baseSettings)
   .settings(
     name := s"$projectBaseName-domain",
@@ -44,7 +44,7 @@ val domain = (project in file("modules/domain"))
 // --- contracts
 
 val `contract-interface-adaptor-command` =
-  (project in file("contracts/interface-adaptor-command"))
+  (project in file("contracts/command/interface-adaptor-command"))
     .enablePlugins(AkkaGrpcPlugin)
     .settings(baseSettings)
     .settings(
@@ -58,7 +58,7 @@ val `contract-interface-adaptor-command` =
     ).dependsOn(domain)
 
 val `contract-interface-adaptor-query` =
-  (project in file("contracts/interface-adaptor-query"))
+  (project in file("contracts/query/interface-adaptor-query"))
     .enablePlugins(AkkaGrpcPlugin)
     .settings(baseSettings)
     .settings(
@@ -71,11 +71,11 @@ val `contract-interface-adaptor-query` =
       PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "query"
     )
 
-val `contract-use-case` =
-  (project in file("contracts/use-case"))
+val `contract-command-processor` =
+  (project in file("contracts/command/command-processor"))
     .settings(baseSettings)
     .settings(
-      name := s"$projectBaseName-contract-use-case",
+      name := s"$projectBaseName-contract-command-processor",
       libraryDependencies ++= Seq(
         akka.actorTyped,
         akka.stream
@@ -83,13 +83,22 @@ val `contract-use-case` =
     )
     .dependsOn(domain)
 
-// --- modules
-
-val `use-case` =
-  (project in file("modules/use-case"))
+val `contract-query-processor` =
+  (project in file("contracts/query/query-processor"))
     .settings(baseSettings)
     .settings(
-      name := s"$projectBaseName-use-case",
+      name := s"$projectBaseName-contract-query-processor",
+      libraryDependencies ++= Seq(
+      )
+    )
+
+// --- modules
+
+val `command-processor` =
+  (project in file("modules/command/command-processor"))
+    .settings(baseSettings)
+    .settings(
+      name := s"$projectBaseName-command-processor",
       libraryDependencies ++= Seq(
         akka.actorTyped,
         logback.classic    % Test,
@@ -97,9 +106,23 @@ val `use-case` =
         akka.streamTestKit % Test
       )
     )
-    .dependsOn(`contract-use-case`, `contract-interface-adaptor-command`, infrastructure, domain)
+    .dependsOn(`contract-command-processor`, `contract-interface-adaptor-command`, infrastructure, domain)
 
-val `interface-adaptor-common` = (project in file("modules/interface-adaptor-common"))
+val `query-processor` =
+  (project in file("modules/query/query-processor"))
+    .settings(baseSettings)
+    .settings(
+      name := s"$projectBaseName-query-processor",
+      libraryDependencies ++= Seq(
+        akka.actorTyped,
+        logback.classic    % Test,
+        akka.testKitTyped  % Test,
+        akka.streamTestKit % Test
+      )
+    )
+    .dependsOn(`contract-query-processor`, `contract-interface-adaptor-command`, infrastructure)
+
+val `interface-adaptor-common` = (project in file("modules/common/interface-adaptor-common"))
   .settings(baseSettings)
   .settings(
     name := s"$projectBaseName-interface-adaptor-common",
@@ -119,7 +142,7 @@ val `interface-adaptor-common` = (project in file("modules/interface-adaptor-com
   .dependsOn(`healthchecks-k8s-probes`)
 
 val `interface-adaptor-query` =
-  (project in file("modules/interface-adaptor-query"))
+  (project in file("modules/query/interface-adaptor-query"))
     .settings(baseSettings)
     .settings(
       name := s"$projectBaseName-interface-adaptor-query",
@@ -129,7 +152,7 @@ val `interface-adaptor-query` =
     .dependsOn(`contract-interface-adaptor-query`, `interface-adaptor-common`, infrastructure)
 
 val `interface-adaptor-command` =
-  (project in file("modules/interface-adaptor-command"))
+  (project in file("modules/command/interface-adaptor-command"))
     .settings(baseSettings)
     .settings(
       name := s"$projectBaseName-interface-adaptor-command",
@@ -168,7 +191,7 @@ val `interface-adaptor-command` =
         slf4j.julToSlf4j                      % Test
       )
     )
-    .dependsOn(`contract-interface-adaptor-command`, `interface-adaptor-common`, infrastructure, `use-case`)
+    .dependsOn(`contract-interface-adaptor-command`, `interface-adaptor-common`, infrastructure, `command-processor`)
 
 // ---- bootstrap
 
@@ -469,7 +492,7 @@ val root = (project in file("."))
     infrastructure,
     `interface-adaptor-command`,
     `interface-adaptor-query`,
-    `use-case`,
+    `command-processor`,
     domain,
     `gatling-test`,
     `gatling-runner`,
