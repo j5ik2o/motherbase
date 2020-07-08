@@ -12,6 +12,8 @@
 
 ## システム構成
 
+![](backend/docs/system-layout.png)
+
 ### アプリケーション構成
 
 - Write API
