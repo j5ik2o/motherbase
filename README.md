@@ -41,11 +41,11 @@
 ### ストレージ構成
 
 - ジャーナルデータベース
-    - DynamoDB
+    - DynamoDB(DynamoDB Streams)
 - スナップショットデータベース
     - S3
 - イベントバス
-    - Kafka
+    - Kafka(MSK)
     - 外部にドメインイベントを転送する必要がなければ不要
 - リードモデルデータベース
     - Aurora(RDS)
