@@ -31,6 +31,7 @@
 - Domain Event Router
     - non akka-cluster
     - ドメインイベントをDynamoDB Streamsを利用して読み込みKafkaに転送する
+    外部にドメインイベントを転送する必要がなければ不要
 - Read Model Updater
     - non akka-cluster
     - ドメインイベントを素にリードモデルをリードデータベースに構築する
