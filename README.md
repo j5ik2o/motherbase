@@ -4,11 +4,9 @@
 
 ## 特徴
 
-- ドメイン駆動設計
-- Clean Architecture
-- CQRS & Event Sourcing
-- リアクティブアーキテクチャ(Akka)
-- Kubernetes対応
+- DDD/Clean Architecture/CQRS+Event Sourcingをベースにしたリアクティブアーキテクチャ
+- AWSで稼働する前提
+- Kubernetes(EKS)対応
 
 ## システム構成
 
@@ -32,7 +30,7 @@
 - リードモデルデータベース
     - Aurora(RDS)
 
-## エージェント
+## アクター
 
 - システムオーナー
     - 当該システムを運営する主体
