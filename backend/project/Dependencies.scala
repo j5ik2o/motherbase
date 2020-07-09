@@ -21,7 +21,7 @@ object Version {
   val ficus         = "1.4.7"
   val ulid          = "8.2.0"
   val monix         = "3.1.0"
-  val refined       = "0.9.13"
+  val refined       = "0.9.14"
   val scopt         = "4.0.0-RC2"
   val jaino         = "3.0.6"
   val dockerTestkit = "0.9.9"
