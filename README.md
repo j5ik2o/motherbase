@@ -50,6 +50,18 @@
     - 外部にドメインイベントを転送する必要がなければ不要
 - リードモデルデータベース
     - Aurora(RDS)
+    
+## 主な技術スタック
+
+- akka 2.6
+    - akka-http
+    - akka-stream
+    - akka-actor-typed
+    - akka-persistence-typed
+    - akka-cluster-typed
+    - akka-cluster-sharding-typed
+    - alpakka-kafka
+    - aws-sdk
 
 ## アクター
 
