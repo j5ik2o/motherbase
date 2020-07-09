@@ -15,9 +15,18 @@
 ### アプリケーション構成
 
 - Write API
+    - akka-cluster
+    - コマンド用のリクエストに応じて、集約アクターがコマンドを処理するためのAPI
+    - 集約アクターはコマンドを受理すると、ドメインイベントをジャーナルデータベースに追記保存する
 - Domain Event Router
+    - non akka-cluster
+    - ドメインイベントをDynamoDB Streamsを利用して読み込みKafkaに転送する
 - Read Model Updater
+    - non akka-cluster
+    - ドメインイベントを素にリードモデルをリードデータベースに構築する
 - Read API
+    - non akka-cluster
+    - クエリ用のリクエストに応じて、リードモデルをクライアントに返すためのAPI
 
 ### ストレージ構成
 
