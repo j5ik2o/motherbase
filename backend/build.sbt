@@ -424,7 +424,8 @@ lazy val `gatling-test` = (project in file("tools/aws-gatling-tools/gatling-test
       ),
     publishArtifact in (GatlingIt, packageBin) := true,
     PB.targets in Compile := Seq(
-        scalapb.gen() -> (sourceManaged in Compile).value
+      PB.gens.java -> (sourceManaged in Compile).value,
+        scalapb.gen(javaConversions = true) -> (sourceManaged in Compile).value
       ),
     PB.protoSources in Compile ++= Seq(
         (baseDirectory in LocalRootProject).value / "protobuf" / "command",
