@@ -1,0 +1,1031 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "gatling-aggregate-runner-test",
+        "directory": "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner",
+        "workspaceDir": "/Users/j5ik2o/Sources/motherbase/backend",
+        "sources": [
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/src/test/scala-2.12",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/src/test/scala",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/src/test/java",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/target/scala-2.12/src_managed/test"
+        ],
+        "dependencies": [
+            "gatling-aggregate-runner"
+        ],
+        "classpath": [
+            "/Users/j5ik2o/Sources/motherbase/backend/.bloop/gatling-aggregate-runner/scala-2.12/classes",
+            "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.6/janino-3.0.6.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/iheart/ficus_2.12/1.4.6/ficus_2.12-1.4.6.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/j5ik2o/reactive-aws-ecs-core_2.12/1.1.3/reactive-aws-ecs-core_2.12-1.1.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalaj/scalaj-http_2.12/2.4.2/scalaj-http_2.12-2.4.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.6/commons-compiler-3.0.6.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.3.4/config-1.3.4.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/j5ik2o/reactive-aws-common-core_2.12/1.1.3/reactive-aws-common-core_2.12-1.1.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/beachape/enumeratum_2.12/1.5.13/enumeratum_2.12-1.5.13.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/ecs/2.5.11/ecs-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/sdk-core/2.5.11/sdk-core-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/beachape/enumeratum-macros_2.12/1.5.9/enumeratum-macros_2.12-1.5.9.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/aws-json-protocol/2.5.11/aws-json-protocol-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/protocol-core/2.5.11/protocol-core-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/auth/2.5.11/auth-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/http-client-spi/2.5.11/http-client-spi-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/regions/2.5.11/regions-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/annotations/2.5.11/annotations-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/utils/2.5.11/utils-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/aws-core/2.5.11/aws-core-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/apache-client/2.5.11/apache-client-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/netty-nio-client/2.5.11/netty-nio-client-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/profiles/2.5.11/profiles-2.5.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.8/jackson-core-2.9.8.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.8/jackson-databind-2.9.8.jar",
+            "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/flow/1.7/flow-1.7.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.6/httpclient-4.5.6.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.10/httpcore-4.4.10.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http/4.1.33.Final/netty-codec-http-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http2/4.1.33.Final/netty-codec-http2-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.33.Final/netty-codec-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport/4.1.33.Final/netty-transport-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.33.Final/netty-common-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-buffer/4.1.33.Final/netty-buffer-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.33.Final/netty-handler-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-epoll/4.1.33.Final/netty-transport-native-epoll-4.1.33.Final-linux-x86_64.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams-http/2.0.0/netty-reactive-streams-http-2.0.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.33.Final/netty-resolver-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.33.Final/netty-transport-native-unix-common-4.1.33.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams/2.0.0/netty-reactive-streams-2.0.0.jar"
+        ],
+        "out": "/Users/j5ik2o/Sources/motherbase/backend/.bloop/gatling-aggregate-runner",
+        "classesDir": "/Users/j5ik2o/Sources/motherbase/backend/.bloop/gatling-aggregate-runner/scala-2.12/test-classes",
+        "resources": [
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/src/test/resources",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/target/scala-2.12/resource_managed/test"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.12.10",
+            "options": [
+                "-Ypartial-unification",
+                "-feature",
+                "-deprecation",
+                "-unchecked",
+                "-encoding",
+                "UTF-8",
+                "-Xfatal-warnings",
+                "-language:_",
+                "-Ywarn-adapted-args",
+                "-Ywarn-dead-code",
+                "-Ywarn-inaccessible",
+                "-Ywarn-infer-any",
+                "-Ywarn-nullary-override",
+                "-Ywarn-nullary-unit",
+                "-Ywarn-numeric-widen",
+                "-Ywarn-unused-import",
+                "-Ywarn-numeric-widen",
+                "-Xplugin:/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/wartremover/wartremover_2.12.10/2.4.9/wartremover_2.12.10-2.4.9.jar"
+            ],
+            "jars": [
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-compiler.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/jline.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/jansi.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-xml_2.12.jar"
+            ],
+            "analysis": "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-aggregate-runner/target/streams/test/bloopAnalysisOut/_global/streams/inc_compile_2.12.zip",
+            "setup": {
+                "order": "mixed",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "/Users/j5ik2o/.jabba/jdk/adopt@1.8.0-242/Contents/Home/jre",
+                "options": [
+                    "-Duser.dir=/Users/j5ik2o/Sources/motherbase/backend"
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-reflect",
+                    "version": "2.12.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-reflect",
+                            "path": "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar"
+                        },
+                        {
+                            "name": "scala-reflect",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.10/scala-reflect-2.12.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-api",
+                    "version": "1.7.26",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-api",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar"
+                        },
+                        {
+                            "name": "slf4j-api",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "ch.qos.logback",
+                    "name": "logback-classic",
+                    "version": "1.2.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "logback-classic",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"
+                        },
+                        {
+                            "name": "logback-classic",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.codehaus.janino",
+                    "name": "janino",
+                    "version": "3.0.6",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "janino",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.6/janino-3.0.6.jar"
+                        },
+                        {
+                            "name": "janino",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/janino/janino/3.0.6/janino-3.0.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.iheart",
+                    "name": "ficus_2.12",
+                    "version": "1.4.6",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "ficus_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/iheart/ficus_2.12/1.4.6/ficus_2.12-1.4.6.jar"
+                        },
+                        {
+                            "name": "ficus_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/iheart/ficus_2.12/1.4.6/ficus_2.12-1.4.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.j5ik2o",
+                    "name": "reactive-aws-ecs-core_2.12",
+                    "version": "1.1.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "reactive-aws-ecs-core_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/j5ik2o/reactive-aws-ecs-core_2.12/1.1.3/reactive-aws-ecs-core_2.12-1.1.3.jar"
+                        },
+                        {
+                            "name": "reactive-aws-ecs-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/j5ik2o/reactive-aws-ecs-core_2.12/1.1.3/reactive-aws-ecs-core_2.12-1.1.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scalaj",
+                    "name": "scalaj-http_2.12",
+                    "version": "2.4.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalaj-http_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalaj/scalaj-http_2.12/2.4.2/scalaj-http_2.12-2.4.2.jar"
+                        },
+                        {
+                            "name": "scalaj-http_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalaj/scalaj-http_2.12/2.4.2/scalaj-http_2.12-2.4.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "ch.qos.logback",
+                    "name": "logback-core",
+                    "version": "1.2.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "logback-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"
+                        },
+                        {
+                            "name": "logback-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.codehaus.janino",
+                    "name": "commons-compiler",
+                    "version": "3.0.6",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-compiler",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.6/commons-compiler-3.0.6.jar"
+                        },
+                        {
+                            "name": "commons-compiler",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/janino/commons-compiler/3.0.6/commons-compiler-3.0.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe",
+                    "name": "config",
+                    "version": "1.3.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "config",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.3.4/config-1.3.4.jar"
+                        },
+                        {
+                            "name": "config",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.3.4/config-1.3.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "macro-compat_2.12",
+                    "version": "1.1.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "macro-compat_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1.jar"
+                        },
+                        {
+                            "name": "macro-compat_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.j5ik2o",
+                    "name": "reactive-aws-common-core_2.12",
+                    "version": "1.1.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "reactive-aws-common-core_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/j5ik2o/reactive-aws-common-core_2.12/1.1.3/reactive-aws-common-core_2.12-1.1.3.jar"
+                        },
+                        {
+                            "name": "reactive-aws-common-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/j5ik2o/reactive-aws-common-core_2.12/1.1.3/reactive-aws-common-core_2.12-1.1.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.beachape",
+                    "name": "enumeratum_2.12",
+                    "version": "1.5.13",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "enumeratum_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/beachape/enumeratum_2.12/1.5.13/enumeratum_2.12-1.5.13.jar"
+                        },
+                        {
+                            "name": "enumeratum_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/beachape/enumeratum_2.12/1.5.13/enumeratum_2.12-1.5.13-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-java8-compat_2.12",
+                    "version": "0.9.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-java8-compat_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar"
+                        },
+                        {
+                            "name": "scala-java8-compat_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "ecs",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "ecs",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/ecs/2.5.11/ecs-2.5.11.jar"
+                        },
+                        {
+                            "name": "ecs",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/ecs/2.5.11/ecs-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.reactivestreams",
+                    "name": "reactive-streams",
+                    "version": "1.0.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "reactive-streams",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar"
+                        },
+                        {
+                            "name": "reactive-streams",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "sdk-core",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "sdk-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/sdk-core/2.5.11/sdk-core-2.5.11.jar"
+                        },
+                        {
+                            "name": "sdk-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/sdk-core/2.5.11/sdk-core-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.beachape",
+                    "name": "enumeratum-macros_2.12",
+                    "version": "1.5.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "enumeratum-macros_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/beachape/enumeratum-macros_2.12/1.5.9/enumeratum-macros_2.12-1.5.9.jar"
+                        },
+                        {
+                            "name": "enumeratum-macros_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/beachape/enumeratum-macros_2.12/1.5.9/enumeratum-macros_2.12-1.5.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "aws-json-protocol",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "aws-json-protocol",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/aws-json-protocol/2.5.11/aws-json-protocol-2.5.11.jar"
+                        },
+                        {
+                            "name": "aws-json-protocol",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/aws-json-protocol/2.5.11/aws-json-protocol-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "protocol-core",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "protocol-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/protocol-core/2.5.11/protocol-core-2.5.11.jar"
+                        },
+                        {
+                            "name": "protocol-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/protocol-core/2.5.11/protocol-core-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "auth",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "auth",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/auth/2.5.11/auth-2.5.11.jar"
+                        },
+                        {
+                            "name": "auth",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/auth/2.5.11/auth-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "http-client-spi",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "http-client-spi",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/http-client-spi/2.5.11/http-client-spi-2.5.11.jar"
+                        },
+                        {
+                            "name": "http-client-spi",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/http-client-spi/2.5.11/http-client-spi-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "regions",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "regions",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/regions/2.5.11/regions-2.5.11.jar"
+                        },
+                        {
+                            "name": "regions",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/regions/2.5.11/regions-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "annotations",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/annotations/2.5.11/annotations-2.5.11.jar"
+                        },
+                        {
+                            "name": "annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/annotations/2.5.11/annotations-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "utils",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "utils",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/utils/2.5.11/utils-2.5.11.jar"
+                        },
+                        {
+                            "name": "utils",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/utils/2.5.11/utils-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "aws-core",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "aws-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/aws-core/2.5.11/aws-core-2.5.11.jar"
+                        },
+                        {
+                            "name": "aws-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/aws-core/2.5.11/aws-core-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "apache-client",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "apache-client",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/apache-client/2.5.11/apache-client-2.5.11.jar"
+                        },
+                        {
+                            "name": "apache-client",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/apache-client/2.5.11/apache-client-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "netty-nio-client",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-nio-client",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/netty-nio-client/2.5.11/netty-nio-client-2.5.11.jar"
+                        },
+                        {
+                            "name": "netty-nio-client",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/netty-nio-client/2.5.11/netty-nio-client-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.awssdk",
+                    "name": "profiles",
+                    "version": "2.5.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "profiles",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/profiles/2.5.11/profiles-2.5.11.jar"
+                        },
+                        {
+                            "name": "profiles",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/awssdk/profiles/2.5.11/profiles-2.5.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-core",
+                    "version": "2.9.8",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.8/jackson-core-2.9.8.jar"
+                        },
+                        {
+                            "name": "jackson-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.8/jackson-core-2.9.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-databind",
+                    "version": "2.9.8",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-databind",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.8/jackson-databind-2.9.8.jar"
+                        },
+                        {
+                            "name": "jackson-databind",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.8/jackson-databind-2.9.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon",
+                    "name": "flow",
+                    "version": "1.7",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "flow",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/flow/1.7/flow-1.7.jar"
+                        },
+                        {
+                            "name": "flow",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/flow/1.7/flow-1.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-annotations",
+                    "version": "2.9.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar"
+                        },
+                        {
+                            "name": "jackson-annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.httpcomponents",
+                    "name": "httpclient",
+                    "version": "4.5.6",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "httpclient",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.6/httpclient-4.5.6.jar"
+                        },
+                        {
+                            "name": "httpclient",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.6/httpclient-4.5.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.httpcomponents",
+                    "name": "httpcore",
+                    "version": "4.4.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "httpcore",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.10/httpcore-4.4.10.jar"
+                        },
+                        {
+                            "name": "httpcore",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.10/httpcore-4.4.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec-http",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec-http",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http/4.1.33.Final/netty-codec-http-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec-http",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http/4.1.33.Final/netty-codec-http-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec-http2",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec-http2",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http2/4.1.33.Final/netty-codec-http2-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec-http2",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http2/4.1.33.Final/netty-codec-http2-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.33.Final/netty-codec-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.33.Final/netty-codec-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-transport",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-transport",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport/4.1.33.Final/netty-transport-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-transport",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport/4.1.33.Final/netty-transport-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-common",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-common",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.33.Final/netty-common-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-common",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.33.Final/netty-common-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-buffer",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-buffer",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-buffer/4.1.33.Final/netty-buffer-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-buffer",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-buffer/4.1.33.Final/netty-buffer-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-handler",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-handler",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.33.Final/netty-handler-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-handler",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.33.Final/netty-handler-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.netty",
+                    "name": "netty-reactive-streams-http",
+                    "version": "2.0.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-reactive-streams-http",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams-http/2.0.0/netty-reactive-streams-http-2.0.0.jar"
+                        },
+                        {
+                            "name": "netty-reactive-streams-http",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams-http/2.0.0/netty-reactive-streams-http-2.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "commons-logging",
+                    "name": "commons-logging",
+                    "version": "1.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-logging",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"
+                        },
+                        {
+                            "name": "commons-logging",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "commons-codec",
+                    "name": "commons-codec",
+                    "version": "1.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-codec",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"
+                        },
+                        {
+                            "name": "commons-codec",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-resolver",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-resolver",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.33.Final/netty-resolver-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-resolver",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.33.Final/netty-resolver-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-transport-native-unix-common",
+                    "version": "4.1.33.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-transport-native-unix-common",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.33.Final/netty-transport-native-unix-common-4.1.33.Final.jar"
+                        },
+                        {
+                            "name": "netty-transport-native-unix-common",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.33.Final/netty-transport-native-unix-common-4.1.33.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.netty",
+                    "name": "netty-reactive-streams",
+                    "version": "2.0.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-reactive-streams",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams/2.0.0/netty-reactive-streams-2.0.0.jar"
+                        },
+                        {
+                            "name": "netty-reactive-streams",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/netty/netty-reactive-streams/2.0.0/netty-reactive-streams-2.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.10",
+                    "configurations": "optional",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "test"
+        ]
+    }
+}

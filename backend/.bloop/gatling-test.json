@@ -1,0 +1,2447 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "gatling-test",
+        "directory": "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test",
+        "workspaceDir": "/Users/j5ik2o/Sources/motherbase/backend",
+        "sources": [
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/src/main/scala-2.12",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/src/main/scala",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/src/main/java",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/target/scala-2.12/src_managed/main"
+        ],
+        "dependencies": [
+            
+        ],
+        "classpath": [
+            "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime_2.12/0.10.2/scalapb-runtime_2.12-0.10.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts/3.3.1/gatling-charts-highcharts-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-test-framework/3.3.1/gatling-test-framework-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.575/aws-java-sdk-core-1.11.575.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.575/aws-java-sdk-s3-1.11.575.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-core_2.12/0.11.1/circe-core_2.12-0.11.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-generic_2.12/0.11.1/circe-generic_2.12-0.11.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-parser_2.12/0.11.1/circe-parser_2.12-0.11.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-netty/1.28.0/grpc-netty-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime-grpc_2.12/0.10.2/scalapb-runtime-grpc_2.12-0.10.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/phisgr/gatling-grpc_2.12/0.8.2/gatling-grpc_2.12-0.8.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/de/huxhorn/sulky/de.huxhorn.sulky.ulid/8.2.0/de.huxhorn.sulky.ulid-8.2.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/lenses_2.12/0.10.2/lenses_2.12-0.10.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.1.4/scala-collection-compat_2.12-2.1.4.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/2.2.4/fastparse_2.12-2.2.4.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-charts/3.3.1/gatling-charts-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-app/3.3.1/gatling-app-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-recorder/3.3.1/gatling-recorder-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-http-client/3.3.1/gatling-http-client-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-commons/3.3.1/gatling-commons-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.575/aws-java-sdk-kms-1.11.575.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/jmespath-java/1.11.575/jmespath-java-1.11.575.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-numbers_2.12/0.11.1/circe-numbers_2.12-0.11.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-core_2.12/1.5.0/cats-core_2.12-1.5.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.12/2.3.3/shapeless_2.12-2.3.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-jawn_2.12/0.11.1/circe-jawn_2.12-0.11.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http2/4.1.45.Final/netty-codec-http2-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler-proxy/4.1.45.Final/netty-handler-proxy-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-core/3.3.1/gatling-core-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.2.1/sourcecode_2.12-0.2.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/geny_2.12/0.5.1/geny_2.12-0.5.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/tdunning/t-digest/3.1/t-digest-3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-http/3.3.1/gatling-http-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-jms/3.3.1/gatling-jms-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-jdbc/3.3.1/gatling-jdbc-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-redis/3.3.1/gatling-redis-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-graphite/3.3.1/gatling-graphite-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.1.1/scala-swing_2.12-2.1.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.7/json4s-jackson_2.12-3.6.7.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.64/bcpkix-jdk15on-1.64.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http/4.1.45.Final/netty-codec-http-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.12/2.5.26/akka-actor_2.12-2.5.26.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-netty-util/3.3.1/gatling-netty-util-3.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver-dns/4.1.42.Final/netty-resolver-dns-4.1.42.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-epoll/4.1.42.Final/netty-transport-native-epoll-4.1.42.Final-linux-x86_64.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.26.Final/netty-tcnative-boringssl-static-2.0.26.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.28/slf4j-api-1.7.28.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.12/3.9.2/scala-logging_2.12-3.9.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar",
+            "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/suzaku/boopickle_2.12/1.3.1/boopickle_2.12-1.3.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire-macros_2.12/0.16.2/spire-macros_2.12-0.16.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/softwaremill/quicklens/quicklens_2.12/1.4.12/quicklens_2.12-1.4.12.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eatthepath/fast-uuid/0.1/fast-uuid-0.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-macros_2.12/1.5.0/cats-macros_2.12-1.5.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-kernel_2.12/1.5.0/cats-kernel_2.12-1.5.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/machinist_2.12/0.6.6/machinist_2.12-0.6.6.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/jawn-parser_2.12/0.14.1/jawn-parser_2.12-0.14.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-socks/4.1.45.Final/netty-codec-socks-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/28.1-android/guava-28.1-android.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-slf4j_2.12/2.5.26/akka-slf4j_2.12-2.5.26.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/simpleflatmapper/lightning-csv/8.0.3/lightning-csv-8.0.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/ben-manes/caffeine/caffeine/2.8.0/caffeine-2.8.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/pebbletemplates/pebble/3.1.0/pebble-3.1.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/scopt/scopt_2.12/3.7.1/scopt_2.12-3.7.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/jsonpath_2.12/0.7.0/jsonpath_2.12-0.7.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/9.9.1-5/Saxon-HE-9.9.1-5.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-lagarto/5.0.13/jodd-lagarto-5.0.13.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/burt/jmespath-jackson/0.4.0/jmespath-jackson-0.4.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/debasishg/redisclient_2.12/3.10/redisclient_2.12-3.10.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/hdrhistogram/HdrHistogram/2.1.11/HdrHistogram-2.1.11.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.7/json4s-core_2.12-3.6.7.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-dns/4.1.42.Final/netty-codec-dns-4.1.42.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.42.Final/netty-transport-native-unix-common-4.1.42.Final.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/simpleflatmapper/sfm-util/8.0.3/sfm-util-8.0.3.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-qual/2.10.0/checker-qual-2.10.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-log/5.0.13/jodd-log-5.0.13.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/burt/jmespath-core/0.4.0/jmespath-core-0.4.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.6.0/commons-pool2-2.6.0.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.7/json4s-ast_2.12-3.6.7.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.7/json4s-scalap_2.12-3.6.7.jar",
+            "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar"
+        ],
+        "out": "/Users/j5ik2o/Sources/motherbase/backend/.bloop/gatling-test",
+        "classesDir": "/Users/j5ik2o/Sources/motherbase/backend/.bloop/gatling-test/scala-2.12/classes",
+        "resources": [
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/src/main/resources",
+            "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/target/scala-2.12/resource_managed/main"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.12.10",
+            "options": [
+                "-Ypartial-unification",
+                "-feature",
+                "-deprecation",
+                "-unchecked",
+                "-encoding",
+                "UTF-8",
+                "-Xfatal-warnings",
+                "-language:_",
+                "-Ywarn-adapted-args",
+                "-Ywarn-dead-code",
+                "-Ywarn-inaccessible",
+                "-Ywarn-infer-any",
+                "-Ywarn-nullary-override",
+                "-Ywarn-nullary-unit",
+                "-Ywarn-numeric-widen",
+                "-Ywarn-unused-import",
+                "-Ywarn-numeric-widen",
+                "-Xplugin:/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/wartremover/wartremover_2.12.10/2.4.9/wartremover_2.12.10-2.4.9.jar"
+            ],
+            "jars": [
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-compiler.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/jline.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/jansi.jar",
+                "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-xml_2.12.jar"
+            ],
+            "analysis": "/Users/j5ik2o/Sources/motherbase/backend/tools/aws-gatling-tools/gatling-test/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.12.zip",
+            "setup": {
+                "order": "mixed",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    
+                ]
+            }
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "/Users/j5ik2o/.jabba/jdk/adopt@1.8.0-242/Contents/Home/jre",
+                "options": [
+                    "-Duser.dir=/Users/j5ik2o/Sources/motherbase/backend"
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-reflect",
+                    "version": "2.12.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-reflect",
+                            "path": "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-reflect.jar"
+                        },
+                        {
+                            "name": "scala-reflect",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.10/scala-reflect-2.12.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.thesamet.scalapb",
+                    "name": "scalapb-runtime_2.12",
+                    "version": "0.10.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalapb-runtime_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime_2.12/0.10.2/scalapb-runtime_2.12-0.10.2.jar"
+                        },
+                        {
+                            "name": "scalapb-runtime_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime_2.12/0.10.2/scalapb-runtime_2.12-0.10.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling.highcharts",
+                    "name": "gatling-charts-highcharts",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-charts-highcharts",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts/3.3.1/gatling-charts-highcharts-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-charts-highcharts",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts/3.3.1/gatling-charts-highcharts-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-test-framework",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-test-framework",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-test-framework/3.3.1/gatling-test-framework-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-test-framework",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-test-framework/3.3.1/gatling-test-framework-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.amazonaws",
+                    "name": "aws-java-sdk-core",
+                    "version": "1.11.575",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "aws-java-sdk-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.575/aws-java-sdk-core-1.11.575.jar"
+                        },
+                        {
+                            "name": "aws-java-sdk-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.575/aws-java-sdk-core-1.11.575-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.amazonaws",
+                    "name": "aws-java-sdk-s3",
+                    "version": "1.11.575",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "aws-java-sdk-s3",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.575/aws-java-sdk-s3-1.11.575.jar"
+                        },
+                        {
+                            "name": "aws-java-sdk-s3",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.575/aws-java-sdk-s3-1.11.575-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.circe",
+                    "name": "circe-core_2.12",
+                    "version": "0.11.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "circe-core_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-core_2.12/0.11.1/circe-core_2.12-0.11.1.jar"
+                        },
+                        {
+                            "name": "circe-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-core_2.12/0.11.1/circe-core_2.12-0.11.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.circe",
+                    "name": "circe-generic_2.12",
+                    "version": "0.11.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "circe-generic_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-generic_2.12/0.11.1/circe-generic_2.12-0.11.1.jar"
+                        },
+                        {
+                            "name": "circe-generic_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-generic_2.12/0.11.1/circe-generic_2.12-0.11.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.circe",
+                    "name": "circe-parser_2.12",
+                    "version": "0.11.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "circe-parser_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-parser_2.12/0.11.1/circe-parser_2.12-0.11.1.jar"
+                        },
+                        {
+                            "name": "circe-parser_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-parser_2.12/0.11.1/circe-parser_2.12-0.11.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-netty",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-netty",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-netty/1.28.0/grpc-netty-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-netty",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-netty/1.28.0/grpc-netty-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.thesamet.scalapb",
+                    "name": "scalapb-runtime-grpc_2.12",
+                    "version": "0.10.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalapb-runtime-grpc_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime-grpc_2.12/0.10.2/scalapb-runtime-grpc_2.12-0.10.2.jar"
+                        },
+                        {
+                            "name": "scalapb-runtime-grpc_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/scalapb-runtime-grpc_2.12/0.10.2/scalapb-runtime-grpc_2.12-0.10.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.phisgr",
+                    "name": "gatling-grpc_2.12",
+                    "version": "0.8.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-grpc_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/phisgr/gatling-grpc_2.12/0.8.2/gatling-grpc_2.12-0.8.2.jar"
+                        },
+                        {
+                            "name": "gatling-grpc_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/phisgr/gatling-grpc_2.12/0.8.2/gatling-grpc_2.12-0.8.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "de.huxhorn.sulky",
+                    "name": "de.huxhorn.sulky.ulid",
+                    "version": "8.2.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "de.huxhorn.sulky.ulid",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/de/huxhorn/sulky/de.huxhorn.sulky.ulid/8.2.0/de.huxhorn.sulky.ulid-8.2.0.jar"
+                        },
+                        {
+                            "name": "de.huxhorn.sulky.ulid",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/de/huxhorn/sulky/de.huxhorn.sulky.ulid/8.2.0/de.huxhorn.sulky.ulid-8.2.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.thesamet.scalapb",
+                    "name": "lenses_2.12",
+                    "version": "0.10.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "lenses_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/lenses_2.12/0.10.2/lenses_2.12-0.10.2.jar"
+                        },
+                        {
+                            "name": "lenses_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thesamet/scalapb/lenses_2.12/0.10.2/lenses_2.12-0.10.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.protobuf",
+                    "name": "protobuf-java",
+                    "version": "3.11.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "protobuf-java",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar"
+                        },
+                        {
+                            "name": "protobuf-java",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-collection-compat_2.12",
+                    "version": "2.1.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-collection-compat_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.1.4/scala-collection-compat_2.12-2.1.4.jar"
+                        },
+                        {
+                            "name": "scala-collection-compat_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.1.4/scala-collection-compat_2.12-2.1.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.lihaoyi",
+                    "name": "fastparse_2.12",
+                    "version": "2.2.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "fastparse_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/2.2.4/fastparse_2.12-2.2.4.jar"
+                        },
+                        {
+                            "name": "fastparse_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/fastparse_2.12/2.2.4/fastparse_2.12-2.2.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-charts",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-charts",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-charts/3.3.1/gatling-charts-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-charts",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-charts/3.3.1/gatling-charts-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-app",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-app",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-app/3.3.1/gatling-app-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-app",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-app/3.3.1/gatling-app-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-recorder",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-recorder",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-recorder/3.3.1/gatling-recorder-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-recorder",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-recorder/3.3.1/gatling-recorder-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-http-client",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-http-client",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-http-client/3.3.1/gatling-http-client-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-http-client",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-http-client/3.3.1/gatling-http-client-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-commons",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-commons",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-commons/3.3.1/gatling-commons-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-commons",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-commons/3.3.1/gatling-commons-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-sbt",
+                    "name": "test-interface",
+                    "version": "1.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "test-interface",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar"
+                        },
+                        {
+                            "name": "test-interface",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "commons-logging",
+                    "name": "commons-logging",
+                    "version": "1.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-logging",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"
+                        },
+                        {
+                            "name": "commons-logging",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.httpcomponents",
+                    "name": "httpclient",
+                    "version": "4.5.5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "httpclient",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5.jar"
+                        },
+                        {
+                            "name": "httpclient",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.5/httpclient-4.5.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "software.amazon.ion",
+                    "name": "ion-java",
+                    "version": "1.0.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "ion-java",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar"
+                        },
+                        {
+                            "name": "ion-java",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-databind",
+                    "version": "2.10.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-databind",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar"
+                        },
+                        {
+                            "name": "jackson-databind",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.dataformat",
+                    "name": "jackson-dataformat-cbor",
+                    "version": "2.6.7",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-dataformat-cbor",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar"
+                        },
+                        {
+                            "name": "jackson-dataformat-cbor",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "joda-time",
+                    "name": "joda-time",
+                    "version": "2.8.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "joda-time",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar"
+                        },
+                        {
+                            "name": "joda-time",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.amazonaws",
+                    "name": "aws-java-sdk-kms",
+                    "version": "1.11.575",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "aws-java-sdk-kms",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.575/aws-java-sdk-kms-1.11.575.jar"
+                        },
+                        {
+                            "name": "aws-java-sdk-kms",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.575/aws-java-sdk-kms-1.11.575-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.amazonaws",
+                    "name": "jmespath-java",
+                    "version": "1.11.575",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jmespath-java",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/jmespath-java/1.11.575/jmespath-java-1.11.575.jar"
+                        },
+                        {
+                            "name": "jmespath-java",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/amazonaws/jmespath-java/1.11.575/jmespath-java-1.11.575-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.circe",
+                    "name": "circe-numbers_2.12",
+                    "version": "0.11.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "circe-numbers_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-numbers_2.12/0.11.1/circe-numbers_2.12-0.11.1.jar"
+                        },
+                        {
+                            "name": "circe-numbers_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-numbers_2.12/0.11.1/circe-numbers_2.12-0.11.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "cats-core_2.12",
+                    "version": "1.5.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "cats-core_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-core_2.12/1.5.0/cats-core_2.12-1.5.0.jar"
+                        },
+                        {
+                            "name": "cats-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-core_2.12/1.5.0/cats-core_2.12-1.5.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.chuusai",
+                    "name": "shapeless_2.12",
+                    "version": "2.3.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "shapeless_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.12/2.3.3/shapeless_2.12-2.3.3.jar"
+                        },
+                        {
+                            "name": "shapeless_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/chuusai/shapeless_2.12/2.3.3/shapeless_2.12-2.3.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.circe",
+                    "name": "circe-jawn_2.12",
+                    "version": "0.11.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "circe-jawn_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-jawn_2.12/0.11.1/circe-jawn_2.12-0.11.1.jar"
+                        },
+                        {
+                            "name": "circe-jawn_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/circe/circe-jawn_2.12/0.11.1/circe-jawn_2.12-0.11.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-core",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-core/1.28.0/grpc-core-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec-http2",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec-http2",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http2/4.1.45.Final/netty-codec-http2-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec-http2",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http2/4.1.45.Final/netty-codec-http2-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-handler-proxy",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-handler-proxy",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler-proxy/4.1.45.Final/netty-handler-proxy-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-handler-proxy",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler-proxy/4.1.45.Final/netty-handler-proxy-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-stub",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-stub",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-stub",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-stub/1.28.0/grpc-stub-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-protobuf",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-protobuf",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-protobuf",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-protobuf/1.28.0/grpc-protobuf-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-core",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-core/3.3.1/gatling-core-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-core/3.3.1/gatling-core-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.lihaoyi",
+                    "name": "sourcecode_2.12",
+                    "version": "0.2.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "sourcecode_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.2.1/sourcecode_2.12-0.2.1.jar"
+                        },
+                        {
+                            "name": "sourcecode_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/sourcecode_2.12/0.2.1/sourcecode_2.12-0.2.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.lihaoyi",
+                    "name": "geny_2.12",
+                    "version": "0.5.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "geny_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/geny_2.12/0.5.1/geny_2.12-0.5.1.jar"
+                        },
+                        {
+                            "name": "geny_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/lihaoyi/geny_2.12/0.5.1/geny_2.12-0.5.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.tdunning",
+                    "name": "t-digest",
+                    "version": "3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "t-digest",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/tdunning/t-digest/3.1/t-digest-3.1.jar"
+                        },
+                        {
+                            "name": "t-digest",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/tdunning/t-digest/3.1/t-digest-3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-http",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-http",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-http/3.3.1/gatling-http-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-http",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-http/3.3.1/gatling-http-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-jms",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-jms",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-jms/3.3.1/gatling-jms-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-jms",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-jms/3.3.1/gatling-jms-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-jdbc",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-jdbc",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-jdbc/3.3.1/gatling-jdbc-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-jdbc",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-jdbc/3.3.1/gatling-jdbc-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-redis",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-redis",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-redis/3.3.1/gatling-redis-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-redis",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-redis/3.3.1/gatling-redis-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-graphite",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-graphite",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-graphite/3.3.1/gatling-graphite-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-graphite",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-graphite/3.3.1/gatling-graphite-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-swing_2.12",
+                    "version": "2.1.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-swing_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.1.1/scala-swing_2.12-2.1.1.jar"
+                        },
+                        {
+                            "name": "scala-swing_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-swing_2.12/2.1.1/scala-swing_2.12-2.1.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.json4s",
+                    "name": "json4s-jackson_2.12",
+                    "version": "3.6.7",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "json4s-jackson_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.7/json4s-jackson_2.12-3.6.7.jar"
+                        },
+                        {
+                            "name": "json4s-jackson_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-jackson_2.12/3.6.7/json4s-jackson_2.12-3.6.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.bouncycastle",
+                    "name": "bcpkix-jdk15on",
+                    "version": "1.64",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "bcpkix-jdk15on",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.64/bcpkix-jdk15on-1.64.jar"
+                        },
+                        {
+                            "name": "bcpkix-jdk15on",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.64/bcpkix-jdk15on-1.64-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec-http",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec-http",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http/4.1.45.Final/netty-codec-http-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec-http",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-http/4.1.45.Final/netty-codec-http-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-actor_2.12",
+                    "version": "2.5.26",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "akka-actor_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.12/2.5.26/akka-actor_2.12-2.5.26.jar"
+                        },
+                        {
+                            "name": "akka-actor_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.12/2.5.26/akka-actor_2.12-2.5.26-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "gatling-netty-util",
+                    "version": "3.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gatling-netty-util",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-netty-util/3.3.1/gatling-netty-util-3.3.1.jar"
+                        },
+                        {
+                            "name": "gatling-netty-util",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/gatling-netty-util/3.3.1/gatling-netty-util-3.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-buffer",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-buffer",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-buffer",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-handler",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-handler",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-handler",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-resolver-dns",
+                    "version": "4.1.42.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-resolver-dns",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver-dns/4.1.42.Final/netty-resolver-dns-4.1.42.Final.jar"
+                        },
+                        {
+                            "name": "netty-resolver-dns",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver-dns/4.1.42.Final/netty-resolver-dns-4.1.42.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-tcnative-boringssl-static",
+                    "version": "2.0.26.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-tcnative-boringssl-static",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.26.Final/netty-tcnative-boringssl-static-2.0.26.Final.jar"
+                        },
+                        {
+                            "name": "netty-tcnative-boringssl-static",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-tcnative-boringssl-static/2.0.26.Final/netty-tcnative-boringssl-static-2.0.26.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.sun.activation",
+                    "name": "javax.activation",
+                    "version": "1.2.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "javax.activation",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar"
+                        },
+                        {
+                            "name": "javax.activation",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.slf4j",
+                    "name": "slf4j-api",
+                    "version": "1.7.28",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "slf4j-api",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.28/slf4j-api-1.7.28.jar"
+                        },
+                        {
+                            "name": "slf4j-api",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.28/slf4j-api-1.7.28-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.scala-logging",
+                    "name": "scala-logging_2.12",
+                    "version": "3.9.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-logging_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.12/3.9.2/scala-logging_2.12-3.9.2.jar"
+                        },
+                        {
+                            "name": "scala-logging_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/scala-logging/scala-logging_2.12/3.9.2/scala-logging_2.12-3.9.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "ch.qos.logback",
+                    "name": "logback-classic",
+                    "version": "1.2.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "logback-classic",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"
+                        },
+                        {
+                            "name": "logback-classic",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe",
+                    "name": "config",
+                    "version": "1.4.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "config",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.jar"
+                        },
+                        {
+                            "name": "config",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.0/config-1.4.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.suzaku",
+                    "name": "boopickle_2.12",
+                    "version": "1.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "boopickle_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/suzaku/boopickle_2.12/1.3.1/boopickle_2.12-1.3.1.jar"
+                        },
+                        {
+                            "name": "boopickle_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/suzaku/boopickle_2.12/1.3.1/boopickle_2.12-1.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "spire-macros_2.12",
+                    "version": "0.16.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "spire-macros_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire-macros_2.12/0.16.2/spire-macros_2.12-0.16.2.jar"
+                        },
+                        {
+                            "name": "spire-macros_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/spire-macros_2.12/0.16.2/spire-macros_2.12-0.16.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.softwaremill.quicklens",
+                    "name": "quicklens_2.12",
+                    "version": "1.4.12",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "quicklens_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/softwaremill/quicklens/quicklens_2.12/1.4.12/quicklens_2.12-1.4.12.jar"
+                        },
+                        {
+                            "name": "quicklens_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/softwaremill/quicklens/quicklens_2.12/1.4.12/quicklens_2.12-1.4.12-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-java8-compat_2.12",
+                    "version": "0.9.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-java8-compat_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar"
+                        },
+                        {
+                            "name": "scala-java8-compat_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.eatthepath",
+                    "name": "fast-uuid",
+                    "version": "0.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "fast-uuid",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eatthepath/fast-uuid/0.1/fast-uuid-0.1.jar"
+                        },
+                        {
+                            "name": "fast-uuid",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/eatthepath/fast-uuid/0.1/fast-uuid-0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.httpcomponents",
+                    "name": "httpcore",
+                    "version": "4.4.9",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "httpcore",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar"
+                        },
+                        {
+                            "name": "httpcore",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "commons-codec",
+                    "name": "commons-codec",
+                    "version": "1.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-codec",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"
+                        },
+                        {
+                            "name": "commons-codec",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/commons-codec/commons-codec/1.10/commons-codec-1.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-annotations",
+                    "version": "2.10.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar"
+                        },
+                        {
+                            "name": "jackson-annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.fasterxml.jackson.core",
+                    "name": "jackson-core",
+                    "version": "2.10.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jackson-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar"
+                        },
+                        {
+                            "name": "jackson-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "cats-macros_2.12",
+                    "version": "1.5.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "cats-macros_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-macros_2.12/1.5.0/cats-macros_2.12-1.5.0.jar"
+                        },
+                        {
+                            "name": "cats-macros_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-macros_2.12/1.5.0/cats-macros_2.12-1.5.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "cats-kernel_2.12",
+                    "version": "1.5.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "cats-kernel_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-kernel_2.12/1.5.0/cats-kernel_2.12-1.5.0.jar"
+                        },
+                        {
+                            "name": "cats-kernel_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/cats-kernel_2.12/1.5.0/cats-kernel_2.12-1.5.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "machinist_2.12",
+                    "version": "0.6.6",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "machinist_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/machinist_2.12/0.6.6/machinist_2.12-0.6.6.jar"
+                        },
+                        {
+                            "name": "machinist_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/machinist_2.12/0.6.6/machinist_2.12-0.6.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "macro-compat_2.12",
+                    "version": "1.1.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "macro-compat_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1.jar"
+                        },
+                        {
+                            "name": "macro-compat_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.typelevel",
+                    "name": "jawn-parser_2.12",
+                    "version": "0.14.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jawn-parser_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/jawn-parser_2.12/0.14.1/jawn-parser_2.12-0.14.1.jar"
+                        },
+                        {
+                            "name": "jawn-parser_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/typelevel/jawn-parser_2.12/0.14.1/jawn-parser_2.12-0.14.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-api",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-api",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-api",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-api/1.28.0/grpc-api-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.code.gson",
+                    "name": "gson",
+                    "version": "2.8.6",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "gson",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar"
+                        },
+                        {
+                            "name": "gson",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/gson/gson/2.8.6/gson-2.8.6-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.android",
+                    "name": "annotations",
+                    "version": "4.1.1.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4.jar"
+                        },
+                        {
+                            "name": "annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/android/annotations/4.1.1.4/annotations-4.1.1.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.errorprone",
+                    "name": "error_prone_annotations",
+                    "version": "2.3.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "error_prone_annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4.jar"
+                        },
+                        {
+                            "name": "error_prone_annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.3.4/error_prone_annotations-2.3.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.perfmark",
+                    "name": "perfmark-api",
+                    "version": "0.19.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "perfmark-api",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0.jar"
+                        },
+                        {
+                            "name": "perfmark-api",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/perfmark/perfmark-api/0.19.0/perfmark-api-0.19.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-common",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-common",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-common",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-transport",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-transport",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-transport",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec-socks",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec-socks",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-socks/4.1.45.Final/netty-codec-socks-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec-socks",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-socks/4.1.45.Final/netty-codec-socks-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.guava",
+                    "name": "guava",
+                    "version": "28.1-android",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "guava",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/28.1-android/guava-28.1-android.jar"
+                        },
+                        {
+                            "name": "guava",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/28.1-android/guava-28.1-android-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.api.grpc",
+                    "name": "proto-google-common-protos",
+                    "version": "1.17.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "proto-google-common-protos",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0.jar"
+                        },
+                        {
+                            "name": "proto-google-common-protos",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/api/grpc/proto-google-common-protos/1.17.0/proto-google-common-protos-1.17.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-protobuf-lite",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-protobuf-lite",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-protobuf-lite",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-protobuf-lite/1.28.0/grpc-protobuf-lite-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.typesafe.akka",
+                    "name": "akka-slf4j_2.12",
+                    "version": "2.5.26",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "akka-slf4j_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-slf4j_2.12/2.5.26/akka-slf4j_2.12-2.5.26.jar"
+                        },
+                        {
+                            "name": "akka-slf4j_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-slf4j_2.12/2.5.26/akka-slf4j_2.12-2.5.26-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.simpleflatmapper",
+                    "name": "lightning-csv",
+                    "version": "8.0.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "lightning-csv",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/simpleflatmapper/lightning-csv/8.0.3/lightning-csv-8.0.3.jar"
+                        },
+                        {
+                            "name": "lightning-csv",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/simpleflatmapper/lightning-csv/8.0.3/lightning-csv-8.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.ben-manes.caffeine",
+                    "name": "caffeine",
+                    "version": "2.8.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "caffeine",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/ben-manes/caffeine/caffeine/2.8.0/caffeine-2.8.0.jar"
+                        },
+                        {
+                            "name": "caffeine",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/ben-manes/caffeine/caffeine/2.8.0/caffeine-2.8.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.pebbletemplates",
+                    "name": "pebble",
+                    "version": "3.1.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "pebble",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/pebbletemplates/pebble/3.1.0/pebble-3.1.0.jar"
+                        },
+                        {
+                            "name": "pebble",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/pebbletemplates/pebble/3.1.0/pebble-3.1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-parser-combinators_2.12",
+                    "version": "1.1.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-parser-combinators_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2.jar"
+                        },
+                        {
+                            "name": "scala-parser-combinators_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.12/1.1.2/scala-parser-combinators_2.12-1.1.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.github.scopt",
+                    "name": "scopt_2.12",
+                    "version": "3.7.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scopt_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/scopt/scopt_2.12/3.7.1/scopt_2.12-3.7.1.jar"
+                        },
+                        {
+                            "name": "scopt_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/github/scopt/scopt_2.12/3.7.1/scopt_2.12-3.7.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.gatling",
+                    "name": "jsonpath_2.12",
+                    "version": "0.7.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jsonpath_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/jsonpath_2.12/0.7.0/jsonpath_2.12-0.7.0.jar"
+                        },
+                        {
+                            "name": "jsonpath_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/gatling/jsonpath_2.12/0.7.0/jsonpath_2.12-0.7.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.sf.saxon",
+                    "name": "Saxon-HE",
+                    "version": "9.9.1-5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "Saxon-HE",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/9.9.1-5/Saxon-HE-9.9.1-5.jar"
+                        },
+                        {
+                            "name": "Saxon-HE",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/sf/saxon/Saxon-HE/9.9.1-5/Saxon-HE-9.9.1-5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.jodd",
+                    "name": "jodd-lagarto",
+                    "version": "5.0.13",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jodd-lagarto",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-lagarto/5.0.13/jodd-lagarto-5.0.13.jar"
+                        },
+                        {
+                            "name": "jodd-lagarto",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-lagarto/5.0.13/jodd-lagarto-5.0.13-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.burt",
+                    "name": "jmespath-jackson",
+                    "version": "0.4.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jmespath-jackson",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/burt/jmespath-jackson/0.4.0/jmespath-jackson-0.4.0.jar"
+                        },
+                        {
+                            "name": "jmespath-jackson",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/burt/jmespath-jackson/0.4.0/jmespath-jackson-0.4.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang.modules",
+                    "name": "scala-xml_2.12",
+                    "version": "1.2.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-xml_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0.jar"
+                        },
+                        {
+                            "name": "scala-xml_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "javax.jms",
+                    "name": "javax.jms-api",
+                    "version": "2.0.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "javax.jms-api",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar"
+                        },
+                        {
+                            "name": "javax.jms-api",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "net.debasishg",
+                    "name": "redisclient_2.12",
+                    "version": "3.10",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "redisclient_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/debasishg/redisclient_2.12/3.10/redisclient_2.12-3.10.jar"
+                        },
+                        {
+                            "name": "redisclient_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/net/debasishg/redisclient_2.12/3.10/redisclient_2.12-3.10-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.hdrhistogram",
+                    "name": "HdrHistogram",
+                    "version": "2.1.11",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "HdrHistogram",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/hdrhistogram/HdrHistogram/2.1.11/HdrHistogram-2.1.11.jar"
+                        },
+                        {
+                            "name": "HdrHistogram",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/hdrhistogram/HdrHistogram/2.1.11/HdrHistogram-2.1.11-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.json4s",
+                    "name": "json4s-core_2.12",
+                    "version": "3.6.7",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "json4s-core_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.7/json4s-core_2.12-3.6.7.jar"
+                        },
+                        {
+                            "name": "json4s-core_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-core_2.12/3.6.7/json4s-core_2.12-3.6.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.bouncycastle",
+                    "name": "bcprov-jdk15on",
+                    "version": "1.64",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "bcprov-jdk15on",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64.jar"
+                        },
+                        {
+                            "name": "bcprov-jdk15on",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk15on/1.64/bcprov-jdk15on-1.64-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-resolver",
+                    "version": "4.1.45.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-resolver",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar"
+                        },
+                        {
+                            "name": "netty-resolver",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-codec-dns",
+                    "version": "4.1.42.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-codec-dns",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-dns/4.1.42.Final/netty-codec-dns-4.1.42.Final.jar"
+                        },
+                        {
+                            "name": "netty-codec-dns",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-codec-dns/4.1.42.Final/netty-codec-dns-4.1.42.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.netty",
+                    "name": "netty-transport-native-unix-common",
+                    "version": "4.1.42.Final",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "netty-transport-native-unix-common",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.42.Final/netty-transport-native-unix-common-4.1.42.Final.jar"
+                        },
+                        {
+                            "name": "netty-transport-native-unix-common",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/netty/netty-transport-native-unix-common/4.1.42.Final/netty-transport-native-unix-common-4.1.42.Final-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "ch.qos.logback",
+                    "name": "logback-core",
+                    "version": "1.2.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "logback-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"
+                        },
+                        {
+                            "name": "logback-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.grpc",
+                    "name": "grpc-context",
+                    "version": "1.28.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "grpc-context",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0.jar"
+                        },
+                        {
+                            "name": "grpc-context",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/grpc/grpc-context/1.28.0/grpc-context-1.28.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.code.findbugs",
+                    "name": "jsr305",
+                    "version": "3.0.2",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jsr305",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+                        },
+                        {
+                            "name": "jsr305",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.codehaus.mojo",
+                    "name": "animal-sniffer-annotations",
+                    "version": "1.18",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "animal-sniffer-annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar"
+                        },
+                        {
+                            "name": "animal-sniffer-annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.guava",
+                    "name": "failureaccess",
+                    "version": "1.0.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "failureaccess",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar"
+                        },
+                        {
+                            "name": "failureaccess",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.guava",
+                    "name": "listenablefuture",
+                    "version": "9999.0-empty-to-avoid-conflict-with-guava",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "listenablefuture",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.checkerframework",
+                    "name": "checker-compat-qual",
+                    "version": "2.5.5",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "checker-compat-qual",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5.jar"
+                        },
+                        {
+                            "name": "checker-compat-qual",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-compat-qual/2.5.5/checker-compat-qual-2.5.5-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.google.j2objc",
+                    "name": "j2objc-annotations",
+                    "version": "1.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "j2objc-annotations",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar"
+                        },
+                        {
+                            "name": "j2objc-annotations",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.simpleflatmapper",
+                    "name": "sfm-util",
+                    "version": "8.0.3",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "sfm-util",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/simpleflatmapper/sfm-util/8.0.3/sfm-util-8.0.3.jar"
+                        },
+                        {
+                            "name": "sfm-util",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/simpleflatmapper/sfm-util/8.0.3/sfm-util-8.0.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.checkerframework",
+                    "name": "checker-qual",
+                    "version": "2.10.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "checker-qual",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-qual/2.10.0/checker-qual-2.10.0.jar"
+                        },
+                        {
+                            "name": "checker-qual",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-qual/2.10.0/checker-qual-2.10.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.unbescape",
+                    "name": "unbescape",
+                    "version": "1.1.6.RELEASE",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "unbescape",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar"
+                        },
+                        {
+                            "name": "unbescape",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.jodd",
+                    "name": "jodd-core",
+                    "version": "5.0.13",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jodd-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13.jar"
+                        },
+                        {
+                            "name": "jodd-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.jodd",
+                    "name": "jodd-log",
+                    "version": "5.0.13",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jodd-log",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-log/5.0.13/jodd-log-5.0.13.jar"
+                        },
+                        {
+                            "name": "jodd-log",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/jodd/jodd-log/5.0.13/jodd-log-5.0.13-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "io.burt",
+                    "name": "jmespath-core",
+                    "version": "0.4.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "jmespath-core",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/burt/jmespath-core/0.4.0/jmespath-core-0.4.0.jar"
+                        },
+                        {
+                            "name": "jmespath-core",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/burt/jmespath-core/0.4.0/jmespath-core-0.4.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.apache.commons",
+                    "name": "commons-pool2",
+                    "version": "2.6.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "commons-pool2",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.6.0/commons-pool2-2.6.0.jar"
+                        },
+                        {
+                            "name": "commons-pool2",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.6.0/commons-pool2-2.6.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.json4s",
+                    "name": "json4s-ast_2.12",
+                    "version": "3.6.7",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "json4s-ast_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.7/json4s-ast_2.12-3.6.7.jar"
+                        },
+                        {
+                            "name": "json4s-ast_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-ast_2.12/3.6.7/json4s-ast_2.12-3.6.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.json4s",
+                    "name": "json4s-scalap_2.12",
+                    "version": "3.6.7",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "json4s-scalap_2.12",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.7/json4s-scalap_2.12-3.6.7.jar"
+                        },
+                        {
+                            "name": "json4s-scalap_2.12",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/json4s/json4s-scalap_2.12/3.6.7/json4s-scalap_2.12-3.6.7-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "com.thoughtworks.paranamer",
+                    "name": "paranamer",
+                    "version": "2.8",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "paranamer",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar"
+                        },
+                        {
+                            "name": "paranamer",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.12.10",
+                    "configurations": "optional",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/j5ik2o/.sbt/boot/scala-2.12.10/lib/scala-library.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/j5ik2o/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.10/scala-library-2.12.10-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "library"
+        ]
+    }
+}

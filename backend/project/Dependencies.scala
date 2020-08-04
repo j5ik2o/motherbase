@@ -2,7 +2,7 @@ import sbt._
 
 object Version {
   val circe         = "0.13.0"
-  val akka          = "2.6.6"
+  val akka          = "2.6.8"
   val akkaHttp      = "10.1.12"
   val akkaHttpCirce = "1.31.0"
   val cats          = "2.1.1"
@@ -74,10 +74,10 @@ object Dependencies {
   }
 
   object j5ik2o {
-    val reactiveAwsDynamodb     = "com.github.j5ik2o" %% "reactive-aws-dynamodb-core" % "1.2.6"
-    val reactiveAwsDynamodbTest = "com.github.j5ik2o" %% "reactive-aws-dynamodb-test" % "1.2.6"
-    val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal"  % "1.1.3"
-    val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3"        % "1.0.10"
+    val reactiveAwsDynamodb     = "com.github.j5ik2o" %% "reactive-aws-dynamodb-core"        % "1.2.6"
+    val reactiveAwsDynamodbTest = "com.github.j5ik2o" %% "reactive-aws-dynamodb-test"        % "1.2.6"
+    val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.3"
+    val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3"               % "1.0.10"
   }
 
   object aws {
@@ -134,8 +134,8 @@ object Dependencies {
     val classic = "ch.qos.logback" % "logback-classic" % Version.logback
 
     val logstashLogbackEncoder = "net.logstash.logback" % "logstash-logback-encoder" % "4.11" excludeAll (
-      ExclusionRule(organization = "com.fasterxml.jackson.core", name = "jackson-core"),
-      ExclusionRule(organization = "com.fasterxml.jackson.core", name = "jackson-databind")
+        ExclusionRule(organization = "com.fasterxml.jackson.core", name = "jackson-core"),
+        ExclusionRule(organization = "com.fasterxml.jackson.core", name = "jackson-databind")
     )
   }
 

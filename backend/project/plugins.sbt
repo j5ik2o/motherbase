@@ -7,39 +7,9 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.h2database"    % "h2"                     % "1.4.195",
-  "commons-io"        % "commons-io"             % "2.5",
-  "org.seasar.util"   % "s2util"                 % "0.0.1",
-  "com.github.j5ik2o" %% "reactive-aws-ecs-core" % "1.2.6",
-  "com.thesamet.scalapb" %% "compilerplugin"        % "0.10.2"
+  "com.h2database"       % "h2"                     % "1.4.195",
+  "commons-io"           % "commons-io"             % "2.5",
+  "org.seasar.util"      % "s2util"                 % "0.0.1",
+  "com.github.j5ik2o"    %% "reactive-aws-ecs-core" % "1.2.6",
+  "com.thesamet.scalapb" %% "compilerplugin"        % "0.10.7"
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,1 +1,1 @@
-addSbtPlugin("com.lightbend.akka.grpc" % "sbt-akka-grpc" % "0.8.2")
+addSbtPlugin("com.lightbend.akka.grpc" % "sbt-akka-grpc" % "1.0.1")
