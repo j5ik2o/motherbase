@@ -6,6 +6,7 @@ final case class SystemAccount(
     id: SystemAccountId,
     deleted: Boolean,
     name: SystemAccountName,
+    emailAddress: EmailAddress,
     createdAt: Instant,
     updatedAt: Instant
 ) {
@@ -16,8 +17,13 @@ final case class SystemAccount(
 
 object SystemAccount {
 
-  def canCreate(name: SystemAccountName): Boolean = true
+  def canCreate(name: SystemAccountName, emailAddress: EmailAddress): Boolean = true
 
-  def apply(id: SystemAccountId, name: SystemAccountName, createdAt: Instant): SystemAccount =
-    new SystemAccount(id, false, name, createdAt, createdAt)
+  def apply(
+      id: SystemAccountId,
+      name: SystemAccountName,
+      emailAddress: EmailAddress,
+      createdAt: Instant
+  ): SystemAccount =
+    new SystemAccount(id, false, name, emailAddress, createdAt, createdAt)
 }

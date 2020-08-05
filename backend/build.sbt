@@ -137,7 +137,9 @@ val `interface-adaptor-common` = (project in file("modules/accounts/common/accou
     name := s"$projectBaseName-accounts-common-interface-adaptor",
     libraryDependencies ++= Seq(
         akka.actorTyped,
+      akka.discovery,
         j5ik2o.reactiveAwsDynamodb,
+      j5ik2o.reactiveAwsS3,
         circe.core,
         circe.generic,
         circe.parser,

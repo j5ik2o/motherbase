@@ -1,37 +1,58 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import akka.actor.typed.{ ActorRef, Behavior }
-import com.github.j5ik2o.motherbase.accounts.domain.system.{ SystemAccountId, SystemAccountName }
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol.GetSystemAccountNameSucceeded
+import com.github.j5ik2o.motherbase.accounts.domain.system.{ EmailAddress, SystemAccountId, SystemAccountName }
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol.{
+  CreateSystemAccountSucceeded,
+  DestroySystemAccountSucceeded,
+  GetSystemAccountNameSucceeded
+}
 import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.ActorSpec
+import org.scalatest.freespec.AnyFreeSpecLike
 
-import scala.concurrent.duration._
-
-trait SystemAccountAggregateSpecScenario {
-  this: ActorSpec with SystemAccountAggregateSpecHelper =>
-  val maxDuration: FiniteDuration = (10 * sys.env.getOrElse("SBT_TEST_TIME_FACTOR", "1").toInt) seconds
+trait SystemAccountAggregateSpecScenario
+    extends AnyFreeSpecLike
+    with AggregateSpecScenarioBase
+    with SystemAccountAggregateSpecHelper {
+  this: ActorSpec =>
 
   def behavior(systemAccountId: SystemAccountId): Behavior[SystemAccountProtocol.Command]
 
   def actorRef(systemAccountId: SystemAccountId): ActorRef[SystemAccountProtocol.Command] =
     spawn(behavior(systemAccountId))
 
-  "SystemAccountPersistentAggregate" - {
+  "SystemAccountAggregate" - {
     "create with killActor" in {
       val systemAccountId = SystemAccountId()
       val name            = SystemAccountName("test")
+      val emailAddress    = EmailAddress("test@test.com")
       val actorRef1       = actorRef(systemAccountId)
-      createSystemAccount(actorRef1, maxDuration)(systemAccountId, name)
 
-      killActors(actorRef1)((10 * sys.env.getOrElse("SBT_TEST_TIME_FACTOR", "1").toInt) seconds)
+      val createSystemAccountReply = createSystemAccount(actorRef1, maxDuration)(systemAccountId, name, emailAddress)
+        .asInstanceOf[CreateSystemAccountSucceeded]
+      createSystemAccountReply.systemAccountId shouldBe systemAccountId
+
+      killActors(actorRef1)(maxDuration)
 
       val actorRef2 = actorRef(systemAccountId)
 
-      eventually {
-        val getSystemAccountNameReply2 =
-          getSystemAccountName(actorRef2, maxDuration)(systemAccountId).asInstanceOf[GetSystemAccountNameSucceeded]
-        getSystemAccountNameReply2.name shouldBe name
-      }
+      val getSystemAccountNameReply =
+        getSystemAccountName(actorRef2, maxDuration)(systemAccountId).asInstanceOf[GetSystemAccountNameSucceeded]
+      getSystemAccountNameReply.name shouldBe name
+    }
+    "destroy" in {
+      val systemAccountId = SystemAccountId()
+      val name            = SystemAccountName("test")
+      val emailAddress    = EmailAddress("test@test.com")
+      val actorRef1       = actorRef(systemAccountId)
+
+      val createSystemAccountReply = createSystemAccount(actorRef1, maxDuration)(systemAccountId, name, emailAddress)
+        .asInstanceOf[CreateSystemAccountSucceeded]
+      createSystemAccountReply.systemAccountId shouldBe systemAccountId
+
+      val destroySystemAccountReply =
+        destroySystemAccount(actorRef1, maxDuration)(systemAccountId).asInstanceOf[DestroySystemAccountSucceeded]
+      destroySystemAccountReply.systemAccountId shouldBe systemAccountId
     }
   }
 }

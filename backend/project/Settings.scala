@@ -81,11 +81,10 @@ object Settings {
             compilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full) :: Nil
         }
       },
-      dependencyOverrides ++= Seq(
-        "com.typesafe.akka" %% "akka-http" % "10.1.11",
-        "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.11",
-        "com.typesafe.akka" %% "akka-discovery" % "2.6.4"
-      ),
+//      dependencyOverrides ++= Seq(
+//        "com.typesafe.akka" %% "akka-http" % "10.1.11",
+//        "com.typesafe.akka" %% "akka-http-spray-json" % "10.1.11"
+//      ),
       scalafmtOnCompile := true,
       parallelExecution in Test := false,
       (scalastyleConfig in Compile) := file("scalastyle-config.xml"),

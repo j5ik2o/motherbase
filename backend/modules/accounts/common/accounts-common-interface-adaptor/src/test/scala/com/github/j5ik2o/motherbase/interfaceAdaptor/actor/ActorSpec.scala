@@ -4,6 +4,7 @@ import akka.actor.testkit.typed.TestKitSettings
 import akka.actor.testkit.typed.scaladsl.{ ActorTestKit, ActorTestKitBase, LogCapturing, ScalaTestWithActorTestKit }
 import akka.actor.typed.ActorRef
 import com.typesafe.config.{ Config, ConfigFactory }
+import org.scalatest.TestSuite
 import org.scalatest.concurrent.Waiters
 import org.scalatest.freespec.AnyFreeSpecLike
 
@@ -11,7 +12,7 @@ import scala.concurrent.duration._
 
 abstract class ActorSpec(testKit: ActorTestKit)
     extends ScalaTestWithActorTestKit(testKit)
-    with AnyFreeSpecLike
+    with TestSuite
     with LogCapturing
     with Waiters {
 

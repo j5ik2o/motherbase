@@ -1,7 +1,7 @@
 package com.github.j5ik2o.gatling
 
-import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.command.{AccountCommandServiceGrpc, CreateAccountRequest}
-import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.query.{AccountQueryServiceGrpc, GetAccountRequest, GetAccountsRequest}
+import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.command.{CreateSystemAccountRequest, SystemAccountCommandServiceGrpc}
+import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.query.{AccountQueryServiceGrpc, GetSystemAccountRequest, GetSystemAccountsRequest}
 import com.github.phisgr.gatling.grpc.Predef._
 import com.github.phisgr.gatling.pb._
 import com.typesafe.config.ConfigFactory
@@ -47,14 +47,14 @@ class BasicSimulation extends Simulation {
   private val entireDuration = rampDuration + holdDuration
 
   val grpcConf = grpc(managedChannelBuilder(name = grpcWriteHost, port = grpcWritePort).usePlaintext())
-    .warmUpCall(AccountQueryServiceGrpc.METHOD_GET_ACCOUNTS, GetAccountsRequest.defaultInstance)
+    .warmUpCall(AccountQueryServiceGrpc.METHOD_GET_ACCOUNTS, GetSystemAccountsRequest.defaultInstance)
 
-  val createAccountRequest: Expression[CreateAccountRequest] =
-    CreateAccountRequest().updateExpr(
+  val createAccountRequest: Expression[CreateSystemAccountRequest] =
+    CreateSystemAccountRequest().updateExpr(
       { _.organizationId :~ $("orgId") }, { _.name :~ $("name") }, { _.email :~ $("email") }
     )
 
-  val getAccountRequest = GetAccountRequest().updateExpr { _.accountId :~ $("accountId") }
+  val getAccountRequest = GetSystemAccountRequest().updateExpr { _.accountId :~ $("accountId") }
 
   val getAccount = grpc("get-account")
     .rpc(AccountQueryServiceGrpc.METHOD_GET_ACCOUNT)
@@ -62,7 +62,7 @@ class BasicSimulation extends Simulation {
     .check(statusCode is Status.Code.OK)
 
   val createAccount = grpc("create-account")
-    .rpc(AccountCommandServiceGrpc.METHOD_CREATE_ACCOUNT)
+    .rpc(SystemAccountCommandServiceGrpc.METHOD_CREATE_ACCOUNT)
     .payload(createAccountRequest)
     .check(statusCode is Status.Code.OK)
     .extract(_.accountId.some)(_ saveAs "accountId")

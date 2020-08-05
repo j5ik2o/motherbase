@@ -3,7 +3,7 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 import java.time.Instant
 
 import akka.actor.typed.ActorRef
-import com.github.j5ik2o.motherbase.accounts.domain.system.{ SystemAccountId, SystemAccountName }
+import com.github.j5ik2o.motherbase.accounts.domain.system.{ EmailAddress, SystemAccountId, SystemAccountName }
 
 object SystemAccountProtocol {
 
@@ -16,6 +16,7 @@ object SystemAccountProtocol {
   final case class CreateSystemAccount(
       systemAccountId: SystemAccountId,
       name: SystemAccountName,
+      emailAddress: EmailAddress,
       replyTo: Option[ActorRef[CreateSystemAccountReply]]
   ) extends Command
 
@@ -62,6 +63,7 @@ object SystemAccountProtocol {
   final case class SystemAccountCreated(
       systemAccountId: SystemAccountId,
       name: SystemAccountName,
+      emailAddress: EmailAddress,
       occurredAt: Instant
   ) extends Event
 

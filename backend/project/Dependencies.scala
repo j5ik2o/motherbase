@@ -76,7 +76,8 @@ object Dependencies {
   object j5ik2o {
     val reactiveAwsDynamodb     = "com.github.j5ik2o" %% "reactive-aws-dynamodb-core"        % "1.2.6"
     val reactiveAwsDynamodbTest = "com.github.j5ik2o" %% "reactive-aws-dynamodb-test"        % "1.2.6"
-    val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.3"
+    val reactiveAwsS3     = "com.github.j5ik2o" %% "reactive-aws-s3-core"        % "1.2.6"
+    val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.4"
     val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3"               % "1.0.10"
   }
 
