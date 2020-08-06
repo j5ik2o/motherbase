@@ -56,20 +56,4 @@ object SystemAccountProtocol {
 
   // ---
 
-  sealed trait Event {
-    def systemAccountId: SystemAccountId
-  }
-
-  final case class SystemAccountCreated(
-      systemAccountId: SystemAccountId,
-      name: SystemAccountName,
-      emailAddress: EmailAddress,
-      occurredAt: Instant
-  ) extends Event
-
-  final case class SystemAccountDestroyed(
-      systemAccountId: SystemAccountId,
-      occurredAt: Instant
-  ) extends Event
-
 }

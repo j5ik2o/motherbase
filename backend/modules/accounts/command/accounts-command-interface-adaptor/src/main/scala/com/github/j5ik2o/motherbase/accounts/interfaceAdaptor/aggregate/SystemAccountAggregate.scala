@@ -2,11 +2,18 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import java.time.Instant
 
-import akka.actor.typed.{ActorRef, Behavior}
-import akka.actor.typed.scaladsl.{ActorContext, Behaviors}
+import akka.actor.typed.scaladsl.{ ActorContext, Behaviors }
+import akka.actor.typed.{ ActorRef, Behavior }
 import akka.persistence.typed.PersistenceId
-import akka.persistence.typed.scaladsl.{Effect, EventSourcedBehavior}
-import com.github.j5ik2o.motherbase.accounts.domain.system.{EmailAddress, SystemAccount, SystemAccountId, SystemAccountName}
+import akka.persistence.typed.scaladsl.{ Effect, EventSourcedBehavior }
+import com.github.j5ik2o.motherbase.accounts.domain.event.SystemAccountEvents
+import com.github.j5ik2o.motherbase.accounts.domain.event.SystemAccountEvents._
+import com.github.j5ik2o.motherbase.accounts.domain.system.{
+  EmailAddress,
+  SystemAccount,
+  SystemAccountId,
+  SystemAccountName
+}
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol._
 
 object SystemAccountAggregate {
@@ -16,7 +23,7 @@ object SystemAccountAggregate {
   final case class JustState(systemAccount: SystemAccount) extends State
 
   def apply(id: SystemAccountId): Behavior[SystemAccountProtocol.Command] = Behaviors.setup { ctx =>
-    EventSourcedBehavior[SystemAccountProtocol.Command, SystemAccountProtocol.Event, State](
+    EventSourcedBehavior[SystemAccountProtocol.Command, SystemAccountEvents.Event, State](
       persistenceId = PersistenceId.of(id.modelName, id.value.asString, "-"),
       emptyState = EmptyState,
       commandHandler = commandHandler(ctx, id),
@@ -27,7 +34,7 @@ object SystemAccountAggregate {
   private def eventHandler(
       ctx: ActorContext[_],
       systemAccountId: SystemAccountId
-  ): (State, SystemAccountProtocol.Event) => State = { (state, event) =>
+  ): (State, SystemAccountEvents.Event) => State = { (state, event) =>
     (state, event) match {
       case (EmptyState, SystemAccountCreated(id, name, emailAddress, occurredAt)) if id == systemAccountId =>
         JustState(SystemAccount(id, name, emailAddress, occurredAt))
@@ -39,7 +46,7 @@ object SystemAccountAggregate {
   private def commandHandler(
       ctx: ActorContext[_],
       systemAccountId: SystemAccountId
-  ): (State, SystemAccountProtocol.Command) => Effect[SystemAccountProtocol.Event, State] = { (state, command) =>
+  ): (State, SystemAccountProtocol.Command) => Effect[SystemAccountEvents.Event, State] = { (state, command) =>
     (state, command) match {
       case (EmptyState, CreateSystemAccount(id, name, emailAddress, replyTo)) if id == systemAccountId =>
         create(id, name, emailAddress, replyTo)
@@ -52,23 +59,32 @@ object SystemAccountAggregate {
     }
   }
 
-  private def destroy(state: SystemAccount, id: SystemAccountId, replyTo: Option[ActorRef[DestroySystemAccountReply]]): Effect[SystemAccountProtocol.Event, State] = {
+  private def destroy(
+      state: SystemAccount,
+      id: SystemAccountId,
+      replyTo: Option[ActorRef[DestroySystemAccountReply]]
+  ): Effect[SystemAccountEvents.Event, State] = {
     if (state.canDestroy) {
-      val now = Instant.now
+      val now     = Instant.now
       val builder = Effect.persist[Event, State](SystemAccountDestroyed(id, now))
       replyTo match {
-        case None => builder
+        case None    => builder
         case Some(r) => builder.thenReply(r)(_ => DestroySystemAccountSucceeded(id))
       }
     } else {
       replyTo match {
-        case None => Effect.none
+        case None    => Effect.none
         case Some(r) => Effect.reply(r)(DestroySystemAccountFailed(id, "Can't destroy SystemAccount"))
       }
     }
   }
 
-  private def create(id: SystemAccountId, name: SystemAccountName, emailAddress: EmailAddress, replyTo: Option[ActorRef[CreateSystemAccountReply]]): Effect[SystemAccountProtocol.Event, State] = {
+  private def create(
+      id: SystemAccountId,
+      name: SystemAccountName,
+      emailAddress: EmailAddress,
+      replyTo: Option[ActorRef[CreateSystemAccountReply]]
+  ): Effect[SystemAccountEvents.Event, State] = {
     if (SystemAccount.canCreate(name, emailAddress)) {
       val now = Instant.now
       val builder =
@@ -81,7 +97,7 @@ object SystemAccountAggregate {
       }
     } else {
       replyTo match {
-        case None => Effect.none
+        case None    => Effect.none
         case Some(r) => Effect.reply(r)(CreateSystemAccountFailed(id, "Can't create SystemAccount"))
       }
     }
