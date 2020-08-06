@@ -1,21 +1,11 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
-import java.net.URI
-
-import akka.actor.typed.{ ActorSystem, Behavior }
-import com.dimafeng.testcontainers.{ FixedHostPortGenericContainer, ForAllTestContainer, MultipleContainers }
+import akka.actor.typed.{ActorSystem, Behavior}
+import com.dimafeng.testcontainers.{ForAllTestContainer, MultipleContainers}
 import com.github.j5ik2o.motherbase.accounts.domain.system.SystemAccountId
-import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.{ ActorSpec, JournalTableSpecSupport, S3SpecSupport }
+import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.{ActorSpec, JournalTableSpecSupport, S3SpecSupport}
 import com.github.j5ik2o.motherbase.interfaceAdaptor.util.RandomPortUtil
-import com.github.j5ik2o.reactive.aws.s3.S3AsyncClient
 import com.typesafe.config.ConfigFactory
-import org.testcontainers.containers.wait.strategy.Wait
-import software.amazon.awssdk.auth.credentials.{ AwsBasicCredentials, StaticCredentialsProvider }
-import software.amazon.awssdk.services.s3.model.CreateBucketRequest
-import software.amazon.awssdk.services.s3.{ S3AsyncClient => JavaS3AsyncClient }
-
-import scala.concurrent.Future
-import scala.jdk.CollectionConverters._
 
 object SystemAccountAggregateOnDynamoDBSpec {
   val dynamoDbPort: Int    = RandomPortUtil.temporaryServerPort()
