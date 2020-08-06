@@ -3,7 +3,7 @@ package com.github.j5ik2o.motherbase.interfaceAdaptor.actor
 import com.github.j5ik2o.reactive.aws.dynamodb.implicits._
 import software.amazon.awssdk.services.dynamodb.model._
 
-trait JournalTableSpecSupport extends DynamoDbSpecSupport { this: ActorSpec =>
+trait JournalTableSpecSupport { this: ActorSpec with DynamoDbSpecSupport =>
 
   def journalTableName: String      = "Journal"
   def isDeleteJournalTable: Boolean = true

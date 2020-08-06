@@ -3,7 +3,7 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 import akka.actor.typed.{ActorSystem, Behavior}
 import com.dimafeng.testcontainers.{ForAllTestContainer, MultipleContainers}
 import com.github.j5ik2o.motherbase.accounts.domain.system.SystemAccountId
-import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.{ActorSpec, JournalTableSpecSupport, S3SpecSupport}
+import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.{ActorSpec, DynamoDbSpecSupport, JournalTableSpecSupport, S3SpecSupport}
 import com.github.j5ik2o.motherbase.interfaceAdaptor.util.RandomPortUtil
 import com.typesafe.config.ConfigFactory
 
@@ -49,6 +49,7 @@ class SystemAccountAggregateOnDynamoDBSpec
                                                  |""".stripMargin).withFallback(ConfigFactory.load()))
     with SystemAccountAggregateSpecScenario
     with ForAllTestContainer
+    with DynamoDbSpecSupport
     with JournalTableSpecSupport
     with S3SpecSupport {
 
