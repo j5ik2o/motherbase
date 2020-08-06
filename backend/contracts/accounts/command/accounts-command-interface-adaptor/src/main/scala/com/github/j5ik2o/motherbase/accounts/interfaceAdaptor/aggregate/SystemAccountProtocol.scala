@@ -1,15 +1,13 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
-import java.time.Instant
-
 import akka.actor.typed.ActorRef
-import com.github.j5ik2o.motherbase.accounts.domain.system.{ EmailAddress, SystemAccountId, SystemAccountName }
+import com.github.j5ik2o.motherbase.accounts.domain.system.{EmailAddress, SystemAccountId, SystemAccountName}
 
 object SystemAccountProtocol {
 
   sealed trait Command
 
-  trait CommandReply
+  sealed trait CommandReply
 
   // --- Create
 
@@ -53,7 +51,5 @@ object SystemAccountProtocol {
 
   final case class GetSystemAccountNameFailed(systemAccountId: SystemAccountId, message: String)
       extends GetSystemAccountNameReply
-
-  // ---
 
 }

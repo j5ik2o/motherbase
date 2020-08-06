@@ -1,22 +1,22 @@
 import Dependencies._
 import Settings._
-import com.amazonaws.regions.{ Region, Regions }
+import com.amazonaws.regions.{Region, Regions}
 import com.github.j5ik2o.reactive.aws.ecs.EcsAsyncClient
 import com.github.j5ik2o.reactive.aws.ecs.implicits._
-import com.typesafe.sbt.SbtNativePackager.autoImport.{ maintainer, packageName }
+import com.typesafe.sbt.SbtNativePackager.autoImport.{maintainer, packageName}
 import com.typesafe.sbt.packager.archetypes.scripts.BashStartScriptPlugin.autoImport.bashScriptExtraDefines
-import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{ dockerBaseImage, dockerUpdateLatest, _ }
+import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{dockerBaseImage, dockerUpdateLatest, _}
 import sbt.Keys._
 import sbt.internal.util.ManagedLogger
-import sbt.{ settingKey, taskKey, _ }
-import sbtecr.EcrPlugin.autoImport.{ localDockerImage, login, push, region, repositoryName, repositoryTags, _ }
-import software.amazon.awssdk.services.ecs.model.{ AssignPublicIp, Task, _ }
-import software.amazon.awssdk.services.ecs.{ EcsAsyncClient => JavaEcsAsyncClient }
+import sbt.{settingKey, taskKey, _}
+import sbtecr.EcrPlugin.autoImport.{localDockerImage, login, push, region, repositoryName, _}
+import software.amazon.awssdk.services.ecs.model.{AssignPublicIp, Task, _}
+import software.amazon.awssdk.services.ecs.{EcsAsyncClient => JavaEcsAsyncClient}
 
 import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
-import scala.concurrent.{ Await, Future }
+import scala.concurrent.{Await, Future}
 
 object GatlingSettings {
   val gatlingVersion                      = "3.3.1"

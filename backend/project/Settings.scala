@@ -10,7 +10,6 @@ import org.scalastyle.sbt.ScalastylePlugin.autoImport._
 import sbt.Keys._
 import sbt.{Def, Resolver, _}
 import sbtecr.EcrPlugin.autoImport._
-import wartremover.WartRemover.autoImport._
 
 object Settings {
 

@@ -1,7 +1,7 @@
 package com.github.j5ik2o.gatling.runner
 
-import org.slf4j.{ Logger, LoggerFactory }
-import scalaj.http.{ Http, HttpResponse }
+import org.slf4j.{Logger, LoggerFactory}
+import scalaj.http.{Http, HttpResponse}
 
 object NoticeUtil {
 

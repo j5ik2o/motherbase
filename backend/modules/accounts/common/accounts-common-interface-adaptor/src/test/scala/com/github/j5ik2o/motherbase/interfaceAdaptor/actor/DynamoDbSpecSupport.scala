@@ -6,8 +6,8 @@ import com.dimafeng.testcontainers.FixedHostPortGenericContainer
 import com.github.j5ik2o.motherbase.interfaceAdaptor.util.RandomPortUtil
 import com.github.j5ik2o.reactive.aws.dynamodb.DynamoDbAsyncClient
 import org.testcontainers.containers.wait.strategy.Wait
-import software.amazon.awssdk.auth.credentials.{ AwsBasicCredentials, StaticCredentialsProvider }
-import software.amazon.awssdk.services.dynamodb.{ DynamoDbAsyncClient => JavaDynamoDbAsyncClient }
+import software.amazon.awssdk.auth.credentials.{AwsBasicCredentials, StaticCredentialsProvider}
+import software.amazon.awssdk.services.dynamodb.{DynamoDbAsyncClient => JavaDynamoDbAsyncClient}
 
 trait DynamoDbSpecSupport {
   protected def useAwsEnv                        = false

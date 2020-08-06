@@ -3,7 +3,7 @@ import GatlingSettings._
 import Settings._
 import com.typesafe.sbt.SbtNativePackager.autoImport._
 import com.typesafe.sbt.packager.archetypes.scripts.BashStartScriptPlugin.autoImport._
-import com.typesafe.sbt.packager.docker.{ Cmd, ExecCmd }
+import com.typesafe.sbt.packager.docker.Cmd
 import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport._
 import sbt.Keys._
 import sbt._

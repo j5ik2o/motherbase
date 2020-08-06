@@ -1,15 +1,8 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import akka.actor.typed.ActorRef
-import com.github.j5ik2o.motherbase.accounts.domain.system.{ EmailAddress, SystemAccountId, SystemAccountName }
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol.{
-  CreateSystemAccount,
-  CreateSystemAccountReply,
-  DestroySystemAccount,
-  DestroySystemAccountReply,
-  GetSystemAccountName,
-  GetSystemAccountNameReply
-}
+import com.github.j5ik2o.motherbase.accounts.domain.system.{EmailAddress, SystemAccountId, SystemAccountName}
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol._
 import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.ActorSpec
 
 import scala.concurrent.duration.FiniteDuration

@@ -4,7 +4,7 @@ import com.github.j5ik2o.reactive.aws.ecs.EcsAsyncClient
 import software.amazon.awssdk.services.ecs.model._
 
 import scala.collection.JavaConverters._
-import scala.concurrent.{ ExecutionContext, Future }
+import scala.concurrent.{ExecutionContext, Future}
 
 object EcsTaskUtil {
 

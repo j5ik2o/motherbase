@@ -1,12 +1,8 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
-import akka.actor.typed.{ ActorRef, Behavior }
-import com.github.j5ik2o.motherbase.accounts.domain.system.{ EmailAddress, SystemAccountId, SystemAccountName }
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol.{
-  CreateSystemAccountSucceeded,
-  DestroySystemAccountSucceeded,
-  GetSystemAccountNameSucceeded
-}
+import akka.actor.typed.{ActorRef, Behavior}
+import com.github.j5ik2o.motherbase.accounts.domain.system.{EmailAddress, SystemAccountId, SystemAccountName}
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol.{CreateSystemAccountSucceeded, DestroySystemAccountSucceeded, GetSystemAccountNameSucceeded}
 import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.ActorSpec
 import org.scalatest.freespec.AnyFreeSpecLike
 

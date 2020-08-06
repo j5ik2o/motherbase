@@ -5,16 +5,16 @@ import java.util.Date
 
 import com.github.j5ik2o.reactive.aws.ecs.EcsAsyncClient
 import com.github.j5ik2o.reactive.aws.ecs.implicits._
-import com.typesafe.config.{ Config, ConfigFactory }
+import com.typesafe.config.{Config, ConfigFactory}
 import net.ceedubs.ficus.Ficus._
 import org.slf4j.LoggerFactory
 import software.amazon.awssdk.services.ecs.model._
-import software.amazon.awssdk.services.ecs.{ EcsAsyncClient => JavaEcsAsyncClient }
+import software.amazon.awssdk.services.ecs.{EcsAsyncClient => JavaEcsAsyncClient}
 
 import scala.collection.JavaConverters._
 import scala.compat.java8.OptionConverters._
 import scala.concurrent.duration.Duration
-import scala.concurrent.{ Await, ExecutionContext, Future }
+import scala.concurrent.{Await, ExecutionContext, Future}
 
 object Runner extends App with Loop {
 

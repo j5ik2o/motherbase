@@ -5,7 +5,7 @@ import java.io.File
 import akka.actor.ReflectiveDynamicAccess
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration
 import com.amazonaws.regions.Regions
-import com.amazonaws.services.s3.{ AmazonS3, AmazonS3ClientBuilder }
+import com.amazonaws.services.s3.{AmazonS3, AmazonS3ClientBuilder}
 import com.typesafe.config.ConfigFactory
 import io.gatling.app.Gatling
 import io.gatling.core.scenario.Simulation

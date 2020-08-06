@@ -1,20 +1,7 @@
 package com.github.j5ik2o.motherbase.interfaceAdaptor.actor
 
-import software.amazon.awssdk.services.dynamodb.model.{
-  AttributeDefinition,
-  CreateTableRequest,
-  GlobalSecondaryIndex,
-  KeySchemaElement,
-  KeyType,
-  ListTablesRequest,
-  Projection,
-  ProjectionType,
-  ProvisionedThroughput,
-  ScalarAttributeType,
-  StreamSpecification,
-  StreamViewType
-}
 import com.github.j5ik2o.reactive.aws.dynamodb.implicits._
+import software.amazon.awssdk.services.dynamodb.model._
 
 trait JournalTableSpecSupport extends DynamoDbSpecSupport { this: ActorSpec =>
 

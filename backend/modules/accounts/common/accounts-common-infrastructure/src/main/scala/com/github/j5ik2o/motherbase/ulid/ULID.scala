@@ -1,8 +1,8 @@
 package com.github.j5ik2o.motherbase.ulid
 
 import de.huxhorn.sulky.ulid.ULID.Value
-import de.huxhorn.sulky.ulid.{ ULID => ULIDGen }
-import eu.timepit.refined.api.{ Refined, Validate }
+import de.huxhorn.sulky.ulid.{ULID => ULIDGen}
+import eu.timepit.refined.api.{Refined, Validate}
 
 import scala.util.Try
 
