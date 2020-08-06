@@ -3,11 +3,11 @@ syntax = "proto3";
 package com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto;
 option optimize_for = SPEED;
 
-message GetAccountRequest {
+message GetSystemAccountRequest {
     string accountId = 1;
 }
 
-message GetAccountBody {
+message GetSystemAccountBody {
     string accountId = 1;
     string organizationId = 2;
     string name = 3;
@@ -16,25 +16,25 @@ message GetAccountBody {
     int64 updatedAt = 6;
 }
 
-message GetAccountResponse {
+message GetSystemAccountResponse {
     bool hasError = 1;
     string errorCode = 2;
     string errorMessage = 3;
-    GetAccountBody body = 4;
+    GetSystemAccountBody body = 4;
 }
 
-message GetAccountsRequest {
+message GetSystemAccountsRequest {
     repeated string accountIds = 1;
 }
 
-message GetAccountsResponse {
+message GetSystemAccountsResponse {
     bool hasError = 1;
     string errorCode = 2;
     string errorMessage = 3;
-    repeated GetAccountBody bodies = 4;
+    repeated GetSystemAccountBody bodies = 4;
 }
 
 service AccountQueryService {
-    rpc GetAccount (GetAccountRequest) returns (GetAccountResponse) {};
-    rpc GetAccounts (GetAccountsRequest) returns (GetAccountsResponse) {};
+    rpc GetAccount (GetSystemAccountRequest) returns (GetSystemAccountResponse) {};
+    rpc GetAccounts (GetSystemAccountsRequest) returns (GetSystemAccountsResponse) {};
 }

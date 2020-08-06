@@ -3,27 +3,27 @@ syntax = "proto3";
 package com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto;
 option optimize_for = SPEED;
 
-message CreateAccountRequest {
+message CreateSystemAccountRequest {
     string organizationId = 1;
     string name = 2;
     string email = 3;
 }
 
-message CreateAccountResponse {
+message CreateSystemAccountResponse {
     string accountId = 1;
 }
 
-message RenameAccountRequest {
+message RenameSystemAccountRequest {
     string accountId = 1;
     string name = 2;
 }
 
-message RenameAccountResponse {
+message RenameSystemAccountResponse {
     string accountId = 1;
 }
 
-service AccountCommandService {
-    rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse) {};
-    rpc RenameAccount (RenameAccountRequest) returns (RenameAccountResponse) {};
+service SystemAccountCommandService {
+    rpc CreateAccount (CreateSystemAccountRequest) returns (CreateSystemAccountResponse) {};
+    rpc RenameAccount (RenameSystemAccountRequest) returns (RenameSystemAccountResponse) {};
 }
 
