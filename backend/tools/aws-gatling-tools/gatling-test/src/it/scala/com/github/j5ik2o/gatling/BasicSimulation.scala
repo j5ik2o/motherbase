@@ -51,21 +51,21 @@ class BasicSimulation extends Simulation {
 
   val createAccountRequest: Expression[CreateSystemAccountRequest] =
     CreateSystemAccountRequest().updateExpr(
-      { _.organizationId :~ $("orgId") }, { _.name :~ $("name") }, { _.email :~ $("email") }
+      { _.organizationId :~ $("orgId") }, { _.name :~ $("name") }, { _.emailAddress :~ $("email") }
     )
 
   val getAccountRequest = GetSystemAccountRequest().updateExpr { _.accountId :~ $("accountId") }
 
-  val getAccount = grpc("get-account")
+  val getAccount = grpc("get-system-account")
     .rpc(AccountQueryServiceGrpc.METHOD_GET_ACCOUNT)
     .payload(getAccountRequest)
     .check(statusCode is Status.Code.OK)
 
-  val createAccount = grpc("create-account")
-    .rpc(SystemAccountCommandServiceGrpc.METHOD_CREATE_ACCOUNT)
+  val createAccount = grpc("create-system-account")
+    .rpc(SystemAccountCommandServiceGrpc.METHOD_CREATE_SYSTEM_ACCOUNT)
     .payload(createAccountRequest)
     .check(statusCode is Status.Code.OK)
-    .extract(_.accountId.some)(_ saveAs "accountId")
+    .extract(_.systemAccountId.some)(_ saveAs "accountId")
 
   val ulid  = new ULID()
   def orgId = ulid.nextValue().toString

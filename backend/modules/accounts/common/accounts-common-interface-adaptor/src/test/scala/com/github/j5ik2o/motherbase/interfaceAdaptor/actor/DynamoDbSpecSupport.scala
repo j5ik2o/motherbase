@@ -6,11 +6,16 @@ import com.dimafeng.testcontainers.FixedHostPortGenericContainer
 import com.github.j5ik2o.motherbase.interfaceAdaptor.util.RandomPortUtil
 import com.github.j5ik2o.reactive.aws.dynamodb.DynamoDbAsyncClient
 import org.testcontainers.containers.wait.strategy.Wait
-import software.amazon.awssdk.auth.credentials.{AwsBasicCredentials, StaticCredentialsProvider}
-import software.amazon.awssdk.services.dynamodb.{DynamoDbAsyncClient => JavaDynamoDbAsyncClient}
+import software.amazon.awssdk.auth.credentials.{ AwsBasicCredentials, StaticCredentialsProvider }
+import software.amazon.awssdk.services.dynamodb.{ DynamoDbAsyncClient => JavaDynamoDbAsyncClient }
 
 trait DynamoDbSpecSupport {
   protected def useAwsEnv                        = false
+
+  protected val dynamoDBImageVersion = "1.13.2"
+
+  protected val dynamoDBImageName = s"amazon/dynamodb-local:$dynamoDBImageVersion"
+
   protected lazy val dynamoDBAccessKeyId: String = "x"
 
   protected lazy val dynamoDBSecretAccessKey: String = "x"
@@ -20,9 +25,10 @@ trait DynamoDbSpecSupport {
   protected lazy val dynamoDBEndpoint: String = s"http://127.0.0.1:$dynamoDBPort"
 
   protected lazy val dynamoDbLocalContainer: FixedHostPortGenericContainer = FixedHostPortGenericContainer(
-    "amazon/dynamodb-local:latest",
+    dynamoDBImageName,
     exposedHostPort = dynamoDBPort,
     exposedContainerPort = 8000,
+    command = Seq("-jar", "DynamoDBLocal.jar", "-dbPath", ".", "-sharedDb"),
     waitStrategy = Wait.forListeningPort()
   )
 

@@ -14,12 +14,15 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.jdk.CollectionConverters._
 
 trait S3SpecSupport { this: ActorSpec =>
+  protected val s3ImageVersion = "RELEASE.2020-03-19T21-49-00Z"
+  protected val s3ImageName = s"minio/minio:$s3ImageVersion"
+
   protected def minioAccessKeyId: String
   protected def minioSecretAccessKey: String
   protected def minioPort: Int
 
   protected lazy val minioContainer = FixedHostPortGenericContainer(
-    "minio/minio:RELEASE.2020-03-19T21-49-00Z",
+    s3ImageName,
     env = Map("MINIO_ACCESS_KEY" -> minioAccessKeyId, "MINIO_SECRET_KEY" -> minioSecretAccessKey),
     command = Seq("server", "--compat", "data"),
     exposedHostPort = minioPort,
@@ -27,9 +30,9 @@ trait S3SpecSupport { this: ActorSpec =>
     waitStrategy = Wait.defaultWaitStrategy()
   )
 
-  def s3BucketName(system: ActorSystem[_]): String
+  protected def s3BucketName(system: ActorSystem[_]): String
 
-  private val javaS3Client: JavaS3AsyncClient =
+  private lazy val javaS3Client: JavaS3AsyncClient =
     JavaS3AsyncClient
       .builder()
       .credentialsProvider(
@@ -39,9 +42,9 @@ trait S3SpecSupport { this: ActorSpec =>
       .endpointOverride(URI.create(s"http://127.0.0.1:${minioPort}"))
       .build()
 
-  lazy val s3Client = S3AsyncClient(javaS3Client)
+  protected lazy val s3Client = S3AsyncClient(javaS3Client)
 
-  def createS3Bucket()(implicit ec: ExecutionContext): Unit = {
+  protected def createS3Bucket()(implicit ec: ExecutionContext): Unit = {
     s3Client
       .listBuckets()
       .flatMap { list =>

@@ -71,7 +71,7 @@ class SystemAccountAggregateOnDynamoDBSpec
     deleteJournalTable()
   }
 
-  override def s3BucketName(system: ActorSystem[_]): String =
+  override protected def s3BucketName(system: ActorSystem[_]): String =
     new MotherBaseBucketNameResolver(system.settings.config.getConfig("j5ik2o.s3-snapshot-store")).resolve(null)
 
   override def behavior(systemAccountId: SystemAccountId): Behavior[SystemAccountProtocol.Command] =

@@ -2,13 +2,18 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import java.time.Instant
 
-import akka.actor.typed.scaladsl.{ActorContext, Behaviors}
-import akka.actor.typed.{ActorRef, Behavior}
+import akka.actor.typed.scaladsl.{ ActorContext, Behaviors }
+import akka.actor.typed.{ ActorRef, Behavior }
 import akka.persistence.typed.PersistenceId
-import akka.persistence.typed.scaladsl.{Effect, EventSourcedBehavior}
+import akka.persistence.typed.scaladsl.{ Effect, EventSourcedBehavior }
 import com.github.j5ik2o.motherbase.accounts.domain.event.SystemAccountEvents
 import com.github.j5ik2o.motherbase.accounts.domain.event.SystemAccountEvents._
-import com.github.j5ik2o.motherbase.accounts.domain.system.{EmailAddress, SystemAccount, SystemAccountId, SystemAccountName}
+import com.github.j5ik2o.motherbase.accounts.domain.system.{
+  EmailAddress,
+  SystemAccount,
+  SystemAccountId,
+  SystemAccountName
+}
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.SystemAccountProtocol._
 
 object SystemAccountAggregate {

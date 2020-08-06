@@ -2,7 +2,7 @@ package com.github.j5ik2o.motherbase.accounts.domain.event
 
 import java.time.Instant
 
-import com.github.j5ik2o.motherbase.accounts.domain.system.{EmailAddress, SystemAccountId, SystemAccountName}
+import com.github.j5ik2o.motherbase.accounts.domain.system.{ EmailAddress, SystemAccountId, SystemAccountName }
 
 object SystemAccountEvents {
 
