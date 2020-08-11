@@ -1,0 +1,3 @@
+package com.github.j5ik2o.motherbase.commandProcessor
+
+trait CreateAccountCommandProcessor extends CommandProcessor[CreateAccountRequest, CreateAccountResponse]

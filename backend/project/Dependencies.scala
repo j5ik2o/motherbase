@@ -28,6 +28,10 @@ object Version {
   val aspectj       = "1.8.13"
   val kamon         = "2.1.0"
   val enumeratum    = "1.6.1"
+  val jackson = "2.11.2"
+  val swaggerAkkaHttp = "2.1.1"
+  val swaggerScalaModule = "2.1.4"
+  val swagger = "2.1.4"
 }
 
 object Dependencies {

@@ -21,6 +21,17 @@ val `healthchecks-k8s-probes` = project
 
 // --- modules
 
+val `common-infrastructure` =
+  (project in file("modules/common/common-infrastructure"))
+    .settings(baseSettings)
+    .settings(
+      name := s"$projectBaseName-common-infrastructure",
+      libraryDependencies ++= Seq(
+        logback.classic % Test,
+        beachape.enumeratum
+      )
+    )
+
 val `accounts-common-infrastructure` =
   (project in file("modules/accounts/common/accounts-common-infrastructure"))
     .settings(baseSettings)
@@ -30,9 +41,9 @@ val `accounts-common-infrastructure` =
           logback.classic % Test,
           beachape.enumeratum
         )
-    )
+    ).dependsOn(`common-infrastructure`)
 
-val `accounts-command-domain` = (project in file("modules/accounts/command/accounts-command-domain"))
+val `accounts-domain` = (project in file("modules/accounts/command/accounts-domain"))
   .settings(baseSettings)
   .settings(
     name := s"$projectBaseName-accounts-command-domain",
@@ -43,33 +54,19 @@ val `accounts-command-domain` = (project in file("modules/accounts/command/accou
 
 // --- contracts
 
-val `accounts-command-interface-adaptor-contracts` =
-  (project in file("contracts/accounts/command/accounts-command-interface-adaptor"))
-    .enablePlugins(AkkaGrpcPlugin)
-    .settings(baseSettings)
-    .settings(
-      name := s"$projectBaseName-accounts-command-interface-contracts",
-      libraryDependencies ++= Seq(
-          akka.actorTyped,
-          akka.slf4j,
-          akka.stream
-        ),
-      PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "command"
-    ).dependsOn(`accounts-command-domain`)
-
-val `accounts-query-interface-adaptor-contracts` =
-  (project in file("contracts/accounts/query/accounts-query-interface-adaptor"))
-    .enablePlugins(AkkaGrpcPlugin)
-    .settings(baseSettings)
-    .settings(
-      name := s"$projectBaseName-accounts-query-interface-adaptor-contracts",
-      libraryDependencies ++= Seq(
-          akka.actorTyped,
-          akka.slf4j,
-          akka.stream
-        ),
-      PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "query"
-    )
+val swaggerLibraryDependencies = Seq(
+    "javax.ws.rs" % "javax.ws.rs-api" % "2.0.1",
+    "com.github.swagger-akka-http" %% "swagger-akka-http" % "2.1.1",
+    "com.github.swagger-akka-http" %% "swagger-scala-module" % "2.1.2",
+    "com.github.swagger-akka-http" %% "swagger-enumeratum-module" % "2.0.0",
+    "com.fasterxml.jackson.module" %% "jackson-module-scala" % Version.jackson,
+    "pl.iterators" %% "kebs-akka-http" % "1.7.1",
+    "io.swagger.core.v3" % "swagger-core" % Version.swagger,
+    "io.swagger.core.v3" % "swagger-annotations" % Version.swagger,
+    "io.swagger.core.v3" % "swagger-models" % Version.swagger,
+    "io.swagger.core.v3" % "swagger-jaxrs2" % Version.swagger,
+    "ch.megard" %% "akka-http-cors" % "0.4.3",
+)
 
 val `accounts-command-processor-contracts` =
   (project in file("contracts/accounts/command/accounts-command-processor"))
@@ -77,11 +74,49 @@ val `accounts-command-processor-contracts` =
     .settings(
       name := s"$projectBaseName-accounts-command-processor-contracts",
       libraryDependencies ++= Seq(
-          akka.actorTyped,
-          akka.stream
-        )
+        akka.actorTyped,
+        akka.stream
+      )
     )
-    .dependsOn(`accounts-command-domain`)
+    .dependsOn(`accounts-domain`)
+
+val `accounts-command-interface-adaptor-contracts` =
+  (project in file("contracts/accounts/command/accounts-command-interface-adaptor"))
+    .enablePlugins(AkkaGrpcPlugin)
+    .settings(baseSettings)
+    .settings(
+      name := s"$projectBaseName-accounts-command-interface-contracts",
+      libraryDependencies ++= swaggerLibraryDependencies,
+      libraryDependencies ++= Seq(
+          akka.actorTyped,
+          akka.slf4j,
+          akka.stream,
+        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
+        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
+      ),
+      PB.protoSources in Compile += target.value / "protobuf_external",
+      PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "command"
+    ).dependsOn(`accounts-domain`, `accounts-command-processor-contracts`)
+
+val `accounts-query-interface-adaptor-contracts` =
+  (project in file("contracts/accounts/query/accounts-query-interface-adaptor"))
+    .enablePlugins(AkkaGrpcPlugin)
+    .settings(baseSettings)
+    .settings(
+      name := s"$projectBaseName-accounts-query-interface-adaptor-contracts",
+      libraryDependencies ++= swaggerLibraryDependencies,
+      libraryDependencies ++= Seq(
+          akka.actorTyped,
+          akka.slf4j,
+          akka.stream,
+        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
+        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
+        ),
+      PB.protoSources in Compile += target.value / "protobuf_external" ,
+      PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "query"
+    )
+
+
 
 val `contract-query-processor` =
   (project in file("contracts/accounts/query/accounts-query-processor"))
@@ -94,7 +129,7 @@ val `contract-query-processor` =
 
 // --- modules
 
-val `command-processor` =
+val `accounts-command-processor` =
   (project in file("modules/accounts/command/accounts-command-processor"))
     .settings(baseSettings)
     .settings(
@@ -110,10 +145,10 @@ val `command-processor` =
       `accounts-command-processor-contracts`,
       `accounts-command-interface-adaptor-contracts`,
       `accounts-common-infrastructure`,
-      `accounts-command-domain`
+      `accounts-domain`
     )
 
-val `query-processor` =
+val `accounts-query-processor` =
   (project in file("modules/accounts/query/accounts-query-processor"))
     .settings(baseSettings)
     .settings(
@@ -131,7 +166,29 @@ val `query-processor` =
       `accounts-common-infrastructure`
     )
 
-val `interface-adaptor-common` = (project in file("modules/accounts/common/accounts-common-interface-adaptor"))
+val `interface-adaptor-common` = (project in file("modules/common/common-interface-adaptor"))
+  .settings(baseSettings)
+  .settings(
+    name := s"$projectBaseName-common-interface-adaptor",
+    libraryDependencies ++= Seq(
+//      akka.actorTyped,
+//      akka.discovery,
+//      j5ik2o.reactiveAwsDynamodb,
+//      j5ik2o.reactiveAwsS3,
+//      circe.core,
+//      circe.generic,
+//      circe.parser,
+//      akka.http,
+//      kamon.bundle,
+//      kamon.datadog,
+//      kamon.status,
+//      heikoseeberger.akkaHttpCirce,
+//      akka.testKitTyped % Test
+    )
+  )
+  .dependsOn(`healthchecks-k8s-probes`)
+
+val `accounts-interface-adaptor-common` = (project in file("modules/accounts/common/accounts-common-interface-adaptor"))
   .settings(baseSettings)
   .settings(
     name := s"$projectBaseName-accounts-common-interface-adaptor",
@@ -151,9 +208,9 @@ val `interface-adaptor-common` = (project in file("modules/accounts/common/accou
         akka.testKitTyped % Test
       )
   )
-  .dependsOn(`healthchecks-k8s-probes`)
+  .dependsOn(`healthchecks-k8s-probes`, `interface-adaptor-common`)
 
-val `interface-adaptor-query` =
+val `accounts-interface-adaptor-query` =
   (project in file("modules/accounts/query/accounts-query-interface-adaptor"))
     .settings(baseSettings)
     .settings(
@@ -163,16 +220,17 @@ val `interface-adaptor-query` =
     )
     .dependsOn(
       `accounts-query-interface-adaptor-contracts`,
-      `interface-adaptor-common`,
+      `accounts-interface-adaptor-common`,
       `accounts-common-infrastructure`
     )
 
-val `interface-adaptor-command` =
+val `accounts-interface-adaptor-command` =
   (project in file("modules/accounts/command/accounts-command-interface-adaptor"))
     .settings(baseSettings)
     .settings(
       name := s"$projectBaseName-accounts-command-interface-adaptor",
       libraryDependencies ++= Seq(
+
           "com.amazonaws" % "dynamodb-streams-kinesis-adapter" % "1.5.1",
           "com.amazonaws" % "aws-java-sdk-sts"                 % "1.11.728",
           "com.amazonaws" % "aws-java-sdk-dynamodb"            % "1.11.475",
@@ -209,9 +267,9 @@ val `interface-adaptor-command` =
     )
     .dependsOn(
       `accounts-command-interface-adaptor-contracts`,
-      `interface-adaptor-common` % "compile->compile;test->test",
+      `accounts-interface-adaptor-common` % "compile->compile;test->test",
       `accounts-common-infrastructure`,
-      `command-processor`
+      `accounts-command-processor`
     )
 
 // ---- bootstrap
@@ -252,7 +310,7 @@ val `write-grpc-server` = (project in file("bootstrap/write-grpc-server"))
         aws.sts
       )
   )
-  .dependsOn(`interface-adaptor-command`, `accounts-common-infrastructure`)
+  .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)
 
 val `read-grpc-server` = (project in file("bootstrap/read-grpc-server"))
   .enablePlugins(AshScriptPlugin, JavaAgent, EcrPlugin)
@@ -289,7 +347,7 @@ val `read-grpc-server` = (project in file("bootstrap/read-grpc-server"))
         aws.sts
       )
   )
-  .dependsOn(`interface-adaptor-query`, `accounts-common-infrastructure`)
+  .dependsOn(`accounts-interface-adaptor-query`, `accounts-common-infrastructure`)
 
 val `read-model-updater` = (project in file("bootstrap/read-model-updater"))
   .enablePlugins(AshScriptPlugin, JavaAgent, EcrPlugin)
@@ -326,7 +384,7 @@ val `read-model-updater` = (project in file("bootstrap/read-model-updater"))
         aws.sts
       )
   )
-  .dependsOn(`interface-adaptor-command`, `accounts-common-infrastructure`)
+  .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)
 
 val `domain-event-router` = (project in file("bootstrap/domain-event-router"))
   .enablePlugins(AshScriptPlugin, JavaAgent, EcrPlugin)
@@ -362,7 +420,7 @@ val `domain-event-router` = (project in file("bootstrap/domain-event-router"))
         jaino.jaino
       )
   )
-  .dependsOn(`interface-adaptor-command`, `accounts-common-infrastructure`)
+  .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)
 
 val `test-grpc-client` = (project in file("bootstrap/test-grpc-client"))
   .enablePlugins(AshScriptPlugin, JavaAgent)
@@ -515,11 +573,14 @@ val root = (project in file("."))
     `read-model-updater`,
     `read-grpc-server`,
     `test-grpc-client`,
+    `common-infrastructure`,
     `accounts-common-infrastructure`,
-    `interface-adaptor-command`,
-    `interface-adaptor-query`,
-    `command-processor`,
-    `accounts-command-domain`,
+    `accounts-interface-adaptor-common`,
+    `accounts-interface-adaptor-command`,
+    `accounts-interface-adaptor-query`,
+    `accounts-command-processor`,
+    `accounts-domain`,
+    `accounts-query-processor`,
     `gatling-test`,
     `gatling-runner`,
     `gatling-s3-reporter`,
