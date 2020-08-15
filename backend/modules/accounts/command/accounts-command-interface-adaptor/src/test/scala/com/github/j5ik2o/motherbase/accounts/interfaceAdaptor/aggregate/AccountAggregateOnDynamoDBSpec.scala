@@ -75,5 +75,5 @@ class AccountAggregateOnDynamoDBSpec
     new MotherBaseBucketNameResolver(system.settings.config.getConfig("j5ik2o.s3-snapshot-store")).resolve(null)
 
   override def behavior(systemAccountId: AccountId): Behavior[AccountProtocol.Command] =
-    SystemAccountAggregate(systemAccountId)
+    AccountAggregate(systemAccountId)
 }

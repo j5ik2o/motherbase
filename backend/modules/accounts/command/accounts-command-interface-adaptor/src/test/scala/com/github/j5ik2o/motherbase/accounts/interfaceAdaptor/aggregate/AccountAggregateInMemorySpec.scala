@@ -19,5 +19,5 @@ class AccountAggregateInMemorySpec
     with AccountAggregateSpecScenario {
 
   override def behavior(systemAccountId: AccountId): Behavior[AccountProtocol.Command] =
-    SystemAccountAggregate(systemAccountId)
+    AccountAggregate(systemAccountId)
 }

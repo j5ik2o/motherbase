@@ -1,7 +1,7 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import akka.actor.typed.ActorRef
-import com.github.j5ik2o.motherbase.accounts.domain.accounts.{ AccountError, AccountId, AccountName, EmailAddress }
+import com.github.j5ik2o.motherbase.accounts.domain.accounts.{AccountError, AccountId, AccountName, EmailAddress}
 
 object AccountProtocol {
 
@@ -11,6 +11,14 @@ object AccountProtocol {
 
   sealed trait CommandReply {
     def accountId: AccountId
+  }
+
+  final case object Idle extends Command {
+    override def accountId: AccountId = throw new UnsupportedOperationException
+  }
+
+  final case object Stop extends Command {
+    override def accountId: AccountId = throw new UnsupportedOperationException
   }
 
   // --- Create
