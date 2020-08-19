@@ -1,10 +1,10 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.{ActorRef, Behavior}
+import akka.actor.typed.{ ActorRef, Behavior }
 import akka.cluster.sharding.typed.ShardingEnvelope
-import akka.cluster.sharding.typed.scaladsl.{ClusterSharding, Entity, EntityContext, EntityTypeKey}
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.AccountProtocol.{Idle, Stop}
+import akka.cluster.sharding.typed.scaladsl.{ ClusterSharding, Entity, EntityContext, EntityTypeKey }
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.AccountProtocol.{ Idle, Stop }
 
 import scala.concurrent.duration.FiniteDuration
 
@@ -14,10 +14,10 @@ object ShardedAccountAggregates {
   val TypeKey: EntityTypeKey[AccountProtocol.Command] = EntityTypeKey[AccountProtocol.Command]("Account")
 
   private def entityBehavior(
-                              childBehavior: Behavior[AccountProtocol.Command],
-                              actorName: String,
-                              receiveTimeout: Option[FiniteDuration]
-                            ): EntityContext[AccountProtocol.Command] => Behavior[AccountProtocol.Command] = { entityContext =>
+      childBehavior: Behavior[AccountProtocol.Command],
+      actorName: String,
+      receiveTimeout: Option[FiniteDuration]
+  ): EntityContext[AccountProtocol.Command] => Behavior[AccountProtocol.Command] = { entityContext =>
     Behaviors.setup[AccountProtocol.Command] { ctx =>
       val childRef = ctx.spawn(childBehavior, actorName)
       receiveTimeout.foreach(ctx.setReceiveTimeout(_, Idle))
@@ -36,11 +36,11 @@ object ShardedAccountAggregates {
   }
 
   /**
-   * ShardRegionへのプロキシー。
-   *
-   * @param clusterSharding [[ClusterSharding]]
-   * @return 振る舞い
-   */
+    * ShardRegionへのプロキシー。
+    *
+    * @param clusterSharding [[ClusterSharding]]
+    * @return 振る舞い
+    */
   def ofProxy(clusterSharding: ClusterSharding): Behavior[AccountProtocol.Command] =
     Behaviors.receiveMessage[AccountProtocol.Command] { msg =>
       val entityRef = clusterSharding
@@ -50,18 +50,18 @@ object ShardedAccountAggregates {
     }
 
   /**
-   * クラスターシャーディングを初期化し、ShardRegionへのActorRefを返す。
-   *
-   * @param clusterSharding [[ClusterSharding]]
-   * @param childBehavior 子アクターの振るまい
-   * @param receiveTimeout 受信タイムアウト
-   * @return [[ActorRef]]
-   */
+    * クラスターシャーディングを初期化し、ShardRegionへのActorRefを返す。
+    *
+    * @param clusterSharding [[ClusterSharding]]
+    * @param childBehavior 子アクターの振るまい
+    * @param receiveTimeout 受信タイムアウト
+    * @return [[ActorRef]]
+    */
   def initClusterSharding(
-                           clusterSharding: ClusterSharding,
-                           childBehavior: Behavior[AccountProtocol.Command],
-                           receiveTimeout: Option[FiniteDuration]
-                         ): ActorRef[ShardingEnvelope[AccountProtocol.Command]] = {
+      clusterSharding: ClusterSharding,
+      childBehavior: Behavior[AccountProtocol.Command],
+      receiveTimeout: Option[FiniteDuration]
+  ): ActorRef[ShardingEnvelope[AccountProtocol.Command]] = {
     val entity = Entity(TypeKey)(
       createBehavior = entityBehavior(
         childBehavior,
@@ -70,9 +70,7 @@ object ShardedAccountAggregates {
       )
     )
     clusterSharding.init(
-      receiveTimeout.fold(entity) { _ =>
-        entity.withStopMessage(Stop)
-      }
+      receiveTimeout.fold(entity) { _ => entity.withStopMessage(Stop) }
     )
   }
 

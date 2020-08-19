@@ -1,6 +1,6 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
-import akka.actor.typed.{ActorRef, Behavior}
+import akka.actor.typed.{ ActorRef, Behavior }
 import akka.actor.typed.scaladsl.Behaviors
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.AccountId
 
@@ -8,7 +8,7 @@ object AccountAggregates {
   val name = "accounts"
 
   def apply(nameF: AccountId => String)(
-    childBehaviorF: AccountId => Behavior[AccountProtocol.Command]
+      childBehaviorF: AccountId => Behavior[AccountProtocol.Command]
   ): Behavior[AccountProtocol.Command] = {
     Behaviors.setup { ctx =>
       def getOrCreateRef(accountId: AccountId): ActorRef[AccountProtocol.Command] = {

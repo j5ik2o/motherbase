@@ -1,7 +1,7 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import akka.actor.typed.ActorRef
-import com.github.j5ik2o.motherbase.accounts.domain.accounts.{AccountError, AccountId, AccountName, EmailAddress}
+import com.github.j5ik2o.motherbase.accounts.domain.accounts.{ AccountError, AccountId, AccountName, EmailAddress }
 
 object AccountProtocol {
 

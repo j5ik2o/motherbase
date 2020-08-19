@@ -30,7 +30,7 @@ trait AccountValidateDirectives {
       .fold({ errors => reject(rejections.ValidationsRejection(errors)) }, provide)
   }
 
-  protected def validateJsonRequest[A, B](value: A)(implicit V: Validator[A, B]): Directive1[B] =
+  protected def validateRequest[A, B](value: A)(implicit V: Validator[A, B]): Directive1[B] =
     V.validate(value)
       .fold({ errors => reject(rejections.ValidationsRejection(errors)) }, provide)
 
@@ -45,13 +45,12 @@ object AccountValidateDirectives {
         value: CreateAccountRequestJson
     ): ValidationResult[CreateAccountRequest] = {
       (
-        validateAccountId(value.accountId),
         validateAccountName(value.name),
         validateEmailAddress(value.emailAddress)
       ).mapN {
-        case (accountId, name, emailAddress) =>
+        case (name, emailAddress) =>
           CreateAccountRequest(
-            accountId,
+            AccountId(),
             name,
             emailAddress
           )

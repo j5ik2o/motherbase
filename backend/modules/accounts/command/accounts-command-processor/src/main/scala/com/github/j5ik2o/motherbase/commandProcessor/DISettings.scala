@@ -10,13 +10,12 @@ import scala.concurrent.duration._
 
 object DISettings {
 
-
   def design: Design = {
-    newDesign.bind[CreateAccountCommandProcessor].toProvider[AccountRef, ActorSystem[Nothing]]{ case (accountRef, system) =>
-      implicit val to = Timeout(10 seconds)
-      new CreateAccountCommandProcessorImpl(accountRef, to)(system)
+    newDesign.bind[CreateAccountCommandProcessor].toProvider[AccountRef, ActorSystem[Nothing]] {
+      case (accountRef, system) =>
+        implicit val to = Timeout(10 seconds)
+        new CreateAccountCommandProcessorImpl(accountRef, to)(system)
     }
   }
-
 
 }
