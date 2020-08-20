@@ -4,6 +4,10 @@ package com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto;
 
 option optimize_for = SPEED;
 
+message Error {
+    string message = 1;
+}
+
 message CreateAccountRequest {
     string organizationId = 1;
     string name = 2;
@@ -12,6 +16,7 @@ message CreateAccountRequest {
 
 message CreateAccountResponse {
     string accountId = 1;
+    repeated Error errors = 255;
 }
 
 message RenameAccountRequest {
