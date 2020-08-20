@@ -9,7 +9,7 @@ import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.controller.{
   AccountCommandControllerImpl
 }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.{
-  CreateAccountGrpcResponder,
+  CreateAccountGRPCResponder,
   CreateAccountJsonResponder
 }
 import com.github.j5ik2o.motherbase.commandProcessor.CreateAccountCommandProcessor
@@ -31,7 +31,7 @@ object DISettings {
 
   private[interfaceAdaptor] def designOfGRPCServices(): Design = {
     newDesign
-      .bind[AccountCommandService].toProvider[CreateAccountCommandProcessor, CreateAccountGrpcResponder, ActorSystem[
+      .bind[AccountCommandService].toProvider[CreateAccountCommandProcessor, CreateAccountGRPCResponder, ActorSystem[
         Nothing
       ]] {
         case (processor, responder, system) =>

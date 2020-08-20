@@ -8,4 +8,4 @@ import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.{
 
 trait CreateAccountJsonResponder extends Responder[CreateAccountResponse, CreateAccountResponseJson]
 
-trait CreateAccountGrpcResponder extends Responder[CreateAccountResponse, GRPCCreateAccountGprcResponse]
+trait CreateAccountGRPCResponder extends Responder[CreateAccountResponse, GRPCCreateAccountGprcResponse]

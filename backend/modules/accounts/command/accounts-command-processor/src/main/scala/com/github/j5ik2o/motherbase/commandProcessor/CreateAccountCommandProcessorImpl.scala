@@ -27,9 +27,9 @@ final class CreateAccountCommandProcessorImpl(accountRef: AccountRef, timeout: T
       .mapAsync(1) { req =>
         accountRef.ask[CreateAccountReply](ref => CreateAccount(req.accountId, req.name, req.emailAddress, Some(ref)))
       }.map {
-        case v: CreateAccountSucceeded =>
-          CreateAccountResponse(v.accountId, None)
-        case v: CreateAccountFailed =>
-          CreateAccountResponse(v.accountId, Some(v.error))
+        case res: CreateAccountSucceeded =>
+          CreateAccountResponse(res.accountId, None)
+        case res: CreateAccountFailed =>
+          CreateAccountResponse(res.accountId, Some(res.error))
       }
 }

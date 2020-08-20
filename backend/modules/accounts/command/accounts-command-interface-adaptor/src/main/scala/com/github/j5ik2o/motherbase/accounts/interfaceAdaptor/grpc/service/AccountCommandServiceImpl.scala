@@ -4,7 +4,7 @@ import akka.actor.typed.ActorSystem
 import akka.stream.scaladsl.{ Sink, Source }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.grpc.validate.ValidateSupport
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.grpc.validate.ValidateSupport._
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.CreateAccountGrpcResponder
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.CreateAccountGRPCResponder
 import com.github.j5ik2o.motherbase.commandProcessor.CreateAccountCommandProcessor
 import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto._
 import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.{ CreateAccountResponse => GRPCCreateAccountResponse }
@@ -13,7 +13,7 @@ import scala.concurrent.Future
 
 final class AccountCommandServiceImpl(
     createAccountCommandProcessor: CreateAccountCommandProcessor,
-    createAccountGrpcResponder: CreateAccountGrpcResponder
+    createAccountGrpcResponder: CreateAccountGRPCResponder
 )(implicit system: ActorSystem[Nothing])
     extends AccountCommandService
     with ValidateSupport {
