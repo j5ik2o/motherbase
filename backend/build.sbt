@@ -138,7 +138,8 @@ val `accounts-command-processor` =
           akka.actorTyped,
           logback.classic    % Test,
           akka.testKitTyped  % Test,
-          akka.streamTestKit % Test
+          akka.streamTestKit % Test,
+        akka.httpTestKit % Test,
         )
     )
     .dependsOn(

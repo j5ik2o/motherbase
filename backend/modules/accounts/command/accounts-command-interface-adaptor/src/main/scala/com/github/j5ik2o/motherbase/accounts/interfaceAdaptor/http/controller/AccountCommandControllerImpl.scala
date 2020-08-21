@@ -6,6 +6,7 @@ import akka.stream.scaladsl.{ Sink, Source }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.directives.AccountValidateDirectives
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.directives.AccountValidateDirectives._
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.CreateAccountRequestJson
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.rejections.RejectionHandlers
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.CreateAccountJsonResponder
 import com.github.j5ik2o.motherbase.commandProcessor.CreateAccountCommandProcessor
 import de.heikoseeberger.akkahttpcirce.FailFastCirceSupport._
@@ -17,8 +18,10 @@ final class AccountCommandControllerImpl(
 ) extends AccountCommandController
     with AccountValidateDirectives {
 
-  override def toRoutes: Route = pathPrefix("v1") {
-    createAccount
+  override def toRoutes: Route = handleRejections(RejectionHandlers.default) {
+    pathPrefix("v1") {
+      createAccount
+    }
   }
 
   override private[controller] def createAccount =

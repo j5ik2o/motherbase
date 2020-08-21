@@ -46,7 +46,7 @@ object AccountValidateDirectives {
     ): ValidationResult[CreateAccountRequest] = {
       (
         validateAccountName(value.name),
-        validateEmailAddress(value.emailAddress)
+        validateEmailAddress(value.email_address)
       ).mapN {
         case (name, emailAddress) =>
           CreateAccountRequest(
