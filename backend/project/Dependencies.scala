@@ -16,22 +16,22 @@ object Version {
 
   val slf4j = "1.7.30"
 
-  val cariban       = "0.7.3"
-  val airframe      = "20.3.3"
-  val ficus         = "1.4.7"
-  val ulid          = "8.2.0"
-  val monix         = "3.1.0"
-  val refined       = "0.9.14"
-  val scopt         = "4.0.0-RC2"
-  val jaino         = "3.0.6"
-  val dockerTestkit = "0.9.9"
-  val aspectj       = "1.8.13"
-  val kamon         = "2.1.0"
-  val enumeratum    = "1.6.1"
-  val jackson = "2.11.2"
-  val swaggerAkkaHttp = "2.1.1"
+  val cariban            = "0.7.3"
+  val airframe           = "20.8.0"
+  val ficus              = "1.4.7"
+  val ulid               = "8.2.0"
+  val monix              = "3.1.0"
+  val refined            = "0.9.14"
+  val scopt              = "4.0.0-RC2"
+  val jaino              = "3.0.6"
+  val dockerTestkit      = "0.9.9"
+  val aspectj            = "1.8.13"
+  val kamon              = "2.1.0"
+  val enumeratum         = "1.6.1"
+  val jackson            = "2.11.2"
+  val swaggerAkkaHttp    = "2.1.1"
   val swaggerScalaModule = "2.1.4"
-  val swagger = "2.1.4"
+  val swagger            = "2.1.4"
 }
 
 object Dependencies {
@@ -80,7 +80,7 @@ object Dependencies {
   object j5ik2o {
     val reactiveAwsDynamodb     = "com.github.j5ik2o" %% "reactive-aws-dynamodb-core"        % "1.2.6"
     val reactiveAwsDynamodbTest = "com.github.j5ik2o" %% "reactive-aws-dynamodb-test"        % "1.2.6"
-    val reactiveAwsS3     = "com.github.j5ik2o" %% "reactive-aws-s3-core"        % "1.2.6"
+    val reactiveAwsS3           = "com.github.j5ik2o" %% "reactive-aws-s3-core"              % "1.2.6"
     val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.4"
     val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3"               % "1.0.10"
   }
@@ -127,7 +127,8 @@ object Dependencies {
   }
 
   object airframe {
-    val airframe = "org.wvlet.airframe" %% "airframe" % Version.airframe
+    val airframe        = "org.wvlet.airframe" %% "airframe"         % Version.airframe
+    val airframeControl = "org.wvlet.airframe" %% "airframe-control" % Version.airframe
   }
 
   object slf4j {

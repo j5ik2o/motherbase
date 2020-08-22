@@ -27,9 +27,10 @@ val `common-infrastructure` =
     .settings(
       name := s"$projectBaseName-common-infrastructure",
       libraryDependencies ++= Seq(
-        logback.classic % Test,
-        beachape.enumeratum
-      )
+          logback.classic % Test,
+          beachape.enumeratum,
+          airframe.airframeControl
+        )
     )
 
 val `accounts-common-infrastructure` =
@@ -55,17 +56,17 @@ val `accounts-domain` = (project in file("modules/accounts/command/accounts-doma
 // --- contracts
 
 val swaggerLibraryDependencies = Seq(
-    "javax.ws.rs" % "javax.ws.rs-api" % "2.0.1",
-    "com.github.swagger-akka-http" %% "swagger-akka-http" % "2.1.1",
-    "com.github.swagger-akka-http" %% "swagger-scala-module" % "2.1.2",
-    "com.github.swagger-akka-http" %% "swagger-enumeratum-module" % "2.0.0",
-    "com.fasterxml.jackson.module" %% "jackson-module-scala" % Version.jackson,
-    "pl.iterators" %% "kebs-akka-http" % "1.7.1",
-    "io.swagger.core.v3" % "swagger-core" % Version.swagger,
-    "io.swagger.core.v3" % "swagger-annotations" % Version.swagger,
-    "io.swagger.core.v3" % "swagger-models" % Version.swagger,
-    "io.swagger.core.v3" % "swagger-jaxrs2" % Version.swagger,
-    "ch.megard" %% "akka-http-cors" % "0.4.3",
+  "javax.ws.rs"                  % "javax.ws.rs-api"            % "2.0.1",
+  "com.github.swagger-akka-http" %% "swagger-akka-http"         % "2.1.1",
+  "com.github.swagger-akka-http" %% "swagger-scala-module"      % "2.1.2",
+  "com.github.swagger-akka-http" %% "swagger-enumeratum-module" % "2.0.0",
+  "com.fasterxml.jackson.module" %% "jackson-module-scala"      % Version.jackson,
+  "pl.iterators"                 %% "kebs-akka-http"            % "1.7.1",
+  "io.swagger.core.v3"           % "swagger-core"               % Version.swagger,
+  "io.swagger.core.v3"           % "swagger-annotations"        % Version.swagger,
+  "io.swagger.core.v3"           % "swagger-models"             % Version.swagger,
+  "io.swagger.core.v3"           % "swagger-jaxrs2"             % Version.swagger,
+  "ch.megard"                    %% "akka-http-cors"            % "0.4.3"
 )
 
 val `accounts-command-processor-contracts` =
@@ -74,9 +75,9 @@ val `accounts-command-processor-contracts` =
     .settings(
       name := s"$projectBaseName-accounts-command-processor-contracts",
       libraryDependencies ++= Seq(
-        akka.actorTyped,
-        akka.stream
-      )
+          akka.actorTyped,
+          akka.stream
+        )
     )
     .dependsOn(`accounts-domain`)
 
@@ -91,9 +92,9 @@ val `accounts-command-interface-adaptor-contracts` =
           akka.actorTyped,
           akka.slf4j,
           akka.stream,
-        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
-        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
-      ),
+          "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
+          "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
+        ),
       PB.protoSources in Compile += target.value / "protobuf_external",
       PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "command"
     ).dependsOn(`accounts-domain`, `accounts-command-processor-contracts`)
@@ -109,14 +110,12 @@ val `accounts-query-interface-adaptor-contracts` =
           akka.actorTyped,
           akka.slf4j,
           akka.stream,
-        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
-        "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
+          "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
+          "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
         ),
-      PB.protoSources in Compile += target.value / "protobuf_external" ,
+      PB.protoSources in Compile += target.value / "protobuf_external",
       PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "query"
     )
-
-
 
 val `contract-query-processor` =
   (project in file("contracts/accounts/query/accounts-query-processor"))
@@ -139,7 +138,7 @@ val `accounts-command-processor` =
           logback.classic    % Test,
           akka.testKitTyped  % Test,
           akka.streamTestKit % Test,
-        akka.httpTestKit % Test,
+          akka.httpTestKit   % Test
         )
     )
     .dependsOn(
@@ -185,7 +184,7 @@ val `interface-adaptor-common` = (project in file("modules/common/common-interfa
 //      kamon.status,
 //      heikoseeberger.akkaHttpCirce,
 //      akka.testKitTyped % Test
-    )
+      )
   )
   .dependsOn(`healthchecks-k8s-probes`)
 
@@ -195,9 +194,9 @@ val `accounts-interface-adaptor-common` = (project in file("modules/accounts/com
     name := s"$projectBaseName-accounts-common-interface-adaptor",
     libraryDependencies ++= Seq(
         akka.actorTyped,
-      akka.discovery,
+        akka.discovery,
         j5ik2o.reactiveAwsDynamodb,
-      j5ik2o.reactiveAwsS3,
+        j5ik2o.reactiveAwsS3,
         circe.core,
         circe.generic,
         circe.parser,
@@ -231,7 +230,6 @@ val `accounts-interface-adaptor-command` =
     .settings(
       name := s"$projectBaseName-accounts-command-interface-adaptor",
       libraryDependencies ++= Seq(
-
           "com.amazonaws" % "dynamodb-streams-kinesis-adapter" % "1.5.1",
           "com.amazonaws" % "aws-java-sdk-sts"                 % "1.11.728",
           "com.amazonaws" % "aws-java-sdk-dynamodb"            % "1.11.475",
@@ -485,7 +483,7 @@ lazy val `gatling-test` = (project in file("tools/aws-gatling-tools/gatling-test
       ),
     publishArtifact in (GatlingIt, packageBin) := true,
     PB.targets in Compile := Seq(
-      PB.gens.java -> (sourceManaged in Compile).value,
+        PB.gens.java                        -> (sourceManaged in Compile).value,
         scalapb.gen(javaConversions = true) -> (sourceManaged in Compile).value
       ),
     PB.protoSources in Compile ++= Seq(
