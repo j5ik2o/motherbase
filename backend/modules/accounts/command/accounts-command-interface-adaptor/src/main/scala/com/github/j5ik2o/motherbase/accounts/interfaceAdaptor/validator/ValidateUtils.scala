@@ -7,8 +7,11 @@ import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.error.{
   SystemAccountIdFormatError,
   SystemAccountNameError
 }
+import org.slf4j.LoggerFactory
 
 object ValidateUtils {
+
+  private val logger = LoggerFactory.getLogger(getClass)
 
   def validateAccountId(value: String): ValidationResult[AccountId] = {
     try {
@@ -24,6 +27,7 @@ object ValidateUtils {
       AccountName(value).valid
     } catch {
       case ex: Throwable =>
+        logger.error("occurred error", ex)
         SystemAccountNameError("Invalid system account name", Some(ex)).invalidNel
     }
   }
@@ -33,6 +37,7 @@ object ValidateUtils {
       EmailAddress(value).valid
     } catch {
       case ex: Throwable =>
+        logger.error("occurred error", ex)
         EmailAddressError("Invalid email address", Some(ex)).invalidNel
     }
   }

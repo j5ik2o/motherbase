@@ -6,16 +6,16 @@ import akka.actor.typed.ActorSystem
 import com.dimafeng.testcontainers.FixedHostPortGenericContainer
 import com.github.j5ik2o.reactive.aws.s3.S3AsyncClient
 import org.testcontainers.containers.wait.strategy.Wait
-import software.amazon.awssdk.auth.credentials.{AwsBasicCredentials, StaticCredentialsProvider}
+import software.amazon.awssdk.auth.credentials.{ AwsBasicCredentials, StaticCredentialsProvider }
 import software.amazon.awssdk.services.s3.model.CreateBucketRequest
-import software.amazon.awssdk.services.s3.{S3AsyncClient => JavaS3AsyncClient}
+import software.amazon.awssdk.services.s3.{ S3AsyncClient => JavaS3AsyncClient }
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.{ ExecutionContext, Future }
 import scala.jdk.CollectionConverters._
 
 trait S3SpecSupport { this: ActorSpec =>
   protected val s3ImageVersion = "RELEASE.2020-03-19T21-49-00Z"
-  protected val s3ImageName = s"minio/minio:$s3ImageVersion"
+  protected val s3ImageName    = s"minio/minio:$s3ImageVersion"
 
   protected def minioAccessKeyId: String
   protected def minioSecretAccessKey: String

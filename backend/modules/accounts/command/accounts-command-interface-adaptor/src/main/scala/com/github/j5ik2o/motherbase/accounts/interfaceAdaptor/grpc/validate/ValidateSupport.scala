@@ -7,7 +7,7 @@ import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.validator.Validate
   validateEmailAddress
 }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.validator.{ ValidationResult, Validator }
-import com.github.j5ik2o.motherbase.commandProcessor.CreateAccountRequest
+import com.github.j5ik2o.motherbase.accounts.commandProcessor.CreateAccountRequest
 
 trait ValidateSupport {
 

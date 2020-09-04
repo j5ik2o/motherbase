@@ -10,7 +10,7 @@ import software.amazon.awssdk.auth.credentials.{ AwsBasicCredentials, StaticCred
 import software.amazon.awssdk.services.dynamodb.{ DynamoDbAsyncClient => JavaDynamoDbAsyncClient }
 
 trait DynamoDbSpecSupport {
-  protected def useAwsEnv                        = false
+  protected def useAwsEnv = false
 
   protected val dynamoDBImageVersion = "1.13.2"
 

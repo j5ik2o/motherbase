@@ -11,6 +11,7 @@
     </appender>
 
     <logger name="com.github.j5ik2o" level="DEBUG" />
+    <logger name="akka" level="DEBUG" />
 
     <logger name="akka.serialization.jackson" level="ERROR" />
     <logger name="io.netty" level="ERROR" />

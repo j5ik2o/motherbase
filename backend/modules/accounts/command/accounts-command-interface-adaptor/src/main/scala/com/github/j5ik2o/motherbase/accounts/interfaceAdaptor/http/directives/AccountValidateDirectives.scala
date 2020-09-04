@@ -8,7 +8,7 @@ import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.CreateAc
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.rejections
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.rejections.ValidationsRejection
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.validator.{ ValidateUtils, ValidationResult, Validator }
-import com.github.j5ik2o.motherbase.commandProcessor.CreateAccountRequest
+import com.github.j5ik2o.motherbase.accounts.commandProcessor.CreateAccountRequest
 
 trait AccountValidateDirectives {
 

@@ -3,13 +3,13 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 import java.util.UUID
 
 import akka.actor.typed.Behavior
-import akka.cluster.MemberStatus
 import akka.cluster.sharding.typed.scaladsl.ClusterSharding
-import akka.cluster.typed.{Cluster, Join}
+import akka.cluster.typed.Cluster
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.AccountId
 import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.ActorSpec
 import com.typesafe.config.ConfigFactory
 import org.scalatest.BeforeAndAfterAll
+
 import scala.concurrent.duration._
 
 class ShardedAccountAggregatesSpec
@@ -22,6 +22,7 @@ class ShardedAccountAggregatesSpec
                     |akka.persistence.snapshot-store.local.dir = "target/snapshot-${UUID.randomUUID().toString}"
                     |""".stripMargin).withFallback(ConfigFactory.load())
     )
+    with ClusterShardingSpecSupport
     with BeforeAndAfterAll
     with AccountAggregateSpecScenario {
 
@@ -30,13 +31,12 @@ class ShardedAccountAggregatesSpec
 
   override protected def beforeAll(): Unit = {
     super.beforeAll()
-    cluster.manager ! Join(cluster.selfMember.address)
-    eventually {
-      cluster.selfMember.status shouldEqual MemberStatus.Up
-    }
-
-    ShardedAccountAggregates.initClusterSharding(clusterSharding,
-      AccountAggregates(_.value.asString)(AccountAggregate(_)), Some(10 seconds))
+    prepareClusterSharding()
+    ShardedAccountAggregates.initClusterSharding(
+      clusterSharding,
+      AccountAggregates(_.value.asString)(AccountAggregate(_)),
+      Some(10 seconds)
+    )
   }
 
   override def behavior(systemAccountId: AccountId): Behavior[AccountProtocol.Command] =

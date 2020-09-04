@@ -250,6 +250,7 @@ val `accounts-interface-adaptor-command` =
           akkaManagement.k8sApi,
           aspectj.aspectjweaver,
           "com.amazonaws"                       % "DynamoDBLocal" % "[1.12,2.0)" % Test,
+          akka.httpTestKit                      % Test,
           dimafeng.testcontainerScalaKafka      % Test,
           dimafeng.testcontainerScalaLocalstack % Test,
           j5ik2o.reactiveAwsDynamodbTest        % Test,

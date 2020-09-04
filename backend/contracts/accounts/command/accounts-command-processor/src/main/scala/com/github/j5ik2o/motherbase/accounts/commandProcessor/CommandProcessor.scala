@@ -1,4 +1,4 @@
-package com.github.j5ik2o.motherbase.commandProcessor
+package com.github.j5ik2o.motherbase.accounts.commandProcessor
 
 import akka.NotUsed
 import akka.stream.scaladsl.Flow

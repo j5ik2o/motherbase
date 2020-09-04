@@ -9,7 +9,7 @@ import io.circe.generic.auto._
 
 object ExceptionHandlers {
 
-  final val default = ExceptionHandler{
+  final val default = ExceptionHandler {
     case ex: Exception =>
       complete((StatusCodes.InternalServerError, ErrorsResponseJson(Seq(ex.getMessage))))
   }

@@ -1,7 +1,7 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate
 
 import akka.actor.typed.ActorRef
-import com.github.j5ik2o.motherbase.accounts.domain.accounts.{EmailAddress, AccountId, AccountName}
+import com.github.j5ik2o.motherbase.accounts.domain.accounts.{ AccountId, AccountName, EmailAddress }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.AccountProtocol._
 import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.ActorSpec
 
@@ -10,9 +10,9 @@ import scala.concurrent.duration.FiniteDuration
 trait SystemAccountAggregateSpecHelper { this: ActorSpec =>
 
   def createSystemAccount(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
-    systemAccountId: AccountId,
-    name: AccountName,
-    emailAddress: EmailAddress
+      systemAccountId: AccountId,
+      name: AccountName,
+      emailAddress: EmailAddress
   ): CreateAccountReply = {
     val replyProbe = testKit.createTestProbe[CreateAccountReply]()
     ref ! CreateAccount(systemAccountId, name, emailAddress, Some(replyProbe.ref))

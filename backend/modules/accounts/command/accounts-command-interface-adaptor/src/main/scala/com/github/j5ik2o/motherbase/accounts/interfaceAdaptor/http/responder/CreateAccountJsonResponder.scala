@@ -6,7 +6,7 @@ import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.{
   CreateAccountResponseJson,
   ErrorsResponseJson
 }
-import com.github.j5ik2o.motherbase.commandProcessor.CreateAccountResponse
+import com.github.j5ik2o.motherbase.accounts.commandProcessor.CreateAccountResponse
 import com.github.j5ik2o.motherbase.interfaceAdaptor.grpc.proto.{ CreateAccountResponse => GRPCCreateAccountResponse }
 
 final class CreateAccountJsonResponderImpl extends CreateAccountJsonResponder {
