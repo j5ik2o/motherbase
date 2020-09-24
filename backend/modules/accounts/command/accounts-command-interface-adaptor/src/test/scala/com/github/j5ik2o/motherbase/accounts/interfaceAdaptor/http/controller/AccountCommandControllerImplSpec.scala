@@ -56,7 +56,6 @@ class AccountCommandControllerImplSpec
       val email  = "ABC@ABC.com"
       val entity = CreateAccountRequestJson(name, email)
       Post(RouteNames.CreateAccount, entity) ~> commandController.createAccount ~> check {
-        println(response)
         response.status shouldEqual StatusCodes.OK
         val responseJson = responseAs[CreateAccountResponseJson]
         responseJson.isSuccessful shouldBe true
