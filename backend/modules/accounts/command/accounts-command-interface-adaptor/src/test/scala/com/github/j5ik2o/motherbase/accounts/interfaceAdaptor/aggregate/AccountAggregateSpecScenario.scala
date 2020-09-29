@@ -13,7 +13,7 @@ import org.scalatest.freespec.AnyFreeSpecLike
 trait AccountAggregateSpecScenario
     extends AnyFreeSpecLike
     with AggregateSpecScenarioBase
-    with SystemAccountAggregateSpecHelper {
+    with AccountAggregateSpecHelper {
   this: ActorSpec =>
 
   def behavior(systemAccountId: AccountId): Behavior[AccountProtocol.Command]
@@ -28,7 +28,7 @@ trait AccountAggregateSpecScenario
       val emailAddress    = EmailAddress("test@test.com")
       val actorRef1       = actorRef(systemAccountId)
 
-      val createSystemAccountReply = createSystemAccount(actorRef1, maxDuration)(systemAccountId, name, emailAddress)
+      val createSystemAccountReply = createAccount(actorRef1, maxDuration)(systemAccountId, name, emailAddress)
         .asInstanceOf[CreateAccountSucceeded]
       createSystemAccountReply.accountId shouldBe systemAccountId
 
@@ -37,7 +37,7 @@ trait AccountAggregateSpecScenario
       val actorRef2 = actorRef(systemAccountId)
 
       val getSystemAccountNameReply =
-        getSystemAccountName(actorRef2, maxDuration)(systemAccountId).asInstanceOf[GetAccountNameSucceeded]
+        getAccountName(actorRef2, maxDuration)(systemAccountId).asInstanceOf[GetAccountNameSucceeded]
       getSystemAccountNameReply.name shouldBe name
     }
     "destroy" in {
@@ -46,12 +46,12 @@ trait AccountAggregateSpecScenario
       val emailAddress    = EmailAddress("test@test.com")
       val actorRef1       = actorRef(systemAccountId)
 
-      val createSystemAccountReply = createSystemAccount(actorRef1, maxDuration)(systemAccountId, name, emailAddress)
+      val createSystemAccountReply = createAccount(actorRef1, maxDuration)(systemAccountId, name, emailAddress)
         .asInstanceOf[CreateAccountSucceeded]
       createSystemAccountReply.accountId shouldBe systemAccountId
 
       val destroySystemAccountReply =
-        destroySystemAccount(actorRef1, maxDuration)(systemAccountId).asInstanceOf[DestroyAccountSucceeded]
+        destroyAccount(actorRef1, maxDuration)(systemAccountId).asInstanceOf[DestroyAccountSucceeded]
       destroySystemAccountReply.accountId shouldBe systemAccountId
     }
   }

@@ -162,7 +162,7 @@ val `accounts-query-processor` =
     )
     .dependsOn(
       `contract-query-processor`,
-      `accounts-command-interface-adaptor-contracts`,
+      `accounts-query-interface-adaptor-contracts`,
       `accounts-common-infrastructure`
     )
 
@@ -195,6 +195,8 @@ val `accounts-interface-adaptor-common` = (project in file("modules/accounts/com
     libraryDependencies ++= Seq(
         akka.actorTyped,
         akka.discovery,
+        "com.amazonaws" % "dynamodb-streams-kinesis-adapter" % "1.5.1",
+        aws.v1.dynamodb,
         j5ik2o.reactiveAwsDynamodb,
         j5ik2o.reactiveAwsS3,
         circe.core,
@@ -205,7 +207,9 @@ val `accounts-interface-adaptor-common` = (project in file("modules/accounts/com
         kamon.datadog,
         kamon.status,
         heikoseeberger.akkaHttpCirce,
-        akka.testKitTyped % Test
+        akka.testKitTyped                     % Test,
+        dimafeng.testcontainerScalaKafka      % Test,
+        dimafeng.testcontainerScalaLocalstack % Test
       )
   )
   .dependsOn(`healthchecks-k8s-probes`, `interface-adaptor-common`)
@@ -230,10 +234,7 @@ val `accounts-interface-adaptor-command` =
     .settings(
       name := s"$projectBaseName-accounts-command-interface-adaptor",
       libraryDependencies ++= Seq(
-          "com.amazonaws" % "dynamodb-streams-kinesis-adapter" % "1.5.1",
-          "com.amazonaws" % "aws-java-sdk-sts"                 % "1.11.728",
-          "com.amazonaws" % "aws-java-sdk-dynamodb"            % "1.11.475",
-          "com.amazonaws" % "dynamodb-lock-client"             % "1.1.0",
+          "com.amazonaws" % "aws-java-sdk-sts" % "1.11.728",
           akka.clusterTyped,
           akka.streamKafka,
           akka.streamKafkaClusterSharding,
@@ -249,20 +250,18 @@ val `accounts-interface-adaptor-command` =
           akkaManagement.clusterBootstrap,
           akkaManagement.k8sApi,
           aspectj.aspectjweaver,
-          "com.amazonaws"                       % "DynamoDBLocal" % "[1.12,2.0)" % Test,
-          akka.httpTestKit                      % Test,
-          dimafeng.testcontainerScalaKafka      % Test,
-          dimafeng.testcontainerScalaLocalstack % Test,
-          j5ik2o.reactiveAwsDynamodbTest        % Test,
-          logback.classic                       % Test,
-          akka.testKit                          % Test,
-          akka.testKitTyped                     % Test,
-          akka.streamTestKit                    % Test,
-          akka.multiNodeTestKit                 % Test,
-          embeddedkafka.embeddedKafka           % Test,
-          whisk.dockerTestkitScalaTest          % Test,
-          whisk.dockerTestkitImplSpotify        % Test,
-          slf4j.julToSlf4j                      % Test
+          "com.amazonaws"                % "DynamoDBLocal" % "[1.12,2.0)" % Test,
+          akka.httpTestKit               % Test,
+          j5ik2o.reactiveAwsDynamodbTest % Test,
+          logback.classic                % Test,
+          akka.testKit                   % Test,
+          akka.testKitTyped              % Test,
+          akka.streamTestKit             % Test,
+          akka.multiNodeTestKit          % Test,
+          embeddedkafka.embeddedKafka    % Test,
+          whisk.dockerTestkitScalaTest   % Test,
+          whisk.dockerTestkitImplSpotify % Test,
+          slf4j.julToSlf4j               % Test
         )
     )
     .dependsOn(
@@ -307,7 +306,7 @@ val `write-grpc-server` = (project in file("bootstrap/write-grpc-server"))
         slf4j.julToSlf4j,
         logback.classic,
         jaino.jaino,
-        aws.sts
+        aws.v1.sts
       )
   )
   .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)
@@ -344,7 +343,7 @@ val `read-grpc-server` = (project in file("bootstrap/read-grpc-server"))
         slf4j.julToSlf4j,
         logback.classic,
         jaino.jaino,
-        aws.sts
+        aws.v1.sts
       )
   )
   .dependsOn(`accounts-interface-adaptor-query`, `accounts-common-infrastructure`)
@@ -381,7 +380,7 @@ val `read-model-updater` = (project in file("bootstrap/read-model-updater"))
         slf4j.julToSlf4j,
         logback.classic,
         jaino.jaino,
-        aws.sts
+        aws.v1.sts
       )
   )
   .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)

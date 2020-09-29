@@ -7,9 +7,9 @@ import com.github.j5ik2o.motherbase.interfaceAdaptor.actor.ActorSpec
 
 import scala.concurrent.duration.FiniteDuration
 
-trait SystemAccountAggregateSpecHelper { this: ActorSpec =>
+trait AccountAggregateSpecHelper { this: ActorSpec =>
 
-  def createSystemAccount(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
+  def createAccount(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
       systemAccountId: AccountId,
       name: AccountName,
       emailAddress: EmailAddress
@@ -19,7 +19,7 @@ trait SystemAccountAggregateSpecHelper { this: ActorSpec =>
     replyProbe.expectMessageType[CreateAccountReply](maxDuration)
   }
 
-  def destroySystemAccount(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
+  def destroyAccount(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
       systemAccountId: AccountId
   ): DestroyAccountReply = {
     val replyProbe = testKit.createTestProbe[DestroyAccountReply]()
@@ -27,7 +27,7 @@ trait SystemAccountAggregateSpecHelper { this: ActorSpec =>
     replyProbe.expectMessageType[DestroyAccountReply](maxDuration)
   }
 
-  def getSystemAccountName(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
+  def getAccountName(ref: ActorRef[AccountProtocol.Command], maxDuration: FiniteDuration)(
       systemAccountId: AccountId
   ): GetAccountNameReply = {
     val replyProbe = testKit.createTestProbe[GetAccountNameReply]()

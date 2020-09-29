@@ -86,7 +86,11 @@ object Dependencies {
   }
 
   object aws {
-    val sts = "software.amazon.awssdk" % "sts" % "2.13.11"
+
+    object v1 {
+      val sts      = "software.amazon.awssdk" % "sts"                   % "2.13.11"
+      val dynamodb = "com.amazonaws"          % "aws-java-sdk-dynamodb" % "1.11.475"
+    }
   }
 
   object dimafeng {

@@ -2,161 +2,71 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router
 
 import java.time.Instant
 import java.util.Date
+import java.util.concurrent.CompletableFuture
 
-import net.ceedubs.ficus.Ficus._
-import akka.actor.typed.{ ActorRef, Behavior }
 import akka.actor.typed.scaladsl.{ AbstractBehavior, ActorContext, Behaviors }
-import akka.kafka.scaladsl.Producer
-import akka.kafka.{ ProducerMessage, ProducerSettings }
-import akka.serialization.{ Serialization, SerializationExtension }
-import akka.stream.scaladsl.{ Sink, Source }
+import akka.actor.typed.{ ActorRef, Behavior }
 import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch
 import com.amazonaws.services.dynamodbv2.model.{ BillingMode, DescribeStreamRequest }
 import com.amazonaws.services.dynamodbv2.streamsadapter.{ AmazonDynamoDBStreamsAdapterClient, StreamsWorkerFactory }
-import com.amazonaws.services.dynamodbv2.streamsadapter.model.RecordAdapter
 import com.amazonaws.services.dynamodbv2.{ AmazonDynamoDB, AmazonDynamoDBStreams }
-import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.{ IRecordProcessor, IRecordProcessorFactory }
-import com.amazonaws.services.kinesis.clientlibrary.lib.worker.{
-  InitialPositionInStream,
-  KinesisClientLibConfiguration,
-  NoOpShardPrioritization,
-  ShardSyncStrategyType,
-  ShutdownReason,
-  Worker
-}
-import com.amazonaws.services.kinesis.clientlibrary.types.{ InitializationInput, ProcessRecordsInput, ShutdownInput }
+import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.IRecordProcessorFactory
+import com.amazonaws.services.kinesis.clientlibrary.lib.worker._
 import com.amazonaws.services.kinesis.metrics.interfaces.MetricsLevel
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router.AccountEventRouter.{
-  Command,
-  Start,
-  StartWithReply,
-  Started,
-  WrappedResult
-}
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router.AccountEventRouter._
 import com.github.j5ik2o.motherbase.infrastructure.ulid.ULID
 import com.typesafe.config.Config
 import kamon.Kamon
-import org.apache.kafka.clients.producer.{ ProducerRecord, Producer => KafkaProducer }
-import org.apache.kafka.common.serialization.{ ByteArraySerializer, StringSerializer }
-import org.slf4j.LoggerFactory
+import net.ceedubs.ficus.Ficus._
 
-import scala.concurrent.{ Await, Promise }
-import scala.concurrent.duration.Duration
+import scala.concurrent.Promise
+import scala.concurrent.duration.{ Duration, _ }
 import scala.jdk.CollectionConverters._
-import scala.concurrent.duration._
 import scala.util.{ Failure, Success }
+import scala.jdk.FutureConverters._
 
 object AccountEventRouter {
   trait Command
   trait CommandReply
-  case class StartWithReply(streamArn: String, replyTo: ActorRef[CommandReply]) extends Command
-  case class Start(streamArn: String)                                           extends Command
-  case object Started                                                           extends CommandReply
-  case object Stop                                                              extends Command
-  case class Stopped()                                                          extends CommandReply
-  private[router] case class WrappedResult(replyTo: ActorRef[CommandReply])     extends Command
+  case class StopWithReply(replyTo: ActorRef[Stopped]) extends Command
+  case object Stop                                     extends Command
+  case class Stopped()                                 extends CommandReply
+
+  case class StartWithReply(streamArn: String, replyTo: ActorRef[Started]) extends Command
+  case class Start(streamArn: String)                                      extends Command
+  case class Started()                                                     extends CommandReply
+
+  private[router] case class WrappedStartedResult(replyTo: ActorRef[Started], msg: Started) extends Command
+  private[router] case class WrappedStoppedResult(replyTo: ActorRef[Stopped], msg: Stopped) extends Command
 
   private[router] val kafkaProduceCounter    = Kamon.counter("kafka-produce-count").withTag("event-type", "account")
   private[router] val dynamoDbConsumeCounter = Kamon.counter("dynamo-db-consume-count").withTag("event-type", "account")
   private[router] val processRecordsCounter  = Kamon.counter("process-records-count").withTag("event-type", "account")
-}
 
-final class AccountEventProcessor(ctx: ActorContext[_], config: Config) extends IRecordProcessor {
-
-  implicit val system        = ctx.system
-  private val topic: String  = config.getString("topic")
-  private val producerConfig = config.getConfig("producer")
-  private val logger         = LoggerFactory.getLogger(getClass)
-
-  val producerSettings: ProducerSettings[String, Array[Byte]] =
-    ProducerSettings(producerConfig, new StringSerializer, new ByteArraySerializer)
-  val producer: KafkaProducer[String, Array[Byte]] = producerSettings.createKafkaProducer()
-  val serialization: Serialization                 = SerializationExtension(ctx.system)
-  private var checkpointCounter                    = 0
-  private var shardId: String                      = _
-
-  override def initialize(initializationInput: InitializationInput): Unit = {
-    checkpointCounter = 0
-    shardId = initializationInput.getShardId
+  def apply(
+      id: ULID,
+      amazonDynamoDB: AmazonDynamoDB,
+      dynamoDBStreamsClient: AmazonDynamoDBStreams,
+      amazonCloudWatchClient: AmazonCloudWatch,
+      awsCredentialsProvider: AWSCredentialsProvider,
+      timestampAtInitialPositionInStream: Option[Instant] = None,
+      regionName: Option[String] = None,
+      recordProcessorFactory: Option[IRecordProcessorFactory] = None,
+      config: Config
+  ): Behavior[Command] = Behaviors.setup { ctx =>
+    new AccountEventRouter(
+      id,
+      amazonDynamoDB,
+      dynamoDBStreamsClient,
+      amazonCloudWatchClient,
+      awsCredentialsProvider,
+      timestampAtInitialPositionInStream,
+      regionName,
+      recordProcessorFactory,
+      config
+    )(ctx)
   }
-
-  override def processRecords(processRecordsInput: ProcessRecordsInput): Unit = {
-    val startTimestamp = System.currentTimeMillis()
-    logger.info(s"Received a ddbEvent")
-
-    val records = processRecordsInput.getRecords
-      .iterator()
-      .asScala
-      .map(_.asInstanceOf[RecordAdapter])
-      .map(_.getInternalObject)
-      .map(_.getDynamodb)
-      .toArray
-
-    val firstJournalTimestamp = records.head.getNewImage.asScala.apply("ordering").getN.toLong
-    val lastJournalTimestamp  = records.last.getNewImage.asScala.apply("ordering").getN.toLong
-    val averageTimeStamp =
-      records.iterator.map(_.getNewImage.asScala.apply("ordering").getN.toLong).sum / records.length
-
-    logger.info(s"Latency from FirstJournal: ${startTimestamp - firstJournalTimestamp} ms")
-    logger.info(s"Latency from LastJournal: ${startTimestamp - lastJournalTimestamp} ms")
-    logger.info(s"Average Latency from Journal: ${startTimestamp - averageTimeStamp} ms")
-
-    val producerRecords = records
-      .map { dynamoDb =>
-        val newImage = dynamoDb.getNewImage.asScala
-        val pid      = newImage("persistence-id").getS
-        val message  = newImage("message").getB
-        new ProducerRecord[String, Array[Byte]](topic, null, pid, message.array())
-      }
-    val producerMessage                 = ProducerMessage.multi(producerRecords)
-    val producerRecordsConvertTimestamp = System.currentTimeMillis()
-
-    logger.info(s"Duration of Converting Journal: ${producerRecordsConvertTimestamp - startTimestamp} ms")
-
-    val future = Source
-      .single(producerMessage)
-      .via(Producer.flexiFlow(producerSettings))
-      .runWith(Sink.ignore)
-
-    try {
-      val results = Await.result(future, Duration.Inf)
-      processRecordsInput.getCheckpointer.checkpoint()
-      logger.debug(s">>> results = $results")
-
-      val endTimestamp = System.currentTimeMillis()
-
-      logger.info(s"Duration of KafkaProduce: ${endTimestamp - producerRecordsConvertTimestamp} ms")
-      logger.info(s"Duration of handleRequest: ${endTimestamp - startTimestamp} ms")
-      logger.info(s"Successfully processed " + producerRecords.length + " records.")
-    } catch {
-      case ex: Exception =>
-        logger.error("occurred error", ex)
-        throw ex
-    }
-
-  }
-
-  override def shutdown(shutdownInput: ShutdownInput): Unit = {
-    if (shutdownInput.getShutdownReason == ShutdownReason.TERMINATE) {
-      try {
-        shutdownInput.getCheckpointer.checkpoint()
-      } catch {
-        case ex: Exception =>
-          logger.error("occurred error", ex)
-      }
-      try {
-        producer.close()
-      } catch {
-        case ex: Exception =>
-          logger.error("occurred error", ex)
-      }
-    }
-  }
-}
-
-final class AccountEventProcessorFactory(ctx: ActorContext[_], config: Config) extends IRecordProcessorFactory {
-  override def createProcessor(): IRecordProcessor = new AccountEventProcessor(ctx, config)
 }
 
 final class AccountEventRouter(
@@ -167,15 +77,19 @@ final class AccountEventRouter(
     awsCredentialsProvider: AWSCredentialsProvider,
     timestampAtInitialPositionInStream: Option[Instant],
     regionName: Option[String],
+    recordProcessorFactory: Option[IRecordProcessorFactory] = None,
     config: Config
 )(ctx: ActorContext[Command])
     extends AbstractBehavior[Command](ctx) {
 
   private val adapterClient: AmazonDynamoDBStreamsAdapterClient =
     new AmazonDynamoDBStreamsAdapterClient(dynamoDBStreamsClient)
-  private val recordProcessorFactory = new AccountEventProcessorFactory(ctx, config.getConfig("account"))
-  private var worker: Worker         = null
-  private var workerThread: Thread   = null
+
+  private val _recordProcessorFactory = recordProcessorFactory.getOrElse(
+    new AccountEventProcessorFactory(ctx, config.getConfig("account"))
+  )
+  private var worker: Worker       = null
+  private var workerThread: Thread = null
 
   private def startWorker(streamArn: String) = {
     val describeStreamRequest = new DescribeStreamRequest().withStreamArn(streamArn)
@@ -183,7 +97,7 @@ final class AccountEventRouter(
     val shards                = result.getStreamDescription.getShards.asScala
     ctx.log.debug(s"shards.size = ${shards.size}, shards = $shards")
     worker = StreamsWorkerFactory.createDynamoDbStreamsWorker(
-      recordProcessorFactory,
+      _recordProcessorFactory,
       createWorkerConfig(
         id,
         awsCredentialsProvider,
@@ -200,8 +114,21 @@ final class AccountEventRouter(
 
   override def onMessage(msg: Command): Behavior[Command] = {
     msg match {
-      case WrappedResult(replyTo) =>
-        replyTo ! Started
+      case Stop =>
+        worker.startGracefulShutdown()
+        Behaviors.same
+      case StopWithReply(replyTo) =>
+        val future = CompletableFuture.supplyAsync { () => worker.startGracefulShutdown().get }.asScala
+        ctx.pipeToSelf(future) {
+          case Success(_)  => WrappedStoppedResult(replyTo, Stopped())
+          case Failure(ex) => throw ex
+        }
+        Behaviors.same
+      case WrappedStartedResult(replyTo, msg) =>
+        replyTo ! msg
+        Behaviors.same
+      case WrappedStoppedResult(replyTo, msg) =>
+        replyTo ! msg
         Behaviors.same
       case Start(streamArn) =>
         startWorker(streamArn)
@@ -212,7 +139,7 @@ final class AccountEventRouter(
         startWorker(streamArn)
         val start = Promise[Unit]()
         ctx.pipeToSelf(start.future) {
-          case Success(_)  => WrappedResult(replyTo)
+          case Success(_)  => WrappedStartedResult(replyTo, Started())
           case Failure(ex) => throw ex
         }
         workerThread = new Thread(worker)
