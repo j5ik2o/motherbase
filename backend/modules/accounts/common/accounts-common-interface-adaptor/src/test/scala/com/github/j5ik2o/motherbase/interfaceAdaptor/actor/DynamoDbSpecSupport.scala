@@ -2,14 +2,19 @@ package com.github.j5ik2o.motherbase.interfaceAdaptor.actor
 
 import java.net.URI
 
-import com.dimafeng.testcontainers.FixedHostPortGenericContainer
+import com.dimafeng.testcontainers.{ FixedHostPortGenericContainer, LocalStackContainer }
 import com.github.j5ik2o.motherbase.interfaceAdaptor.util.RandomPortUtil
 import com.github.j5ik2o.reactive.aws.dynamodb.DynamoDbAsyncClient
+import org.slf4j.LoggerFactory
+import org.testcontainers.containers.localstack.LocalStackContainer.Service
 import org.testcontainers.containers.wait.strategy.Wait
 import software.amazon.awssdk.auth.credentials.{ AwsBasicCredentials, StaticCredentialsProvider }
 import software.amazon.awssdk.services.dynamodb.{ DynamoDbAsyncClient => JavaDynamoDbAsyncClient }
 
 trait DynamoDbSpecSupport {
+
+  private val logger = LoggerFactory.getLogger(getClass)
+
   protected def useAwsEnv = false
 
   protected val dynamoDBImageVersion = "1.13.2"
@@ -34,7 +39,7 @@ trait DynamoDbSpecSupport {
 
   def underlyingAsyncV2: JavaDynamoDbAsyncClient =
     if (!useAwsEnv) {
-      println("v2 async = " + (dynamoDBEndpoint, dynamoDBAccessKeyId, dynamoDBSecretAccessKey))
+      logger.debug("v2 async = " + (dynamoDBEndpoint, dynamoDBAccessKeyId, dynamoDBSecretAccessKey))
       JavaDynamoDbAsyncClient
         .builder()
         .credentialsProvider(
