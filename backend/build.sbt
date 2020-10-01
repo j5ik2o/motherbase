@@ -250,6 +250,7 @@ val `accounts-interface-adaptor-command` =
           akkaManagement.clusterBootstrap,
           akkaManagement.k8sApi,
           aspectj.aspectjweaver,
+          "com.github.j5ik2o"            %% "akka-kinesis-kcl" % "1.0.1-SNAPSHOT",
           "com.amazonaws"                % "DynamoDBLocal" % "[1.12,2.0)" % Test,
           akka.httpTestKit               % Test,
           j5ik2o.reactiveAwsDynamodbTest % Test,

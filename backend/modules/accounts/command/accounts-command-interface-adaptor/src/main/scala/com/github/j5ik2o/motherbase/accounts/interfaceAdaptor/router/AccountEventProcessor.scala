@@ -1,5 +1,6 @@
 package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router
 
+import akka.NotUsed
 import akka.actor.typed.scaladsl.ActorContext
 import akka.kafka.scaladsl.Producer
 import akka.kafka.{ ProducerMessage, ProducerSettings }
@@ -65,8 +66,8 @@ final class AccountEventProcessor(ctx: ActorContext[_], config: Config) extends 
         val message  = newImage("message").getB
         new ProducerRecord[String, Array[Byte]](topic, null, pid, message.array())
       }
-    val producerMessage                 = ProducerMessage.multi(producerRecords)
-    val producerRecordsConvertTimestamp = System.currentTimeMillis()
+    val producerMessage: ProducerMessage.Envelope[String, Array[Byte], NotUsed] = ProducerMessage.multi(producerRecords)
+    val producerRecordsConvertTimestamp                                         = System.currentTimeMillis()
 
     logger.info(s"Duration of Converting Journal: ${producerRecordsConvertTimestamp - startTimestamp} ms")
 
