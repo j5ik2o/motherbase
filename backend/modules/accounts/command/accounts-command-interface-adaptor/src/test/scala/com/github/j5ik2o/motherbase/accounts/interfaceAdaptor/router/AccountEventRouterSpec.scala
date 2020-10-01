@@ -2,10 +2,12 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router
 
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.AskPattern._
+import akka.stream.scaladsl.Flow
 import com.amazonaws.services.dynamodbv2.streamsadapter.model.RecordAdapter
 import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.{ IRecordProcessor, IRecordProcessorFactory }
 import com.amazonaws.services.kinesis.clientlibrary.types.{ InitializationInput, ProcessRecordsInput, ShutdownInput }
 import com.dimafeng.testcontainers.{ ForAllTestContainer, MultipleContainers }
+import com.github.j5ik2o.ak.kcl.stage.CommittableRecord
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.{ AccountId, AccountName, EmailAddress }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.AccountProtocol.CreateAccountSucceeded
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.{
@@ -152,31 +154,6 @@ class AccountEventRouterSpec
 
       var receivePid = ""
 
-      val rp = new IRecordProcessor {
-        override def initialize(initializationInput: InitializationInput): Unit = {
-          println(s">>>>> $initializationInput")
-        }
-        override def processRecords(processRecordsInput: ProcessRecordsInput): Unit = {
-          val records = processRecordsInput.getRecords
-            .iterator()
-            .asScala
-            .map(_.asInstanceOf[RecordAdapter])
-            .map(_.getInternalObject)
-            .map(_.getDynamodb)
-            .toArray
-
-          records
-            .foreach { dynamoDb =>
-              val newImage = dynamoDb.getNewImage.asScala
-              val pid      = newImage("persistence-id").getS
-              val message  = newImage("message").getB
-              println(s">>>>> $pid, $message")
-              receivePid = pid
-            }
-        }
-        override def shutdown(shutdownInput: ShutdownInput): Unit = {}
-      }
-
       val streamArn: String = amazonDynamoDB.describeTable(journalTableName).getTable.getLatestStreamArn
 
       val accountEventRouterRef = spawn(
@@ -186,13 +163,12 @@ class AccountEventRouterSpec
           dynamoDBStreamsClient = amazonDynamoDBStreams,
           amazonCloudWatchClient = amazonCloudwatch,
           awsCredentialsProvider = credentialsProvider,
+          producerFlow = Flow[((String, Array[Byte]), CommittableRecord)].map { msg =>
+            receivePid = msg._1._1
+            msg._2
+          },
           timestampAtInitialPositionInStream = None,
           regionName = None,
-          recordProcessorFactory = Some(
-            new IRecordProcessorFactory {
-              override def createProcessor(): IRecordProcessor = rp
-            }
-          ),
           config = config
         )
       )

@@ -2,29 +2,42 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router
 
 import java.time.Instant
 import java.util.Date
-import java.util.concurrent.CompletableFuture
 
+import akka.actor.typed.scaladsl.adapter._
 import akka.actor.typed.scaladsl.{ AbstractBehavior, ActorContext, Behaviors }
 import akka.actor.typed.{ ActorRef, Behavior }
+import akka.kafka.ProducerMessage.{ Envelope, Results }
+import akka.kafka.scaladsl.Producer
+import akka.kafka.{ ProducerMessage, ProducerSettings }
+import akka.stream.scaladsl.{ Flow, GraphDSL, Keep, Sink, Unzip, Zip }
+import akka.stream.stage.AsyncCallback
+import akka.stream.{ FlowShape, KillSwitches, UniqueKillSwitch }
+import akka.{ Done, NotUsed }
 import com.amazonaws.auth.AWSCredentialsProvider
 import com.amazonaws.services.cloudwatch.AmazonCloudWatch
 import com.amazonaws.services.dynamodbv2.model.{ BillingMode, DescribeStreamRequest }
+import com.amazonaws.services.dynamodbv2.streamsadapter.model.RecordAdapter
 import com.amazonaws.services.dynamodbv2.streamsadapter.{ AmazonDynamoDBStreamsAdapterClient, StreamsWorkerFactory }
 import com.amazonaws.services.dynamodbv2.{ AmazonDynamoDB, AmazonDynamoDBStreams }
 import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.IRecordProcessorFactory
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker._
+import com.amazonaws.services.kinesis.clientlibrary.types.{ InitializationInput, ShutdownInput }
 import com.amazonaws.services.kinesis.metrics.interfaces.MetricsLevel
+import com.github.j5ik2o.ak.kcl.dsl.KCLSource
+import com.github.j5ik2o.ak.kcl.stage.KCLSourceStage.RecordSet
+import com.github.j5ik2o.ak.kcl.stage.{ CommittableRecord, KCLSourceStage }
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router.AccountEventRouter._
 import com.github.j5ik2o.motherbase.infrastructure.ulid.ULID
 import com.typesafe.config.Config
 import kamon.Kamon
 import net.ceedubs.ficus.Ficus._
+import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.kafka.common.serialization.{ ByteArraySerializer, StringSerializer }
 
-import scala.concurrent.Promise
 import scala.concurrent.duration.{ Duration, _ }
+import scala.concurrent.{ Future, Promise }
 import scala.jdk.CollectionConverters._
 import scala.util.{ Failure, Success }
-import scala.jdk.FutureConverters._
 
 object AccountEventRouter {
   trait Command
@@ -50,9 +63,9 @@ object AccountEventRouter {
       dynamoDBStreamsClient: AmazonDynamoDBStreams,
       amazonCloudWatchClient: AmazonCloudWatch,
       awsCredentialsProvider: AWSCredentialsProvider,
+      producerFlow: Flow[((String, Array[Byte]), CommittableRecord), CommittableRecord, NotUsed],
       timestampAtInitialPositionInStream: Option[Instant] = None,
       regionName: Option[String] = None,
-      recordProcessorFactory: Option[IRecordProcessorFactory] = None,
       config: Config
   ): Behavior[Command] = Behaviors.setup { ctx =>
     new AccountEventRouter(
@@ -61,43 +74,70 @@ object AccountEventRouter {
       dynamoDBStreamsClient,
       amazonCloudWatchClient,
       awsCredentialsProvider,
+      producerFlow,
       timestampAtInitialPositionInStream,
       regionName,
-      recordProcessorFactory,
       config
     )(ctx)
   }
+
+  def kafkaFlow(
+      topic: String,
+      config: Config
+  ): Flow[((String, Array[Byte]), CommittableRecord), CommittableRecord, NotUsed] = {
+    val producerConfig = config.getConfig("producer")
+    val producerSettings: ProducerSettings[String, Array[Byte]] =
+      ProducerSettings(producerConfig, new StringSerializer, new ByteArraySerializer)
+    Flow[((String, Array[Byte]), CommittableRecord)]
+      .map {
+        case ((pid, message), committableRecord) =>
+          val producerRecord = new ProducerRecord[String, Array[Byte]](topic, null, pid, message)
+          val msg            = ProducerMessage.single(producerRecord)
+          (msg, committableRecord)
+      }.via(Flow.fromGraph(GraphDSL.create() { implicit b =>
+        import GraphDSL.Implicits._
+
+        val unzip = b.add(Unzip[Envelope[String, Array[Byte], NotUsed], CommittableRecord]())
+        val zip   = b.add(Zip[Results[String, Array[Byte], NotUsed], CommittableRecord]())
+        unzip.out0.via(Producer.flexiFlow(producerSettings)) ~> (zip.in0)
+        unzip.out1 ~> zip.in1
+        FlowShape(unzip.in, zip.out)
+      })).map {
+        case (_, record) =>
+          record
+      }
+  }
+
 }
 
 final class AccountEventRouter(
     id: ULID,
     amazonDynamoDB: AmazonDynamoDB,
-    dynamoDBStreamsClient: AmazonDynamoDBStreams,
-    amazonCloudWatchClient: AmazonCloudWatch,
+    amazonDynamoDBStreams: AmazonDynamoDBStreams,
+    amazonCloudWatch: AmazonCloudWatch,
     awsCredentialsProvider: AWSCredentialsProvider,
+    producerFlow: Flow[((String, Array[Byte]), CommittableRecord), CommittableRecord, NotUsed],
     timestampAtInitialPositionInStream: Option[Instant],
     regionName: Option[String],
-    recordProcessorFactory: Option[IRecordProcessorFactory] = None,
     config: Config
 )(ctx: ActorContext[Command])
     extends AbstractBehavior[Command](ctx) {
 
-  private val adapterClient: AmazonDynamoDBStreamsAdapterClient =
-    new AmazonDynamoDBStreamsAdapterClient(dynamoDBStreamsClient)
+  implicit val system = ctx.system.toClassic
 
-  private val _recordProcessorFactory = recordProcessorFactory.getOrElse(
-    new AccountEventProcessorFactory(ctx, config.getConfig("account"))
-  )
-  private var worker: Worker       = null
-  private var workerThread: Thread = null
+  import ctx.executionContext
 
-  private def startWorker(streamArn: String) = {
-    val describeStreamRequest = new DescribeStreamRequest().withStreamArn(streamArn)
-    val result                = dynamoDBStreamsClient.describeStream(describeStreamRequest)
-    val shards                = result.getStreamDescription.getShards.asScala
-    ctx.log.debug(s"shards.size = ${shards.size}, shards = $shards")
-    worker = StreamsWorkerFactory.createDynamoDbStreamsWorker(
-      _recordProcessorFactory,
+  private var sw: UniqueKillSwitch = null
+  private var future: Future[Done] = null
+
+  private def newWorker(streamArn: String)(
+      initializationInputCallback: AsyncCallback[InitializationInput],
+      recordSetCallback: AsyncCallback[RecordSet],
+      shutdownInputCallback: AsyncCallback[ShutdownInput]
+  ): Worker = {
+    StreamsWorkerFactory.createDynamoDbStreamsWorker(
+      KCLSourceStage
+        .newRecordProcessorFactory(initializationInputCallback, recordSetCallback, shutdownInputCallback),
       createWorkerConfig(
         id,
         awsCredentialsProvider,
@@ -106,19 +146,48 @@ final class AccountEventRouter(
         regionName,
         config
       ),
-      adapterClient,
+      new AmazonDynamoDBStreamsAdapterClient(amazonDynamoDBStreams),
       amazonDynamoDB,
-      amazonCloudWatchClient
+      amazonCloudWatch
     )
+  }
+
+  private val convertToPidWithMessageFlow
+      : Flow[CommittableRecord, ((String, Array[Byte]), CommittableRecord), NotUsed] = Flow[CommittableRecord].map {
+    commitableRecord =>
+      val dynamoDb = commitableRecord.record.asInstanceOf[RecordAdapter].getInternalObject.getDynamodb
+      val newImage = dynamoDb.getNewImage.asScala
+      val pid      = newImage("persistence-id").getS
+      val message  = newImage("message").getB.array()
+      (pid -> message, commitableRecord)
+  }
+
+  private def startWorker(streamArn: String): Unit = {
+    val describeStreamRequest = new DescribeStreamRequest().withStreamArn(streamArn)
+    val describeStreamResult  = amazonDynamoDBStreams.describeStream(describeStreamRequest)
+    val shards                = describeStreamResult.getStreamDescription.getShards.asScala
+    ctx.log.debug(s"shards.size = ${shards.size}, shards = $shards")
+
+    val result = KCLSource
+      .withoutCheckpointWithWorker(
+        workerF = newWorker(streamArn)
+      ).viaMat(KillSwitches.single)(Keep.right)
+      .via(convertToPidWithMessageFlow)
+      .via(producerFlow)
+      .map(_.checkpoint())
+      .toMat(Sink.ignore)(Keep.both)
+      .run()
+    sw = result._1
+    future = result._2
   }
 
   override def onMessage(msg: Command): Behavior[Command] = {
     msg match {
       case Stop =>
-        worker.startGracefulShutdown()
+        sw.shutdown()
         Behaviors.same
       case StopWithReply(replyTo) =>
-        val future = CompletableFuture.supplyAsync { () => worker.startGracefulShutdown().get }.asScala
+        sw.shutdown()
         ctx.pipeToSelf(future) {
           case Success(_)  => WrappedStoppedResult(replyTo, Stopped())
           case Failure(ex) => throw ex
@@ -132,8 +201,6 @@ final class AccountEventRouter(
         Behaviors.same
       case Start(streamArn) =>
         startWorker(streamArn)
-        workerThread = new Thread(worker)
-        workerThread.start()
         Behaviors.same
       case StartWithReply(streamArn, replyTo) =>
         startWorker(streamArn)
@@ -142,8 +209,6 @@ final class AccountEventRouter(
           case Success(_)  => WrappedStartedResult(replyTo, Started())
           case Failure(ex) => throw ex
         }
-        workerThread = new Thread(worker)
-        workerThread.start()
         start.success(())
         Behaviors.same
     }
