@@ -34,6 +34,7 @@ import net.ceedubs.ficus.Ficus._
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{ ByteArraySerializer, StringSerializer }
 
+import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.duration.{ Duration, _ }
 import scala.concurrent.{ Future, Promise }
 import scala.jdk.CollectionConverters._
@@ -81,9 +82,10 @@ object AccountEventRouter {
     )(ctx)
   }
 
-  def kafkaFlow(
+  def kafkaProducerFlow(
       topic: String,
-      config: Config
+      config: Config,
+      batchSize: Int = Int.MaxValue
   ): Flow[((String, Array[Byte]), CommittableRecord), CommittableRecord, NotUsed] = {
     val producerConfig = config.getConfig("producer")
     val producerSettings: ProducerSettings[String, Array[Byte]] =
@@ -92,18 +94,20 @@ object AccountEventRouter {
       .map {
         case ((pid, message), committableRecord) =>
           val producerRecord = new ProducerRecord[String, Array[Byte]](topic, null, pid, message)
-          val msg            = ProducerMessage.single(producerRecord)
-          (msg, committableRecord)
-      }.via(Flow.fromGraph(GraphDSL.create() { implicit b =>
+          (producerRecord, committableRecord)
+      }.batch(batchSize, Vector(_))(_ :+ _)
+      .map { records => (ProducerMessage.multi(records.map(_._1)), records.last._2) }
+      .via(Flow.fromGraph(GraphDSL.create() { implicit b =>
         import GraphDSL.Implicits._
-
         val unzip = b.add(Unzip[Envelope[String, Array[Byte], NotUsed], CommittableRecord]())
         val zip   = b.add(Zip[Results[String, Array[Byte], NotUsed], CommittableRecord]())
-        unzip.out0.via(Producer.flexiFlow(producerSettings)) ~> (zip.in0)
+        unzip.out0 ~> Producer.flexiFlow[String, Array[Byte], NotUsed](producerSettings) ~> zip.in0
         unzip.out1 ~> zip.in1
         FlowShape(unzip.in, zip.out)
       })).map {
-        case (_, record) =>
+//        case (ProducerMessage.Result(metadata, result), record) =>
+//          ()
+        case (ProducerMessage.MultiResult(parts, _), record) =>
           record
       }
   }
@@ -169,7 +173,7 @@ final class AccountEventRouter(
     ctx.log.debug(s"shards.size = ${shards.size}, shards = $shards")
 
     val result = KCLSource
-      .withoutCheckpointWithWorker(
+      .ofCustomWorkerWithoutCheckpoint(
         workerF = newWorker(streamArn)
       ).viaMat(KillSwitches.single)(Keep.right)
       .via(convertToPidWithMessageFlow)
