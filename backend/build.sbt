@@ -210,6 +210,9 @@ val `accounts-interface-adaptor-common` = (project in file("modules/accounts/com
         akka.testKitTyped                     % Test,
         dimafeng.testcontainerScalaKafka      % Test,
         dimafeng.testcontainerScalaLocalstack % Test
+//        testcontainers.testcontainers           % Test,
+//        testcontainers.testcontainersLocalStack % Test,
+//        testcontainers.testcontainersKafka      % Test
       )
   )
   .dependsOn(`healthchecks-k8s-probes`, `interface-adaptor-common`)
@@ -234,7 +237,7 @@ val `accounts-interface-adaptor-command` =
     .settings(
       name := s"$projectBaseName-accounts-command-interface-adaptor",
       libraryDependencies ++= Seq(
-          "com.amazonaws" % "aws-java-sdk-sts" % "1.11.728",
+          aws.v1.sts,
           akka.clusterTyped,
           akka.streamKafka,
           akka.streamKafkaClusterSharding,
@@ -245,24 +248,20 @@ val `accounts-interface-adaptor-command` =
           megard.akkaHttpCors,
           j5ik2o.akkaPersistenceDynamodb,
           j5ik2o.akkaPersistenceS3,
+          j5ik2o.akkaKinesisKcl,
           akkaManagement.akkaManagement,
           akkaManagement.clusterHttp,
           akkaManagement.clusterBootstrap,
           akkaManagement.k8sApi,
           aspectj.aspectjweaver,
-          "com.github.j5ik2o"            %% "akka-kinesis-kcl" % "1.0.1",
-          "com.amazonaws"                % "DynamoDBLocal" % "[1.12,2.0)" % Test,
-          akka.httpTestKit               % Test,
-          j5ik2o.reactiveAwsDynamodbTest % Test,
-          logback.classic                % Test,
-          akka.testKit                   % Test,
-          akka.testKitTyped              % Test,
-          akka.streamTestKit             % Test,
-          akka.multiNodeTestKit          % Test,
-          embeddedkafka.embeddedKafka    % Test,
-          whisk.dockerTestkitScalaTest   % Test,
-          whisk.dockerTestkitImplSpotify % Test,
-          slf4j.julToSlf4j               % Test
+          logback.classic             % Test,
+          akka.httpTestKit            % Test,
+          akka.testKit                % Test,
+          akka.testKitTyped           % Test,
+          akka.streamTestKit          % Test,
+          akka.multiNodeTestKit       % Test,
+          embeddedkafka.embeddedKafka % Test,
+          slf4j.julToSlf4j            % Test
         )
     )
     .dependsOn(
@@ -272,6 +271,46 @@ val `accounts-interface-adaptor-command` =
       `accounts-command-processor`
     )
 
+val `accounts-interface-adaptor-eventbus` =
+  (project in file("modules/accounts/eventbus/accounts-eventbus-interface-adaptor"))
+    .settings(baseSettings)
+    .settings(
+      name := s"$projectBaseName-accounts-eventbus-interface-adaptor",
+      libraryDependencies ++= Seq(
+          aws.v1.sts,
+          akka.clusterTyped,
+          akka.streamKafka,
+          akka.streamKafkaClusterSharding,
+          akka.discovery,
+          akka.clusterShardingTyped,
+          akka.persistenceTyped,
+          akka.serializationJackson,
+          megard.akkaHttpCors,
+          j5ik2o.akkaPersistenceDynamodb,
+          j5ik2o.akkaPersistenceS3,
+          j5ik2o.akkaKinesisKcl,
+          akkaManagement.akkaManagement,
+          akkaManagement.clusterHttp,
+          akkaManagement.clusterBootstrap,
+          akkaManagement.k8sApi,
+          aspectj.aspectjweaver,
+          logback.classic             % Test,
+          akka.httpTestKit            % Test,
+          akka.testKit                % Test,
+          akka.testKitTyped           % Test,
+          akka.streamTestKit          % Test,
+          akka.multiNodeTestKit       % Test,
+          embeddedkafka.embeddedKafka % Test,
+          slf4j.julToSlf4j            % Test
+        )
+    )
+    .dependsOn(
+      `accounts-command-interface-adaptor-contracts`,
+      `accounts-interface-adaptor-common`  % "compile->compile;test->test",
+      `accounts-interface-adaptor-command` % "test->test",
+      `accounts-common-infrastructure`,
+      `accounts-command-processor`
+    )
 // ---- bootstrap
 
 val `write-grpc-server` = (project in file("bootstrap/write-grpc-server"))

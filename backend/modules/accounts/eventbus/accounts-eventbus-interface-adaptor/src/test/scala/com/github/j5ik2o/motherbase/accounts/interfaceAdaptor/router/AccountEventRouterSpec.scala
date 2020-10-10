@@ -3,9 +3,6 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.router
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.AskPattern._
 import akka.stream.scaladsl.Flow
-import com.amazonaws.services.dynamodbv2.streamsadapter.model.RecordAdapter
-import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.{ IRecordProcessor, IRecordProcessorFactory }
-import com.amazonaws.services.kinesis.clientlibrary.types.{ InitializationInput, ProcessRecordsInput, ShutdownInput }
 import com.dimafeng.testcontainers.{ ForAllTestContainer, MultipleContainers }
 import com.github.j5ik2o.ak.kcl.stage.CommittableRecord
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.{ AccountId, AccountName, EmailAddress }
@@ -32,8 +29,6 @@ import com.github.j5ik2o.motherbase.interfaceAdaptor.aws.{
 import com.github.j5ik2o.motherbase.interfaceAdaptor.util.RandomPortUtil
 import com.typesafe.config.ConfigFactory
 import org.scalatest.freespec.AnyFreeSpecLike
-
-import scala.jdk.CollectionConverters._
 
 object AccountEventRouterSpec {
 

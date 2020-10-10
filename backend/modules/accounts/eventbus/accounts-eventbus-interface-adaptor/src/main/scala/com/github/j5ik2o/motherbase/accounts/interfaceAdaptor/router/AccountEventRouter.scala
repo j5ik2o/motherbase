@@ -19,7 +19,6 @@ import com.amazonaws.services.dynamodbv2.model.{ BillingMode, DescribeStreamRequ
 import com.amazonaws.services.dynamodbv2.streamsadapter.model.RecordAdapter
 import com.amazonaws.services.dynamodbv2.streamsadapter.{ AmazonDynamoDBStreamsAdapterClient, StreamsWorkerFactory }
 import com.amazonaws.services.dynamodbv2.{ AmazonDynamoDB, AmazonDynamoDBStreams }
-import com.amazonaws.services.kinesis.clientlibrary.interfaces.v2.IRecordProcessorFactory
 import com.amazonaws.services.kinesis.clientlibrary.lib.worker._
 import com.amazonaws.services.kinesis.clientlibrary.types.{ InitializationInput, ShutdownInput }
 import com.amazonaws.services.kinesis.metrics.interfaces.MetricsLevel
@@ -34,7 +33,6 @@ import net.ceedubs.ficus.Ficus._
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{ ByteArraySerializer, StringSerializer }
 
-import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.duration.{ Duration, _ }
 import scala.concurrent.{ Future, Promise }
 import scala.jdk.CollectionConverters._

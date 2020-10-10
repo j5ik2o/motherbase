@@ -83,21 +83,33 @@ object Dependencies {
     val reactiveAwsS3           = "com.github.j5ik2o" %% "reactive-aws-s3-core"              % "1.2.6"
     val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.4"
     val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3"               % "1.0.10"
+    val akkaKinesisKcl          = "com.github.j5ik2o" %% "akka-kinesis-kcl"                  % "1.0.1"
   }
 
   object aws {
 
+    object v2 {
+      val sts = "software.amazon.awssdk" % "sts" % "2.13.11"
+    }
+
     object v1 {
-      val sts      = "software.amazon.awssdk" % "sts"                   % "2.13.11"
-      val dynamodb = "com.amazonaws"          % "aws-java-sdk-dynamodb" % "1.11.475"
+      val sts      = "com.amazonaws" % "aws-java-sdk-sts"      % "1.11.728"
+      val dynamodb = "com.amazonaws" % "aws-java-sdk-dynamodb" % "1.11.475"
     }
   }
 
+  object testcontainers {
+    val testcontainersVersion    = "1.15.0-rc2"
+    val testcontainers           = "org.testcontainers" % "testcontainers" % testcontainersVersion
+    val testcontainersLocalStack = "org.testcontainers" % "localstack" % testcontainersVersion
+    val testcontainersKafka      = "org.testcontainers" % "kafka" % testcontainersVersion
+  }
+
   object dimafeng {
-    val testcontainersScalaVersion   = "0.36.1"
-    val testcontainerScalaScalaTest  = "com.dimafeng" %% "testcontainers-scala-scalatest" % testcontainersScalaVersion
-    val testcontainerScalaMsql       = "com.dimafeng" %% "testcontainers-scala-mysql" % testcontainersScalaVersion
-    val testcontainerScalaKafka      = "com.dimafeng" %% "testcontainers-scala-kafka" % testcontainersScalaVersion
+    val testcontainersScalaVersion  = "0.38.4"
+    val testcontainerScalaScalaTest = "com.dimafeng" %% "testcontainers-scala-scalatest" % testcontainersScalaVersion
+//    val testcontainerScalaMsql       = "com.dimafeng" %% "testcontainers-scala-mysql" % testcontainersScalaVersion
+    val testcontainerScalaKafka      = "com.dimafeng" %% "testcontainers-scala-kafka"      % testcontainersScalaVersion
     val testcontainerScalaLocalstack = "com.dimafeng" %% "testcontainers-scala-localstack" % testcontainersScalaVersion
   }
 
