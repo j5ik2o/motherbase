@@ -18,7 +18,7 @@ final class AccountCommandServiceImpl(
     extends AccountCommandService
     with ValidateSupport {
 
-  override def createSystemAccount(in: CreateAccountRequest): Future[CreateAccountResponse] = {
+  override def createAccount(in: CreateAccountRequest): Future[CreateAccountResponse] = {
     validateRequest(in).fold(
       errors => Future.successful(GRPCCreateAccountResponse("", errors.map { error => Error(error.message) }.toList)), {
         commandRequest =>
@@ -31,7 +31,7 @@ final class AccountCommandServiceImpl(
     )
   }
 
-  override def renameSystemAccount(in: RenameAccountRequest): Future[RenameAccountResponse] = ???
+  override def renameAccount(in: RenameAccountRequest): Future[RenameAccountResponse] = ???
 
-  override def destroySystemAccount(in: CreateAccountRequest): Future[CreateAccountResponse] = ???
+  override def destroyAccount(in: CreateAccountRequest): Future[CreateAccountResponse] = ???
 }

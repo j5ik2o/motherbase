@@ -62,7 +62,7 @@ class BasicSimulation extends Simulation {
     .check(statusCode is Status.Code.OK)
 
   val createAccount = grpc("create-system-account")
-    .rpc(AccountCommandServiceGrpc.METHOD_CREATE_SYSTEM_ACCOUNT)
+    .rpc(AccountCommandServiceGrpc.METHOD_CREATE_ACCOUNT)
     .payload(createAccountRequest)
     .check(statusCode is Status.Code.OK)
     .extract(_.accountId.some)(_ saveAs "accountId")
