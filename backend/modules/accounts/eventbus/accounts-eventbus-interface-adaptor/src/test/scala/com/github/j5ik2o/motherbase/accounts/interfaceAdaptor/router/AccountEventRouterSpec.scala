@@ -76,7 +76,7 @@ class AccountEventRouterSpec
                                                  |    }
                                                  |  }
                                                  |}
-                                                 |event-router.accounts {
+                                                 |motherbase.event-router.accounts {
                                                  |  access-key-id = "${AccountEventRouterSpec.defaultAwsAccessKeyId}"
                                                  |  secret-access-key = "${AccountEventRouterSpec.defaultAwsSecretKey}"
                                                  |  dynamodb-client {
@@ -134,7 +134,7 @@ class AccountEventRouterSpec
 
       val rootConfig                           = system.settings.config
       val id                                   = ULID()
-      val config                               = rootConfig.getConfig("event-router.accounts")
+      val config                               = rootConfig.getConfig("motherbase.event-router.accounts")
       val accessKeyId                          = config.getString("access-key-id")
       val secretAccessKey                      = config.getString("secret-access-key")
       val accountEventRouterClientConfig       = config.getConfig("dynamodb-client")

@@ -209,7 +209,8 @@ val `accounts-interface-adaptor-common` = (project in file("modules/accounts/com
         heikoseeberger.akkaHttpCirce,
         akka.testKitTyped                     % Test,
         dimafeng.testcontainerScalaKafka      % Test,
-        dimafeng.testcontainerScalaLocalstack % Test
+        dimafeng.testcontainerScalaLocalstack % Test,
+        embeddedkafka.embeddedKafka           % Test
 //        testcontainers.testcontainers           % Test,
 //        testcontainers.testcontainersLocalStack % Test,
 //        testcontainers.testcontainersKafka      % Test

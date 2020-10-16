@@ -28,7 +28,7 @@ object AccountAggregate {
   final case class JustState(systemAccount: Account) extends State
 
   def apply(id: AccountId): Behavior[AccountProtocol.Command] = Behaviors.setup { ctx =>
-    EventSourcedBehavior[AccountProtocol.Command, AccountEvents.Event, State](
+    EventSourcedBehavior[AccountProtocol.Command, AccountEvents.AccountEvent, State](
       persistenceId = PersistenceId.of(id.modelName, id.value.asString, "-"),
       emptyState = EmptyState,
       commandHandler = commandHandler(ctx, id),
@@ -39,7 +39,7 @@ object AccountAggregate {
   private def eventHandler(
       ctx: ActorContext[_],
       systemAccountId: AccountId
-  ): (State, AccountEvents.Event) => State = { (state, event) =>
+  ): (State, AccountEvents.AccountEvent) => State = { (state, event) =>
     (state, event) match {
       case (EmptyState, AccountCreated(id, name, emailAddress, occurredAt)) if id == systemAccountId =>
         JustState(Account(id, name, emailAddress, occurredAt))
@@ -51,7 +51,7 @@ object AccountAggregate {
   private def commandHandler(
       ctx: ActorContext[_],
       systemAccountId: AccountId
-  ): (State, AccountProtocol.Command) => Effect[AccountEvents.Event, State] = { (state, command) =>
+  ): (State, AccountProtocol.Command) => Effect[AccountEvents.AccountEvent, State] = { (state, command) =>
     (state, command) match {
       case (EmptyState, CreateAccount(id, name, emailAddress, replyTo)) if id == systemAccountId =>
         create(id, name, emailAddress, replyTo)
@@ -68,10 +68,10 @@ object AccountAggregate {
       state: Account,
       id: AccountId,
       replyTo: Option[ActorRef[DestroyAccountReply]]
-  ): Effect[AccountEvents.Event, State] = {
+  ): Effect[AccountEvents.AccountEvent, State] = {
     if (state.canDestroy) {
       val now     = Instant.now
-      val builder = Effect.persist[Event, State](AccountDestroyed(id, now))
+      val builder = Effect.persist[AccountEvent, State](AccountDestroyed(id, now))
       replyTo match {
         case None    => builder
         case Some(r) => builder.thenReply(r)(_ => DestroyAccountSucceeded(id))
@@ -89,11 +89,11 @@ object AccountAggregate {
       name: AccountName,
       emailAddress: EmailAddress,
       replyTo: Option[ActorRef[CreateAccountReply]]
-  ): Effect[AccountEvents.Event, State] = {
+  ): Effect[AccountEvents.AccountEvent, State] = {
     if (Account.canCreate(name, emailAddress)) {
       val now = Instant.now
       val builder =
-        Effect.persist[Event, State](AccountCreated(id, name, emailAddress, now))
+        Effect.persist[AccountEvent, State](AccountCreated(id, name, emailAddress, now))
       replyTo match {
         case None =>
           builder

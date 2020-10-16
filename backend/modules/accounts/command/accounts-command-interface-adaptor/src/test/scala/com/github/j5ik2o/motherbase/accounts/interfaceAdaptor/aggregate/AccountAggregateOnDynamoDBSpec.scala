@@ -20,7 +20,9 @@ object AccountAggregateOnDynamoDBSpec {
 }
 
 class AccountAggregateOnDynamoDBSpec
-    extends ActorSpec(ConfigFactory.parseString(s"""
+    extends ActorSpec(
+      ConfigFactory
+        .parseString(s"""
                                                  |akka.persistence.journal.plugin = "j5ik2o.dynamo-db-journal"
                                                  |akka.persistence.snapshot-store.plugin = "j5ik2o.s3-snapshot-store"
                                                  |j5ik2o {
@@ -36,7 +38,9 @@ class AccountAggregateOnDynamoDBSpec
                                                  |  s3-snapshot-store {
                                                  |    motherbase.bucket-name = "motherbase-test"
                                                  |    class = "com.github.j5ik2o.akka.persistence.s3.snapshot.S3SnapshotStore"
-                                                 |    bucket-name-resolver-class-name = "com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.MotherBaseBucketNameResolver"
+                                                 |    bucket-name-resolver-class-name = "${classOf[
+                          MotherBaseBucketNameResolver
+                        ].getName}"
                                                  |    key-converter-class-name = "com.github.j5ik2o.akka.persistence.s3.resolver.KeyConverter$$PersistenceId"
                                                  |    path-prefix-resolver-class-name = "com.github.j5ik2o.akka.persistence.s3.resolver.PathPrefixResolver$$PersistenceId"
                                                  |    extension-name = "snapshot"
@@ -51,7 +55,8 @@ class AccountAggregateOnDynamoDBSpec
                                                  |    }
                                                  |  }
                                                  |}
-                                                 |""".stripMargin).withFallback(ConfigFactory.load()))
+                                                 |""".stripMargin).withFallback(ConfigFactory.load())
+    )
     with AccountAggregateSpecScenario
     with ForAllTestContainer
     with DynamoDbSpecSupport

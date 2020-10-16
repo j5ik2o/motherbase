@@ -4,7 +4,7 @@ import java.time.Instant
 
 object AccountEvents {
 
-  sealed trait Event {
+  sealed trait AccountEvent {
     def accountId: AccountId
   }
 
@@ -13,11 +13,11 @@ object AccountEvents {
       name: AccountName,
       emailAddress: EmailAddress,
       occurredAt: Instant
-  ) extends Event
+  ) extends AccountEvent
 
   final case class AccountDestroyed(
       accountId: AccountId,
       occurredAt: Instant
-  ) extends Event
+  ) extends AccountEvent
 
 }
