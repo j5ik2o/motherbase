@@ -33,12 +33,12 @@ trait RouteSpec extends ScalatestRouteTest with Matchers with BeforeAndAfterAll 
   private var _session: Session          = _
   def session: Session                   = _session
 
+  val host = "127.0.0.1"
+  val port = 8080
+
   def design: Design =
     com.github.j5ik2o.motherbase.accounts.commandProcessor.DISettings.design
-      .add(DISettings.designOfActorSystem(clusterMode, system.toTyped, materializer))
-      .add(DISettings.designOfAggregates(clusterMode))
-      .add(DISettings.designOfHttpControllers())
-      .add(DISettings.designOfResponders())
+      .add(DISettings.designForHttpServer(clusterMode, system.toTyped, host, port))
 
   override def beforeAll(): Unit = {
     super.beforeAll()

@@ -13,8 +13,7 @@ final class Routes(
     val swaggerDocService: SwaggerDocService,
     accountCommandController: AccountCommandController
 )(
-    implicit system: ActorSystem[Nothing],
-    mat: Materializer
+    implicit system: ActorSystem[Nothing]
 ) {
 
   def root: Route =

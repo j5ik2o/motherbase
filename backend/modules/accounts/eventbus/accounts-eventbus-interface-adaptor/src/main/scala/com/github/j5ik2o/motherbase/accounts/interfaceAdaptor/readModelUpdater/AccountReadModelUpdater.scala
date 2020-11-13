@@ -12,7 +12,7 @@ import akka.persistence.PersistentRepr
 import akka.serialization.SerializationExtension
 import akka.stream.{ ActorAttributes, Attributes, Supervision }
 import akka.stream.scaladsl.{ Flow, Keep, RestartSource, Sink, Source }
-import com.typesafe.config.Config
+import com.typesafe.config.{ Config, ConfigFactory }
 import kamon.Kamon
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.{ ByteArrayDeserializer, StringDeserializer }
@@ -22,15 +22,19 @@ import scala.concurrent.ExecutionContext
 import scala.util.control.NonFatal
 import scala.util.{ Failure, Success }
 import scala.concurrent.duration._
+import net.ceedubs.ficus.Ficus._
 
 object AccountReadModelUpdater {
+  type Message = ConsumerMessage.CommittableMessage[String, Array[Byte]]
+
   sealed trait Command
   sealed trait CommandReply
-  final case class Start(replyTo: Option[ActorRef[StartReply]] = None)      extends Command
-  final case class StartReply()                                             extends CommandReply
-  final case class Stop(replyTo: Option[ActorRef[StopReply]] = None)        extends Command
-  final case class StopReply()                                              extends CommandReply
-  final case class Restart()                                                extends Command
+  final case class Start(replyTo: Option[ActorRef[StartReply]] = None) extends Command
+  final case class StartReply()                                        extends CommandReply
+  final case class Stop(replyTo: Option[ActorRef[StopReply]] = None)   extends Command
+  final case class StopReply()                                         extends CommandReply
+  final case class Restart()                                           extends Command
+
   private case class DrainAndShutdown(replyTo: Option[ActorRef[StopReply]]) extends Command
 }
 
@@ -39,13 +43,21 @@ final class AccountReadModelUpdater(config: Config, accountEventWriter: AccountE
 ) extends ReadModelUpdaterSupport {
   import com.github.j5ik2o.motherbase.accounts.domain.accounts.AccountEvents._
   import AccountReadModelUpdater._
-  val projectionFlowCounter     = Kamon.counter("projection-flow-count").withTag("event-type", "account")
-  val deserializeMessageCounter = Kamon.counter("deserialize-message-count").withTag("event-type", "account")
-  val dynamodbWriteCounter      = Kamon.counter("dynamodb-write-count").withTag("event-type", "account")
+  private val projectionFlowCounter     = Kamon.counter("projection-flow-count").withTag("event-type", "account")
+  private val deserializeMessageCounter = Kamon.counter("deserialize-message-count").withTag("event-type", "account")
+  private val dynamodbWriteCounter      = Kamon.counter("dynamodb-write-count").withTag("event-type", "account")
 
   private val logger = LoggerFactory.getLogger(getClass)
 
-  private val topic: String  = config.getString("topic")
+  private val topic: String = config.getString("topic")
+
+  private val backoffConfig = config.getOrElse[Config]("backoff", ConfigFactory.empty())
+
+  private val minBackoff   = backoffConfig.getOrElse[FiniteDuration]("min-backoff", 100 milliseconds)
+  private val maxBackoff   = backoffConfig.getOrElse[FiniteDuration]("max-backoff", 30 seconds)
+  private val randomFactor = backoffConfig.getOrElse[Double]("random-factor", 0.2)
+  private val maxRestarts  = backoffConfig.getOrElse[Int]("max-restarts", Int.MaxValue)
+
   private val consumerConfig = config.getConfig("consumer")
 
   private val consumerSettings: ConsumerSettings[String, Array[Byte]] =
@@ -57,24 +69,21 @@ final class AccountReadModelUpdater(config: Config, accountEventWriter: AccountE
 
   private val serialization = SerializationExtension(system)
 
-  type Message = ConsumerMessage.CommittableMessage[String, Array[Byte]]
-
   def behavior: Behavior[Command] = stopping
 
   private def projectionFlow(
       topicPartition: TopicPartition
-  )(
-      implicit ec: ExecutionContext
-  ): Flow[Message, CommittableOffset, NotUsed] = {
+  )(implicit ec: ExecutionContext): Flow[Message, CommittableOffset, NotUsed] = {
     logger.debug(s"topicPartition = $topicPartition")
+
     Flow[ConsumerMessage.CommittableMessage[String, Array[Byte]]]
       .mapAsync(1) { message =>
         def generateSpan(opName: String) = Kamon.spanBuilder(opName).tag("event-type", "account")
         val projectionFlowSpan           = generateSpan("projection-flow").start()
         projectionFlowCounter.increment()
-
         deserializeMessageCounter.increment()
         logger.debug(s"message = $message")
+
         val persistentRepr = serialization.deserialize(message.record.value(), classOf[PersistentRepr]) match {
           case Success(value) =>
             logger.debug(s"success: ${message.committableOffset}")
@@ -83,18 +92,15 @@ final class AccountReadModelUpdater(config: Config, accountEventWriter: AccountE
             logger.error(s"occurred error: ${message.committableOffset}", ex)
             throw ex
         }
+
         dynamodbWriteCounter.increment()
+
         val span  = generateSpan("dynamo-db-write").asChildOf(projectionFlowSpan).start()
         val event = persistentRepr.payload.asInstanceOf[AccountEvent]
         logger.debug(s"manifest = ${persistentRepr.manifest}")
 
         RestartSource // FIXME: config に切り出す
-          .withBackoff(
-            minBackoff = 100.millis,
-            maxBackoff = 30.second,
-            randomFactor = 0.2,
-            maxRestarts = Int.MaxValue // いったんリバランス回避目的 & 問題の単純化のため Int.MaxValue
-          ) { () =>
+          .withBackoff(minBackoff, maxBackoff, randomFactor, maxRestarts) { () =>
             val future = event match {
               case e: AccountCreated => accountEventWriter.create(e)
 //              case e: AccountRenamed => accountEventWriter.update(e)

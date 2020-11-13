@@ -129,8 +129,8 @@ final class AccountEventRouter(
 
   import ctx.executionContext
 
-  private var sw: UniqueKillSwitch = null
-  private var future: Future[Done] = null
+  private var sw: UniqueKillSwitch = _
+  private var future: Future[Done] = _
 
   private def newWorker(streamArn: String)(
       initializationInputCallback: AsyncCallback[InitializationInput],

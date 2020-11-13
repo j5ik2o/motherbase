@@ -2,15 +2,15 @@ import sbt._
 
 object Version {
   val circe         = "0.13.0"
-  val akka          = "2.6.8"
-  val akkaHttp      = "10.1.12"
+  val akka          = "2.6.10"
+  val akkaHttp      = "10.2.1"
   val akkaHttpCirce = "1.31.0"
   val cats          = "2.1.1"
   val scalaTest     = "3.1.1"
   val paradise      = "2.1.1"
 
   val akkaStreamKafka = "2.0.3"
-  val akkaManagement  = "1.0.8"
+  val akkaManagement  = "1.0.9"
   val kafka           = "2.4.1"
   val logback         = "1.2.3"
 
@@ -81,8 +81,8 @@ object Dependencies {
     val reactiveAwsDynamodb     = "com.github.j5ik2o" %% "reactive-aws-dynamodb-core"        % "1.2.6"
     val reactiveAwsDynamodbTest = "com.github.j5ik2o" %% "reactive-aws-dynamodb-test"        % "1.2.6"
     val reactiveAwsS3           = "com.github.j5ik2o" %% "reactive-aws-s3-core"              % "1.2.6"
-    val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.4"
-    val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3"               % "1.0.10"
+    val akkaPersistenceDynamodb = "com.github.j5ik2o" %% "akka-persistence-dynamodb-journal" % "1.1.7-SNAPSHOT"
+    val akkaPersistenceS3       = "com.github.j5ik2o" %% "akka-persistence-s3-snapshot"      % "1.0.15-SNAPSHOT"
     val akkaKinesisKcl          = "com.github.j5ik2o" %% "akka-kinesis-kcl"                  % "1.0.1"
   }
 

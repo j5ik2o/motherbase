@@ -31,8 +31,8 @@ message RenameAccountResponse {
 
 
 service AccountCommandService {
-    rpc CreateSystemAccount (CreateAccountRequest) returns (CreateAccountResponse) {};
-    rpc RenameSystemAccount (RenameAccountRequest) returns (RenameAccountResponse) {};
-    rpc DestroySystemAccount (CreateAccountRequest) returns (CreateAccountResponse) {};
+    rpc CreateAccount (CreateAccountRequest) returns (CreateAccountResponse) {};
+    rpc RenameAccount (RenameAccountRequest) returns (RenameAccountResponse) {};
+    rpc DestroyAccount (CreateAccountRequest) returns (CreateAccountResponse) {};
 }
 
