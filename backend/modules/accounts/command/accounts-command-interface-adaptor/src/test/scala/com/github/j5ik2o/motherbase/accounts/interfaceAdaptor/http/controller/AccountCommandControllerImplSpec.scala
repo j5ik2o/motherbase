@@ -6,15 +6,25 @@ import akka.actor.typed.scaladsl.adapter._
 import akka.cluster.sharding.typed.scaladsl.ClusterSharding
 import akka.cluster.typed.Cluster
 import akka.http.scaladsl.model.StatusCodes
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.ClusterShardingSpecSupport
+import akka.util.Timeout
+import com.github.j5ik2o.motherbase.accounts.commandProcessor.CreateAccountCommandProcessorImpl
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.{
+  AccountAggregate,
+  AccountAggregates,
+  ClusterShardingSpecSupport,
+  ShardedAccountAggregates
+}
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.{
   CreateAccountRequestJson,
   CreateAccountResponseJson
 }
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.CreateAccountJsonResponderImpl
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.routes.RouteNames
 import io.circe.generic.auto._
 import org.scalatest.concurrent.Eventually
 import org.scalatest.freespec.AnyFreeSpec
+
+import scala.concurrent.duration._
 
 class AccountCommandControllerImplSpec
     extends AnyFreeSpec
@@ -42,12 +52,28 @@ class AccountCommandControllerImplSpec
 
   override def beforeAll(): Unit = {
     super.beforeAll()
-    if (clusterMode) {
-      _cluster = session.build[Cluster]
-      _clusterSharding = session.build[ClusterSharding]
+    val accountRef = if (clusterMode) {
+      _cluster = Cluster(system.toTyped)
+      _clusterSharding = ClusterSharding(system.toTyped)
       prepareClusterSharding()
+
+      ShardedAccountAggregates.initClusterSharding(
+        clusterSharding,
+        AccountAggregates(_.value.asString)(AccountAggregate(_)),
+        Some(10 seconds)
+      )
+
+      val behavior = ShardedAccountAggregates.ofProxy(clusterSharding)
+      system.spawn(behavior, "accounts")
+    } else {
+      val behavior = AccountAggregates(_.value.asString)(AccountAggregate(_))
+      system.spawn(behavior, "accounts")
     }
-    commandController = session.build[AccountCommandController]
+
+    implicit val to: Timeout = 10 seconds
+    val processor            = new CreateAccountCommandProcessorImpl(accountRef, to)(system.toTyped)
+    val responder            = new CreateAccountJsonResponderImpl
+    commandController = new AccountCommandControllerImpl(processor, responder)
   }
 
   "AccountCommandController" - {

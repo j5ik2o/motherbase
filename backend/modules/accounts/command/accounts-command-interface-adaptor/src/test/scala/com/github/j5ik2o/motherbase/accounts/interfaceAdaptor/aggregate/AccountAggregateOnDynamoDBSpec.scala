@@ -41,8 +41,6 @@ class AccountAggregateOnDynamoDBSpec
                                                  |    bucket-name-resolver-class-name = "${classOf[
                           MotherBaseBucketNameResolver
                         ].getName}"
-                                                 |    key-converter-class-name = "com.github.j5ik2o.akka.persistence.s3.resolver.KeyConverter$$PersistenceId"
-                                                 |    path-prefix-resolver-class-name = "com.github.j5ik2o.akka.persistence.s3.resolver.PathPrefixResolver$$PersistenceId"
                                                  |    extension-name = "snapshot"
                                                  |    max-load-attempts = 3
                                                  |    s3-client {
