@@ -4,11 +4,14 @@ import akka.http.scaladsl.server.Directive1
 import akka.http.scaladsl.server.Directives._
 import cats.implicits._
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.{ AccountId, AccountName, EmailAddress }
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.CreateAccountRequestJson
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.{
+  CreateAccountRequestJson,
+  RenameAccountRequestJson
+}
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.rejections
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.rejections.ValidationsRejection
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.validator.{ ValidateUtils, ValidationResult, Validator }
-import com.github.j5ik2o.motherbase.accounts.commandProcessor.CreateAccountRequest
+import com.github.j5ik2o.motherbase.accounts.commandProcessor.{ CreateAccountRequest, RenameAccountRequest }
 
 trait AccountValidateDirectives {
 
@@ -53,6 +56,24 @@ object AccountValidateDirectives {
             AccountId(),
             name,
             emailAddress
+          )
+      }
+    }
+  }
+
+  implicit object RenameAccountRequestJsonValidator extends Validator[RenameAccountRequestJson, RenameAccountRequest] {
+
+    override def validate(
+        value: RenameAccountRequestJson
+    ): ValidationResult[RenameAccountRequest] = {
+      (
+        validateAccountId(value.account_id),
+        validateAccountName(value.name)
+      ).mapN {
+        case (accountId, name) =>
+          RenameAccountRequest(
+            accountId,
+            name
           )
       }
     }

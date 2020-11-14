@@ -36,6 +36,20 @@ object AccountProtocol {
 
   final case class CreateAccountFailed(accountId: AccountId, error: AccountError) extends CreateAccountReply
 
+  // --- Rename
+
+  final case class RenameAccount(
+      accountId: AccountId,
+      name: AccountName,
+      replyTo: Option[ActorRef[RenameAccountReply]]
+  ) extends Command
+
+  sealed trait RenameAccountReply extends CommandReply
+
+  final case class RenameAccountSucceeded(accountId: AccountId) extends RenameAccountReply
+
+  final case class RenameAccountFailed(accountId: AccountId, error: AccountError) extends RenameAccountReply
+
   // --- Destroy
 
   final case class DestroyAccount(

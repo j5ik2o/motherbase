@@ -10,7 +10,10 @@ import akka.http.scaladsl.Http
 import akka.management.cluster.bootstrap.ClusterBootstrap
 import akka.management.scaladsl.AkkaManagement
 import akka.util.Timeout
-import com.github.j5ik2o.motherbase.accounts.commandProcessor.CreateAccountCommandProcessorImpl
+import com.github.j5ik2o.motherbase.accounts.commandProcessor.{
+  CreateAccountCommandProcessorImpl,
+  RenameAccountCommandProcessorImpl
+}
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.aggregate.{
   AccountAggregate,
   AccountAggregates,
@@ -21,7 +24,10 @@ import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.controller.{
   AccountCommandController,
   AccountCommandControllerImpl
 }
-import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.CreateAccountJsonResponderImpl
+import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.responder.{
+  CreateAccountJsonResponderImpl,
+  RenameAccountJsonResponderImpl
+}
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.routes.Routes
 import com.typesafe.config.ConfigFactory
 import kamon.Kamon
@@ -77,11 +83,20 @@ object Main extends App {
 
     val accountRef = ctx.spawn(accountBehavior, "accounts")
 
-    val cmdProcessor = new CreateAccountCommandProcessorImpl(accountRef, to)(ctx.system)
-    val sw           = new SwaggerDocService(host, port, Set(classOf[AccountCommandController]))
-    val responder    = new CreateAccountJsonResponderImpl
-    val controller   = new AccountCommandControllerImpl(cmdProcessor, responder)
-    val routes       = new Routes(sw, controller)(ctx.system).root
+    val swaggerDocService             = new SwaggerDocService(host, port, Set(classOf[AccountCommandController]))
+    val createAccountCommandProcessor = new CreateAccountCommandProcessorImpl(accountRef, to)(ctx.system)
+    val createAccountJsonResponder    = new CreateAccountJsonResponderImpl
+    val renameAccountCommandProcessor = new RenameAccountCommandProcessorImpl(accountRef, to)(ctx.system)
+    val renameAccountJsonResponder    = new RenameAccountJsonResponderImpl
+
+    val controller = new AccountCommandControllerImpl(
+      createAccountCommandProcessor,
+      createAccountJsonResponder,
+      renameAccountCommandProcessor,
+      renameAccountJsonResponder
+    )
+
+    val routes = new Routes(swaggerDocService, controller)(ctx.system).root
 
     implicit val s = ctx.system.toClassic
     import ctx.executionContext

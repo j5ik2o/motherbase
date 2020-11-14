@@ -10,6 +10,10 @@ object AccountError {
     override def message: String = "Can't create the account"
   }
 
+  case object CantRenameAccount extends AccountError {
+    override def message: String = "Can't rename the account"
+  }
+
   case object CantDestroyAccount extends AccountError {
     override def message: String = "Can't destroy the account"
   }

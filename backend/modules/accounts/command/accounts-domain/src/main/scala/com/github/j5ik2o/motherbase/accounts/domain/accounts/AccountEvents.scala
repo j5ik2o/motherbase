@@ -15,6 +15,12 @@ object AccountEvents {
       occurredAt: Instant
   ) extends AccountEvent
 
+  final case class AccountRenamed(
+      accountId: AccountId,
+      name: AccountName,
+      occurredAt: Instant
+  ) extends AccountEvent
+
   final case class AccountDestroyed(
       accountId: AccountId,
       occurredAt: Instant

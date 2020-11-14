@@ -6,4 +6,6 @@ object RouteNames {
 
   final val CreateAccount = s"/$Base/create"
 
+  final def RenameAccount(id: String) = s"/$Base/$id"
+
 }

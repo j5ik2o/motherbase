@@ -9,7 +9,8 @@ import akka.persistence.typed.scaladsl.{ Effect, EventSourcedBehavior }
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.AccountError.{
   CantCreateAccount,
   CantDestroyAccount,
-  CantGetName
+  CantGetName,
+  CantRenameAccount
 }
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.AccountEvents._
 import com.github.j5ik2o.motherbase.accounts.domain.accounts.{
@@ -38,29 +39,54 @@ object AccountAggregate {
 
   private def eventHandler(
       ctx: ActorContext[_],
-      systemAccountId: AccountId
+      accountId: AccountId
   ): (State, AccountEvents.AccountEvent) => State = { (state, event) =>
     (state, event) match {
-      case (EmptyState, AccountCreated(id, name, emailAddress, occurredAt)) if id == systemAccountId =>
+      case (EmptyState, AccountCreated(id, name, emailAddress, occurredAt)) if id == accountId =>
         JustState(Account(id, name, emailAddress, occurredAt))
-      case (JustState(systemAccount), AccountDestroyed(id, occurredAt)) if id == systemAccountId =>
-        JustState(systemAccount.destroy(occurredAt))
+      case (JustState(state), AccountRenamed(id, name, occurredAt)) if id == accountId =>
+        JustState(state.rename(name, occurredAt))
+      case (JustState(state), AccountDestroyed(id, occurredAt)) if id == accountId =>
+        JustState(state.destroy(occurredAt))
     }
   }
 
   private def commandHandler(
       ctx: ActorContext[_],
-      systemAccountId: AccountId
+      accountId: AccountId
   ): (State, AccountProtocol.Command) => Effect[AccountEvents.AccountEvent, State] = { (state, command) =>
     (state, command) match {
-      case (EmptyState, CreateAccount(id, name, emailAddress, replyTo)) if id == systemAccountId =>
+      case (EmptyState, CreateAccount(id, name, emailAddress, replyTo)) if id == accountId =>
         create(id, name, emailAddress, replyTo)
-      case (JustState(state), DestroyAccount(id, replyTo)) if id == systemAccountId =>
+      case (JustState(state), RenameAccount(id, name, replyTo)) if id == accountId =>
+        rename(state, id, name, replyTo)
+      case (JustState(state), DestroyAccount(id, replyTo)) if id == accountId =>
         destroy(state, id, replyTo)
-      case (JustState(state), GetAccountName(id, replyTo)) if id == systemAccountId =>
+      case (JustState(state), GetAccountName(id, replyTo)) if id == accountId =>
         Effect.reply(replyTo)(GetAccountNameSucceeded(state.id, state.name))
-      case (EmptyState, GetAccountName(id, replyTo)) if id == systemAccountId =>
+      case (EmptyState, GetAccountName(id, replyTo)) if id == accountId =>
         Effect.reply(replyTo)(GetAccountNameFailed(id, CantGetName))
+    }
+  }
+
+  private def rename(
+      state: Account,
+      id: AccountId,
+      name: AccountName,
+      replyTo: Option[ActorRef[RenameAccountReply]]
+  ): Effect[AccountEvents.AccountEvent, State] = {
+    if (state.canRename(name)) {
+      val now     = Instant.now
+      val builder = Effect.persist[AccountEvent, State](AccountRenamed(id, name, now))
+      replyTo match {
+        case None    => builder
+        case Some(r) => builder.thenReply(r)(_ => RenameAccountSucceeded(id))
+      }
+    } else {
+      replyTo match {
+        case None    => Effect.none
+        case Some(r) => Effect.reply(r)(RenameAccountFailed(id, CantRenameAccount))
+      }
     }
   }
 

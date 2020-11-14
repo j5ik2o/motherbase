@@ -10,6 +10,14 @@ final case class Account(
     createdAt: Instant,
     updatedAt: Instant
 ) {
+
+  def rename(name: AccountName, updatedAt: Instant): Account = {
+    require(canRename(name), "Invalid state")
+    copy(name = name, updatedAt = updatedAt)
+  }
+
+  def canRename(name: AccountName): Boolean = !deleted
+
   def canDestroy: Boolean = !deleted
 
   def destroy(updatedAt: Instant): Account = {

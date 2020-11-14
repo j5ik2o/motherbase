@@ -3,7 +3,9 @@ package com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.controller
 import akka.http.scaladsl.server.Route
 import com.github.j5ik2o.motherbase.accounts.interfaceAdaptor.http.json.{
   CreateAccountRequestJson,
-  CreateAccountResponseJson
+  CreateAccountResponseJson,
+  RenameAccountRequestJson,
+  RenameAccountResponseJson
 }
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.{ Content, Schema }
@@ -39,4 +41,28 @@ trait AccountCommandController {
     )
   )
   private[controller] def createAccount: Route
+
+  @POST
+  @Path("accounts")
+  @Consumes(Array("application/json"))
+  @Operation(
+    summary = "Rename account",
+    description = "Rename account request",
+    requestBody = new RequestBody(
+      content = Array(
+        new Content(
+          schema = new Schema(implementation = classOf[RenameAccountRequestJson])
+        )
+      )
+    ),
+    responses = Array(
+      new ApiResponse(
+        responseCode = "200",
+        description = "Create account response",
+        content = Array(new Content(schema = new Schema(implementation = classOf[RenameAccountResponseJson])))
+      ),
+      new ApiResponse(responseCode = "500", description = "Internal server error")
+    )
+  )
+  private[controller] def renameAccount: Route
 }
