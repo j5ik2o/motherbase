@@ -26,6 +26,7 @@ message RenameAccountRequest {
 
 message RenameAccountResponse {
     string accountId = 1;
+    repeated Error errors = 255;
 }
 
 
