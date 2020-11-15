@@ -314,16 +314,16 @@ val `accounts-interface-adaptor-eventbus` =
     )
 // ---- bootstrap
 
-val `write-grpc-server` = (project in file("bootstrap/write-grpc-server"))
+val `write-api-server` = (project in file("bootstrap/write-api-server"))
   .enablePlugins(AshScriptPlugin, JavaAgent, EcrPlugin)
   .settings(baseSettings)
   .settings(dockerCommonSettings)
   .settings(writeApiEcrSettings)
   .settings(
-    name := s"$projectBaseName-write-grpc-server",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.grpc.server.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.grpc.server.Main"),
-    dockerEntrypoint := Seq(s"/opt/docker/bin/$projectBaseName-write-grpc-server"),
+    name := s"$projectBaseName-write-api-server",
+    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
     dockerExposedPorts := Seq(2222, 2223),
     packageName in Docker := s"$projectBaseName/${name.value}",
     fork in run := true,
@@ -352,16 +352,16 @@ val `write-grpc-server` = (project in file("bootstrap/write-grpc-server"))
   )
   .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)
 
-val `read-grpc-server` = (project in file("bootstrap/read-grpc-server"))
+val `read-api-server` = (project in file("bootstrap/read-api-server"))
   .enablePlugins(AshScriptPlugin, JavaAgent, EcrPlugin)
   .settings(baseSettings)
   .settings(dockerCommonSettings)
   .settings(readApiEcrSettings)
   .settings(
     name := s"$projectBaseName-read-api-server",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.grpc.server.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.grpc.server.Main"),
-    dockerEntrypoint := Seq(s"/opt/docker/bin/$projectBaseName-read-grpc-server"),
+    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
     packageName in Docker := s"$projectBaseName/${name.value}",
     fork in run := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
@@ -396,9 +396,9 @@ val `read-model-updater` = (project in file("bootstrap/read-model-updater"))
   .settings(readModelUpdaterEcrSettings)
   .settings(
     name := s"$projectBaseName-read-model-updater",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.rmu.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.rmu.Main"),
-    dockerEntrypoint := Seq(s"/opt/docker/bin/$projectBaseName-read-model-updater"),
+    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
     packageName in Docker := s"$projectBaseName/${name.value}",
     fork in run := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
@@ -433,9 +433,9 @@ val `domain-event-router` = (project in file("bootstrap/domain-event-router"))
   .settings(domainEventRouterEcrSettings)
   .settings(
     name := s"$projectBaseName-domain-event-router",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.der.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.der.Main"),
-    dockerEntrypoint := Seq(s"/opt/docker/bin/$projectBaseName-domain-event-router"),
+    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
     packageName in Docker := s"$projectBaseName/${name.value}",
     fork in run := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
@@ -462,15 +462,15 @@ val `domain-event-router` = (project in file("bootstrap/domain-event-router"))
   )
   .dependsOn(`accounts-interface-adaptor-command`, `accounts-common-infrastructure`)
 
-val `test-grpc-client` = (project in file("bootstrap/test-grpc-client"))
+val `test-api-client` = (project in file("bootstrap/test-api-client"))
   .enablePlugins(AshScriptPlugin, JavaAgent)
   .settings(baseSettings)
   .settings(dockerCommonSettings)
   .settings(
     name := s"$projectBaseName-test-grpc-client",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.grpc.client.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.grpc.client.Main"),
-    dockerEntrypoint := Seq(s"/opt/docker/bin/$projectBaseName-test-grpc-client"),
+    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
     packageName in Docker := s"$projectBaseName/${name.value}",
     fork in run := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
@@ -608,11 +608,11 @@ val root = (project in file("."))
   .settings(baseSettings)
   .settings(name := s"$projectBaseName-root")
   .aggregate(
-    `write-grpc-server`,
+    `write-api-server`,
     `domain-event-router`,
     `read-model-updater`,
-    `read-grpc-server`,
-    `test-grpc-client`,
+    `read-api-server`,
+    `test-api-client`,
     `common-infrastructure`,
     `accounts-common-infrastructure`,
     `accounts-interface-adaptor-common`,
