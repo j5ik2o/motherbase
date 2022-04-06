@@ -1,43 +1,43 @@
 import Dependencies._
 import Settings._
-import com.amazonaws.regions.{Region, Regions}
+import com.amazonaws.regions.{ Region, Regions }
 import com.github.j5ik2o.reactive.aws.ecs.EcsAsyncClient
 import com.github.j5ik2o.reactive.aws.ecs.implicits._
-import com.typesafe.sbt.SbtNativePackager.autoImport.{maintainer, packageName}
+import com.typesafe.sbt.SbtNativePackager.autoImport.{ maintainer, packageName }
 import com.typesafe.sbt.packager.archetypes.scripts.BashStartScriptPlugin.autoImport.bashScriptExtraDefines
-import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport.{dockerBaseImage, dockerUpdateLatest, _}
+import com.typesafe.sbt.packager.docker.DockerPlugin.autoImport._
 import sbt.Keys._
 import sbt.internal.util.ManagedLogger
-import sbt.{settingKey, taskKey, _}
-import sbtecr.EcrPlugin.autoImport.{localDockerImage, login, push, region, repositoryName, _}
-import software.amazon.awssdk.services.ecs.model.{AssignPublicIp, Task, _}
-import software.amazon.awssdk.services.ecs.{EcsAsyncClient => JavaEcsAsyncClient}
+import sbt.{ settingKey, taskKey, _ }
+import sbtecr.EcrPlugin.autoImport._
+import software.amazon.awssdk.services.ecs.model.{ Task, _ }
+import software.amazon.awssdk.services.ecs.{ EcsAsyncClient => JavaEcsAsyncClient }
 
 import scala.collection.JavaConverters._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{ Await, Future }
 
 object GatlingSettings {
-  val gatlingVersion                      = "3.3.1"
-  val circeVersion                        = "0.11.1"
-  val awsSdkVersion                       = "1.11.575"
-  val akka26Version                       = "2.6.6"
+  val gatlingVersion = "3.3.1"
+  val circeVersion   = "0.11.1"
+  val awsSdkVersion  = "1.11.575"
+  val akka26Version  = "2.6.6"
 
   lazy val dockerRemoteRepository: String = s"${prefix}-$projectBaseName"
 
   lazy val dockerBaseSettings = Seq(
     dockerBaseImage := "adoptopenjdk/openjdk8:x86_64-alpine-jdk8u191-b12",
-    maintainer in Docker := "Junichi Kato <j5ik2o@gmail.com>",
+    Docker / maintainer := "Junichi Kato <j5ik2o@gmail.com>",
     dockerUpdateLatest := true,
     bashScriptExtraDefines ++= Seq(
-      "addJava -Xms${JVM_HEAP_MIN:-1024m}",
-      "addJava -Xmx${JVM_HEAP_MAX:-1024m}",
-      "addJava -XX:MaxMetaspaceSize=${JVM_META_MAX:-512M}",
-      "addJava ${JVM_GC_OPTIONS:--XX:+UseG1GC}",
-      "addJava -Dconfig.resource=${CONFIG_RESOURCE:-application.conf}",
-      "addJava -Dakka.remote.startup-timeout=60s"
-    )
+        "addJava -Xms${JVM_HEAP_MIN:-1024m}",
+        "addJava -Xmx${JVM_HEAP_MAX:-1024m}",
+        "addJava -XX:MaxMetaspaceSize=${JVM_META_MAX:-512M}",
+        "addJava ${JVM_GC_OPTIONS:--XX:+UseG1GC}",
+        "addJava -Dconfig.resource=${CONFIG_RESOURCE:-application.conf}",
+        "addJava -Dakka.remote.startup-timeout=60s"
+      )
   )
 
   lazy val gatlingBaseSettings = Seq(
@@ -45,31 +45,31 @@ object GatlingSettings {
     version := "1.0.0-SNAPSHOT",
     scalaVersion := scala212Version,
     scalacOptions ++= Seq(
-      "-feature",
-      "-deprecation",
-      "-unchecked",
-      "-encoding",
-      "UTF-8",
-      "-Xfatal-warnings",
-      "-language:_",
-      // Warn if an argument list is modified to match the receiver
-      "-Ywarn-adapted-args",
-      // Warn when dead code is identified.
-      "-Ywarn-dead-code",
-      // Warn about inaccessible types in method signatures.
-      "-Ywarn-inaccessible",
-      // Warn when a type argument is inferred to be `Any`.
-      "-Ywarn-infer-any",
-      // Warn when non-nullary `def f()' overrides nullary `def f'
-      "-Ywarn-nullary-override",
-      // Warn when nullary methods return Unit.
-      "-Ywarn-nullary-unit",
-      // Warn when numerics are widened.
-      "-Ywarn-numeric-widen",
-      // Warn when imports are unused.
-      "-Ywarn-unused-import",
-      "-Ywarn-numeric-widen"
-    )
+        "-feature",
+        "-deprecation",
+        "-unchecked",
+        "-encoding",
+        "UTF-8",
+        "-Xfatal-warnings",
+        "-language:_",
+        // Warn if an argument list is modified to match the receiver
+        "-Ywarn-adapted-args",
+        // Warn when dead code is identified.
+        "-Ywarn-dead-code",
+        // Warn about inaccessible types in method signatures.
+        "-Ywarn-inaccessible",
+        // Warn when a type argument is inferred to be `Any`.
+        "-Ywarn-infer-any",
+        // Warn when non-nullary `def f()' overrides nullary `def f'
+        "-Ywarn-nullary-override",
+        // Warn when nullary methods return Unit.
+        "-Ywarn-nullary-unit",
+        // Warn when numerics are widened.
+        "-Ywarn-numeric-widen",
+        // Warn when imports are unused.
+        "-Ywarn-unused-import",
+        "-Ywarn-numeric-widen"
+      )
   )
 
   lazy val gatlingRunnerEcrSettings = Seq(
@@ -105,7 +105,7 @@ object GatlingSettings {
     settingKey[String]("run-task-container-override-name")
 
   def getTaskDefinitionName(client: EcsAsyncClient, awaitDuration: Duration, prefix: String)(
-    implicit logger: Logger
+      implicit logger: Logger
   ): String = {
     logger.info(s"prefix = $prefix")
     def loop(request: ListTaskDefinitionsRequest): Future[String] = {
@@ -149,7 +149,7 @@ object GatlingSettings {
       EcsAsyncClient(underlying)
     },
     runTaskEcsCluster in gatling := sys.env
-      .getOrElse("GATLING_ECS_CLUSTER", "j5ik2o-aws-gatling-tools-ecs"),
+        .getOrElse("GATLING_ECS_CLUSTER", "j5ik2o-aws-gatling-tools-ecs"),
     runTaskTaskDefinition in gatling := {
       implicit val logger = streams.value.log
       getTaskDefinitionName(
@@ -163,8 +163,8 @@ object GatlingSettings {
     },
     runTaskAwaitDuration in gatling := Duration.Inf,
     runTaskSubnets in gatling := Seq(
-      sys.env.getOrElse("GATLING_SUBNET_ID", "subnet-XXXXXXXXX")
-    ),
+        sys.env.getOrElse("GATLING_SUBNET_ID", "subnet-XXXXXXXXX")
+      ),
     runTaskAssignPublicIp in gatling := AssignPublicIp.ENABLED,
     runTaskEnvironments in gatling := {
       Map(
@@ -218,14 +218,14 @@ object GatlingSettings {
             .get("GATLING_NOTICE_CHATWORK_HOST")
             .map(v => Map("GATLING_NOTICE_CHATWORK_HOST" -> v))
             .getOrElse(Map.empty) ++
-            sys.env
-              .get("GATLING_NOTICE_CHATWORK_ROOM_ID")
-              .map(v => Map("GATLING_NOTICE_CHATWORK_ROOM_ID" -> v))
-              .getOrElse(Map.empty) ++
-            sys.env
-              .get("GATLING_NOTICE_CHATWORK_TOKEN")
-              .map(v => Map("GATLING_NOTICE_CHATWORK_TOKEN" -> v))
-              .getOrElse(Map.empty)
+          sys.env
+            .get("GATLING_NOTICE_CHATWORK_ROOM_ID")
+            .map(v => Map("GATLING_NOTICE_CHATWORK_ROOM_ID" -> v))
+            .getOrElse(Map.empty) ++
+          sys.env
+            .get("GATLING_NOTICE_CHATWORK_TOKEN")
+            .map(v => Map("GATLING_NOTICE_CHATWORK_TOKEN" -> v))
+            .getOrElse(Map.empty)
         }
       }
     },
@@ -259,15 +259,15 @@ object GatlingSettings {
   )
 
   def runGatlingTask(
-                      runTaskEcsClient: EcsAsyncClient,
-                      runTaskEcsCluster: String,
-                      runTaskTaskDefinition: String,
-                      runTaskCount: Int,
-                      runTaskSubnets: Seq[String],
-                      runTaskAssignPublicIp: AssignPublicIp,
-                      runTaskContainerOverrideName: String,
-                      runTaskEnvironments: Map[String, String]
-                    )(implicit log: ManagedLogger): Future[Seq[Task]] = {
+      runTaskEcsClient: EcsAsyncClient,
+      runTaskEcsCluster: String,
+      runTaskTaskDefinition: String,
+      runTaskCount: Int,
+      runTaskSubnets: Seq[String],
+      runTaskAssignPublicIp: AssignPublicIp,
+      runTaskContainerOverrideName: String,
+      runTaskEnvironments: Map[String, String]
+  )(implicit log: ManagedLogger): Future[Seq[Task]] = {
     val runTaskRequest = RunTaskRequest
       .builder()
       .cluster(runTaskEcsCluster)

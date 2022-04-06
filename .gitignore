@@ -23,6 +23,7 @@ native
 .terraform/
 node_modules/
 dump.rdb
+.bsp/
 
 .DS_Store
 .credentials

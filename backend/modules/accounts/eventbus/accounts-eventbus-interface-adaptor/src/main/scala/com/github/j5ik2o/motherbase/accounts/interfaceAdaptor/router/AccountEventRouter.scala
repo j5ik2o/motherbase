@@ -232,14 +232,14 @@ final class AccountEventRouter(
     val maxRecords = config.getOrElse[Int]("max-records", KinesisClientLibConfiguration.DEFAULT_MAX_RECORDS)
     val idleTimeBetweenReads = config.getOrElse(
       "idle-time-between-reads",
-      KinesisClientLibConfiguration.DEFAULT_IDLETIME_BETWEEN_READS_MILLIS millis
+      KinesisClientLibConfiguration.DEFAULT_IDLETIME_BETWEEN_READS_MILLIS.millis
     )
     val failoverTime =
-      config.getOrElse("failover-time", KinesisClientLibConfiguration.DEFAULT_FAILOVER_TIME_MILLIS millis)
+      config.getOrElse("failover-time", KinesisClientLibConfiguration.DEFAULT_FAILOVER_TIME_MILLIS.millis)
     val shardSyncInterval = config
       .getOrElse[Duration](
         "shard-sync-interval",
-        KinesisClientLibConfiguration.DEFAULT_SHARD_SYNC_INTERVAL_MILLIS millis
+        KinesisClientLibConfiguration.DEFAULT_SHARD_SYNC_INTERVAL_MILLIS.millis
       )
     val callProcessRecordsEvenForEmptyRecordList = config.getOrElse(
       "call-process-records-even-for-empty-record-list",
@@ -247,7 +247,7 @@ final class AccountEventRouter(
     )
     val parentShardPollInterval = config.getOrElse(
       "parent-shard-poll-interval",
-      KinesisClientLibConfiguration.DEFAULT_PARENT_SHARD_POLL_INTERVAL_MILLIS millis
+      KinesisClientLibConfiguration.DEFAULT_PARENT_SHARD_POLL_INTERVAL_MILLIS.millis
     )
     val cleanupLeasesUponShardCompletion = config.getOrElse(
       "cleanup-leases-upon-shard-completion",
@@ -257,11 +257,11 @@ final class AccountEventRouter(
     val userAgent = config.getOrElse("user-agent", KinesisClientLibConfiguration.KINESIS_CLIENT_LIB_USER_AGENT)
     val taskBackoffTime = config.getOrElse(
       "task-backoff-time",
-      KinesisClientLibConfiguration.DEFAULT_TASK_BACKOFF_TIME_MILLIS millis
+      KinesisClientLibConfiguration.DEFAULT_TASK_BACKOFF_TIME_MILLIS.millis
     )
     val metricsBufferTime = config.getOrElse(
       "metrics-buffer-time",
-      KinesisClientLibConfiguration.DEFAULT_METRICS_BUFFER_TIME_MILLIS millis
+      KinesisClientLibConfiguration.DEFAULT_METRICS_BUFFER_TIME_MILLIS.millis
     )
     val metricsMaxQueueSize =
       config.getOrElse("metrics-max-queue-size", KinesisClientLibConfiguration.DEFAULT_METRICS_MAX_QUEUE_SIZE)
@@ -306,13 +306,13 @@ final class AccountEventRouter(
     val maxRecordsCount               = config.getAs[Int]("max-records-count")
     val timeout                       = config.getAs[Duration]("timeout")
     val shutdownGrace =
-      config.getOrElse("shutdown-grace", KinesisClientLibConfiguration.DEFAULT_SHUTDOWN_GRACE_MILLIS millis)
+      config.getOrElse("shutdown-grace", KinesisClientLibConfiguration.DEFAULT_SHUTDOWN_GRACE_MILLIS.millis)
     val idleMillisBetweenCalls       = config.getAs[Long]("idle-millis-between-calls")
     val logWarningForTaskAfterMillis = config.getAs[Duration]("log-warning-for-task-after")
     val listShardsBackoffTimeInMillis =
       config.getOrElse(
         "list-shards-backoff-time",
-        KinesisClientLibConfiguration.DEFAULT_LIST_SHARDS_BACKOFF_TIME_IN_MILLIS millis
+        KinesisClientLibConfiguration.DEFAULT_LIST_SHARDS_BACKOFF_TIME_IN_MILLIS.millis
       )
     val maxListShardsRetryAttempts = config.getOrElse(
       "max-list-shards-retry-attempts",

@@ -48,8 +48,8 @@ val `accounts-domain` = (project in file("modules/accounts/command/accounts-doma
   .settings(baseSettings)
   .settings(
     name := s"$projectBaseName-accounts-command-domain",
-    jigModelPattern in jig := ".+\\.domain\\.(model|type)\\.[^$]+",
-    jigReports in jig := ((jigReports in jig).dependsOn(compile in Compile)).value
+    jig / jigModelPattern := ".+\\.domain\\.(model|type)\\.[^$]+",
+    jig / jigReports := ((jig / jigReports).dependsOn(Compile / compile)).value
   )
   .dependsOn(`accounts-common-infrastructure`)
 
@@ -95,8 +95,8 @@ val `accounts-command-interface-adaptor-contracts` =
           "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
           "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
         ),
-      PB.protoSources in Compile += target.value / "protobuf_external",
-      PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "command"
+      Compile / PB.protoSources += target.value / "protobuf_external",
+      Compile / PB.protoSources += (LocalRootProject / baseDirectory).value / "protobuf" / "command"
     ).dependsOn(`accounts-domain`, `accounts-command-processor-contracts`)
 
 val `accounts-query-interface-adaptor-contracts` =
@@ -113,8 +113,8 @@ val `accounts-query-interface-adaptor-contracts` =
           "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0" % "protobuf",
           "com.thesamet.scalapb.common-protos" %% "proto-google-common-protos-scalapb_0.10" % "1.17.0-0"
         ),
-      PB.protoSources in Compile += target.value / "protobuf_external",
-      PB.protoSources in Compile += (baseDirectory in LocalRootProject).value / "protobuf" / "query"
+      Compile / PB.protoSources += target.value / "protobuf_external",
+      Compile / PB.protoSources += (LocalRootProject / baseDirectory).value / "protobuf" / "query"
     )
 
 val `contract-query-processor` =
@@ -321,22 +321,22 @@ val `write-api-server` = (project in file("bootstrap/write-api-server"))
   .settings(writeApiEcrSettings)
   .settings(
     name := s"$projectBaseName-write-api-server",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    Compile / run / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    reStart / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
     dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
     dockerExposedPorts := Seq(2222, 2223),
-    packageName in Docker := s"$projectBaseName/${name.value}",
-    fork in run := true,
+    Docker / packageName := s"$projectBaseName/${name.value}",
+    run / fork := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
-    javaOptions in Universal += "-Dorg.aspectj.tracing.factory=default",
-    javaOptions in run ++= Seq(
+    Universal / javaOptions += "-Dorg.aspectj.tracing.factory=default",
+    run / javaOptions ++= Seq(
         s"-Dcom.sun.management.jmxremote.port=${sys.env.getOrElse("JMX_PORT", "8999")}",
         "-Dcom.sun.management.jmxremote.authenticate=false",
         "-Dcom.sun.management.jmxremote.ssl=false",
         "-Dcom.sun.management.jmxremote.local.only=false",
         "-Dcom.sun.management.jmxremote"
       ),
-    javaOptions in Universal ++= Seq(
+    Universal / javaOptions ++= Seq(
         "-Dcom.sun.management.jmxremote",
         "-Dcom.sun.management.jmxremote.local.only=true",
         "-Dcom.sun.management.jmxremote.authenticate=false"
@@ -359,21 +359,21 @@ val `read-api-server` = (project in file("bootstrap/read-api-server"))
   .settings(readApiEcrSettings)
   .settings(
     name := s"$projectBaseName-read-api-server",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    Compile / run / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    reStart / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
     dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
-    packageName in Docker := s"$projectBaseName/${name.value}",
-    fork in run := true,
+    Docker / packageName := s"$projectBaseName/${name.value}",
+    run / fork := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
-    javaOptions in Universal += "-Dorg.aspectj.tracing.factory=default",
-    javaOptions in run ++= Seq(
+    Universal / javaOptions += "-Dorg.aspectj.tracing.factory=default",
+    run / javaOptions ++= Seq(
         s"-Dcom.sun.management.jmxremote.port=${sys.env.getOrElse("JMX_PORT", "8999")}",
         "-Dcom.sun.management.jmxremote.authenticate=false",
         "-Dcom.sun.management.jmxremote.ssl=false",
         "-Dcom.sun.management.jmxremote.local.only=false",
         "-Dcom.sun.management.jmxremote"
       ),
-    javaOptions in Universal ++= Seq(
+    Universal / javaOptions ++= Seq(
         "-Dcom.sun.management.jmxremote",
         "-Dcom.sun.management.jmxremote.local.only=true",
         "-Dcom.sun.management.jmxremote.authenticate=false"
@@ -396,21 +396,21 @@ val `read-model-updater` = (project in file("bootstrap/read-model-updater"))
   .settings(readModelUpdaterEcrSettings)
   .settings(
     name := s"$projectBaseName-read-model-updater",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    Compile / run / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    reStart / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
     dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
-    packageName in Docker := s"$projectBaseName/${name.value}",
-    fork in run := true,
+    Docker / packageName := s"$projectBaseName/${name.value}",
+    run / fork := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
-    javaOptions in Universal += "-Dorg.aspectj.tracing.factory=default",
-    javaOptions in run ++= Seq(
+    Universal / javaOptions += "-Dorg.aspectj.tracing.factory=default",
+    run / javaOptions ++= Seq(
         s"-Dcom.sun.management.jmxremote.port=${sys.env.getOrElse("JMX_PORT", "8999")}",
         "-Dcom.sun.management.jmxremote.authenticate=false",
         "-Dcom.sun.management.jmxremote.ssl=false",
         "-Dcom.sun.management.jmxremote.local.only=false",
         "-Dcom.sun.management.jmxremote"
       ),
-    javaOptions in Universal ++= Seq(
+    Universal / javaOptions ++= Seq(
         "-Dcom.sun.management.jmxremote",
         "-Dcom.sun.management.jmxremote.local.only=true",
         "-Dcom.sun.management.jmxremote.authenticate=false"
@@ -433,21 +433,21 @@ val `domain-event-router` = (project in file("bootstrap/domain-event-router"))
   .settings(domainEventRouterEcrSettings)
   .settings(
     name := s"$projectBaseName-domain-event-router",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    Compile / run / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    reStart / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
     dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
-    packageName in Docker := s"$projectBaseName/${name.value}",
-    fork in run := true,
+    Docker / packageName := s"$projectBaseName/${name.value}",
+    run / fork := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
-    javaOptions in Universal += "-Dorg.aspectj.tracing.factory=default",
-    javaOptions in run ++= Seq(
+    Universal / javaOptions += "-Dorg.aspectj.tracing.factory=default",
+    run / javaOptions ++= Seq(
         s"-Dcom.sun.management.jmxremote.port=${sys.env.getOrElse("JMX_PORT", "8999")}",
         "-Dcom.sun.management.jmxremote.authenticate=false",
         "-Dcom.sun.management.jmxremote.ssl=false",
         "-Dcom.sun.management.jmxremote.local.only=false",
         "-Dcom.sun.management.jmxremote"
       ),
-    javaOptions in Universal ++= Seq(
+    Universal / javaOptions ++= Seq(
         "-Dcom.sun.management.jmxremote",
         "-Dcom.sun.management.jmxremote.local.only=true",
         "-Dcom.sun.management.jmxremote.authenticate=false"
@@ -468,21 +468,21 @@ val `test-api-client` = (project in file("bootstrap/test-api-client"))
   .settings(dockerCommonSettings)
   .settings(
     name := s"$projectBaseName-test-grpc-client",
-    mainClass in (Compile, run) := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
-    mainClass in reStart := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    Compile / run / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
+    reStart / mainClass := Some(organization.value + s".$projectBaseName.bootstrap.Main"),
     dockerEntrypoint := Seq(s"/opt/docker/bin/${name.value}"),
-    packageName in Docker := s"$projectBaseName/${name.value}",
-    fork in run := true,
+    Docker / packageName := s"$projectBaseName/${name.value}",
+    run / fork := true,
     javaAgents += "io.kamon" % "kanela-agent" % "1.0.5",
-    javaOptions in Universal += "-Dorg.aspectj.tracing.factory=default",
-    javaOptions in run ++= Seq(
+    Universal / javaOptions += "-Dorg.aspectj.tracing.factory=default",
+    run / javaOptions ++= Seq(
         s"-Dcom.sun.management.jmxremote.port=${sys.env.getOrElse("JMX_PORT", "8999")}",
         "-Dcom.sun.management.jmxremote.authenticate=false",
         "-Dcom.sun.management.jmxremote.ssl=false",
         "-Dcom.sun.management.jmxremote.local.only=false",
         "-Dcom.sun.management.jmxremote"
       ),
-    javaOptions in Universal ++= Seq(
+    Universal / javaOptions ++= Seq(
         "-Dcom.sun.management.jmxremote",
         "-Dcom.sun.management.jmxremote.local.only=true",
         "-Dcom.sun.management.jmxremote.authenticate=false"
@@ -522,18 +522,18 @@ lazy val `gatling-test` = (project in file("tools/aws-gatling-tools/gatling-test
         "com.github.phisgr"     %% "gatling-grpc"             % "0.8.2",
         sulky.ulid
       ),
-    publishArtifact in (GatlingIt, packageBin) := true,
-    PB.targets in Compile := Seq(
-        PB.gens.java                        -> (sourceManaged in Compile).value,
-        scalapb.gen(javaConversions = true) -> (sourceManaged in Compile).value
+    GatlingIt / packageBin / publishArtifact := true,
+    Compile / PB.targets := Seq(
+        PB.gens.java                        -> (Compile / sourceManaged).value,
+        scalapb.gen(javaConversions = true) -> (Compile / sourceManaged).value
       ),
-    PB.protoSources in Compile ++= Seq(
-        (baseDirectory in LocalRootProject).value / "protobuf" / "command",
-        (baseDirectory in LocalRootProject).value / "protobuf" / "query"
+    Compile / PB.protoSources ++= Seq(
+        (LocalRootProject / baseDirectory).value / "protobuf" / "command",
+        (LocalRootProject / baseDirectory).value / "protobuf" / "query"
       )
   )
   .settings(
-    addArtifact(artifact in (GatlingIt, packageBin), packageBin in GatlingIt)
+    addArtifact(GatlingIt / packageBin / artifact, GatlingIt / packageBin)
   )
 
 lazy val `gatling-runner` = (project in file("tools/aws-gatling-tools/gatling-runner"))
@@ -547,11 +547,11 @@ lazy val `gatling-runner` = (project in file("tools/aws-gatling-tools/gatling-ru
         "com.amazonaws" % "aws-java-sdk-core" % awsSdkVersion,
         "com.amazonaws" % "aws-java-sdk-s3"   % awsSdkVersion
       ),
-    mainClass in (Compile, bashScriptDefines) := Some(
+    Compile / bashScriptDefines / mainClass := Some(
         "com.github.j5ik2o.gatling.runner.Runner"
       ),
     dockerBaseImage := "openjdk:8",
-    packageName in Docker := s"$projectBaseName/gatling-runner",
+    Docker / packageName := s"$projectBaseName/gatling-runner",
     dockerUpdateLatest := true,
     dockerCommands ++= Seq(
         Cmd("USER", "root"),
@@ -577,7 +577,7 @@ lazy val `gatling-s3-reporter` = (project in file("tools/aws-gatling-tools/gatli
         throw new IllegalStateException("frontend maven clean failed!")
       }
     },
-    compile in Compile := ((compile in Compile).dependsOn(buildDockerImage)).value
+    Compile / compile := ((Compile / compile).dependsOn(buildDockerImage)).value
   )
 
 lazy val `gatling-aggregate-runner` =
@@ -588,11 +588,11 @@ lazy val `gatling-aggregate-runner` =
     .settings(gatlingAggregateRunTaskSettings)
     .settings(
       name := "gatling-aggregate-runner",
-      mainClass in (Compile, bashScriptDefines) := Some(
+      Compile / bashScriptDefines / mainClass := Some(
           "com.github.j5ik2o.gatling.runner.Runner"
         ),
       dockerBaseImage := "openjdk:8",
-      packageName in Docker := s"$projectBaseName/gatling-aggregate-runner",
+      Docker / packageName := s"$projectBaseName/gatling-aggregate-runner",
       dockerUpdateLatest := true,
       libraryDependencies ++= Seq(
           "org.slf4j"           % "slf4j-api"              % "1.7.26",
